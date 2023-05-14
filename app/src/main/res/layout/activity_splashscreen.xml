@@ -8,12 +8,27 @@
     tools:context=".SplashScreen">
 
     <ImageView
+        android:id="@+id/splashscreen_logo_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/logo_normal_size"
+        app:layout_constraintVertical_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+
     />
+    <TextView
+        android:id="@+id/splashscreen_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/splashscreen_logo_iv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0"
+        android:text="@string/app_name"
+        style="@style/splashScreenTittle"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

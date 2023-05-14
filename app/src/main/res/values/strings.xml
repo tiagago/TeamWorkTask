@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Team Work Task</string>
+    <string name="app_name">Team Work Tasks</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="pre_login_usuario_label">Usuário</string>

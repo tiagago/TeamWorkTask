@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="app_name_apresentacao">30sp</dimen>
+
     <dimen name="margem_padrao">16dp</dimen>
     <dimen name="elevacao_padrao">8dp</dimen>
     <dimen name="margem_pequena">8dp</dimen>
