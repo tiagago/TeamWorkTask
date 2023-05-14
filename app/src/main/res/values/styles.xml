@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="textInputLayoutDefault" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColorHint">@color/secondary_color_dark</item>
+        <item name="boxStrokeColor">@color/text_input_layout_stroke_color</item>
+
+    </style>
+    <style name="textInputEditTextDefault" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">@color/secondary_color_dark</item>
+        <item name="android:textColor">@color/secondary_color</item>
+    </style>
+</resources>
