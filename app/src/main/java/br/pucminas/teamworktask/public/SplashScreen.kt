@@ -1,11 +1,12 @@
-package br.pucminas.teamworktask
+package br.pucminas.teamworktask.public
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import br.pucminas.teamworktask.login.PublicActivity
+import br.pucminas.teamworktask.R
+import br.pucminas.teamworktask.public.login.PublicActivity
 
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

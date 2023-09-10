@@ -19,5 +19,7 @@
     <color name="backgroud_default">#81B94E</color>
 
 
+    <color name="white_oppacite_70">#88FFFFFF</color>
+
     <color name="splashscreen_background">#E4FAE3</color>
 </resources>
