@@ -12,11 +12,11 @@
         android:theme="@style/Theme.TeamWorkTask"
         tools:targetApi="31">
         <activity
-            android:name=".public.login.PublicActivity"
+            android:name=".publica.login.PublicActivity"
             android:exported="false" />
 
         <activity
-            android:name=".public.SplashScreen"
+            android:name=".publica.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/usuario_cadastro_logo_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_person_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/genericTittle"
+        android:text="@string/usuario_cadastro_titulo"
+        android:layout_marginStart="@dimen/margem_padrao"
+        app:layout_constraintStart_toEndOf="@id/usuario_cadastro_logo_iv"
+        app:layout_constraintTop_toTopOf="@id/usuario_cadastro_logo_iv"
+        app:layout_constraintBottom_toBottomOf="@id/usuario_cadastro_logo_iv"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usuario_cadastro_nome_til"
+        style="@style/textInputLayoutDefault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margem_dobro"
+        android:hint="@string/usuario_cadastro_nome_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/usuario_cadastro_logo_iv">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/usuario_cadastro_nome_tie"
+            style="@style/textInputEditTextDefault"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usuario_cadastro_sobrenome_til"
+        style="@style/textInputLayoutDefault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margem_padrao"
+        android:hint="@string/usuario_cadastro_sobrenome_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/usuario_cadastro_nome_til">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/usuario_cadastro_sobrenome_tie"
+            style="@style/textInputEditTextDefault"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usuario_cadastro_email_til"
+        style="@style/textInputLayoutDefault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margem_padrao"
+        android:hint="@string/usuario_cadastro_email_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/usuario_cadastro_sobrenome_til">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/usuario_cadastro_email_tie"
+            style="@style/textInputEditTextDefault"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usuario_cadastro_senha_til"
+        style="@style/textInputLayoutDefault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margem_padrao"
+        android:hint="@string/usuario_cadastro_senha_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/usuario_cadastro_email_til">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/usuario_cadastro_senha_tie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/textInputEditTextDefault"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usuario_cadastro_repetir_senha_til"
+        style="@style/textInputLayoutDefault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margem_padrao"
+        android:hint="@string/usuario_cadastro_repetir_senha_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/usuario_cadastro_senha_til">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/usuario_cadastro_repetir_senha_tie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/textInputEditTextDefault"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/usuario_cadastro_salvar_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margem_quadruplo"
+        android:paddingStart="@dimen/margem_dobro"
+        android:paddingEnd="@dimen/margem_dobro"
+        android:backgroundTint="@color/primary_color"
+        android:text="@string/generico_salvar_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/usuario_cadastro_repetir_senha_til" />
+
+    <Button
+        android:id="@+id/usuario_cadastro_cancelar_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margem_padrao"
+        android:paddingStart="@dimen/margem_dobro"
+        android:paddingEnd="@dimen/margem_dobro"
+        android:backgroundTint="@color/primary_color"
+        android:text="@string/generico_cancelar_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/usuario_cadastro_salvar_bt"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

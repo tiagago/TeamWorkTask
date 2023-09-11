@@ -1,9 +1,8 @@
-package br.pucminas.teamworktask.public.login
+package br.pucminas.teamworktask.publica.login
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import br.pucminas.teamworktask.public.PreLoginFragment
 import br.pucminas.teamworktask.R
 
 

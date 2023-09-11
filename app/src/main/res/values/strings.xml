@@ -1,9 +1,22 @@
 <resources>
     <string name="app_name">Team Work Tasks</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="pre_login_usuario_label">Usuário</string>
     <string name="pre_login_senha_label">Senha</string>
     <string name="pre_login_entrar_label">Entrar</string>
 
+    <!-- Cadastro usuario -->
+    <string name="usuario_cadastro_titulo">Cadastrar Usuário</string>
+    <string name="usuario_cadastro_nome_label">Nome</string>
+    <string name="usuario_cadastro_sobrenome_label">Sobrenome</string>
+    <string name="usuario_cadastro_email_label">E-mail</string>
+    <string name="usuario_cadastro_senha_label">Senha</string>
+    <string name="usuario_cadastro_repetir_senha_label">Repetir Senha</string>
+
+
+    <!-- Genericos -->
+    <string name="generico_salvar_label">Salvar</string>
+    <string name="generico_cancelar_label">Cancelar</string>
 </resources>
