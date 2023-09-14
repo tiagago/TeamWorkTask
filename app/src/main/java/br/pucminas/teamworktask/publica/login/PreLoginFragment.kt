@@ -1,15 +1,21 @@
 package br.pucminas.teamworktask.publica.login
 
+import android.hardware.biometrics.BiometricManager.Authenticators.BIOMETRIC_STRONG
+import android.hardware.biometrics.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import br.pucminas.teamworktask.R
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
+import br.pucminas.teamworktask.databinding.FragmentPreLoginBinding
+import br.pucminas.teamworktask.utils.PermissionUtils
+import android.hardware.biometrics.BiometricPrompt
+import android.os.Build
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import android.os.CancellationSignal
+import br.pucminas.teamworktask.publica.PublicActivity
 
 /**
  * A simple [Fragment] subclass.
@@ -17,26 +23,60 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class PreLoginFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentPreLoginBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+    private var cancellationSignal: CancellationSignal? = null
 
+    @RequiresApi(Build.VERSION_CODES.P)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        // Inflate the layout for this fragment
+        _binding = FragmentPreLoginBinding.inflate(inflater, container, false)
 
+        prepararListeners()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+        return binding.root
+    }
+
+    @RequiresApi(Build.VERSION_CODES.P)
+    fun prepararListeners(){
+        configurarBotaoBiometria()
+        configurarBotaoUsuarioCadastro()
+        configurarBotaoEntrar()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.P)
+    fun configurarBotaoBiometria(){
+        if(PermissionUtils.checkBiometricSupport(requireContext())){
+            binding.loginFingerprintIv.visibility = View.VISIBLE;
+            binding.loginFingerprintIv.setOnClickListener {
+                authenticateUser();
+            }
+        } else {
+            binding.loginFingerprintIv.visibility = View.GONE;
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pre_login, container, false)
+    fun configurarBotaoUsuarioCadastro(){
+        binding.loginAddUserIv.setOnClickListener {
+            if(activity is PublicActivity){
+                (activity as PublicActivity).changeFragment(UsuarioCadastroFragment.newInstance())
+            }
+        }
+    }
+
+    fun configurarBotaoEntrar(){
+        binding.loginEntrarBt.setOnClickListener {
+            if(activity is PublicActivity){
+                (activity as PublicActivity).doLogin()
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
@@ -51,9 +91,61 @@ class PreLoginFragment : Fragment() {
         fun newInstance() =
             PreLoginFragment().apply {
                 arguments = Bundle().apply {
-                    //putString(ARG_PARAM1, param1)
-                    //putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+
+    private val authenticationCallback: BiometricPrompt.AuthenticationCallback
+        get() = @RequiresApi(Build.VERSION_CODES.P)
+        object : BiometricPrompt.AuthenticationCallback() {
+            override fun onAuthenticationError(errorCode: Int,
+                                               errString: CharSequence) {
+                super.onAuthenticationError(errorCode, errString)
+                notifyUser("Authentication error: $errString")
+            }
+
+            override fun onAuthenticationHelp(helpCode: Int,
+                                              helpString: CharSequence) {
+                super.onAuthenticationHelp(helpCode, helpString)
+            }
+
+            override fun onAuthenticationFailed() {
+                super.onAuthenticationFailed()
+                notifyUser("Authentication Failed")
+            }
+
+            override fun onAuthenticationSucceeded(result:
+                                                   BiometricPrompt.AuthenticationResult) {
+                super.onAuthenticationSucceeded(result)
+                notifyUser("Authentication Succeeded")
+
+            }
+        }
+    @RequiresApi(Build.VERSION_CODES.P)
+    fun authenticateUser() {
+        val biometricPrompt = BiometricPrompt.Builder(context)
+            .setTitle(getString(R.string.pre_login_biometria_titulo))
+            .setSubtitle(getString(R.string.pre_login_biometria_subtitulo))
+            .setDescription(getString(R.string.pre_login_biometria_descricao))
+            .setAllowedAuthenticators(BIOMETRIC_STRONG or DEVICE_CREDENTIAL).build()
+
+        biometricPrompt.authenticate(getCancellationSignal(), requireActivity().mainExecutor,
+            authenticationCallback)
+    }
+
+    private fun getCancellationSignal(): CancellationSignal {
+
+        cancellationSignal = CancellationSignal()
+        cancellationSignal?.setOnCancelListener {
+            notifyUser("Cancelled via signal")
+        }
+        return cancellationSignal as CancellationSignal
+    }
+
+    private fun notifyUser(message: String) {
+        Toast.makeText(context,
+            message,
+            Toast.LENGTH_LONG).show()
     }
 }

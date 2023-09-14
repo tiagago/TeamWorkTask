@@ -6,6 +6,9 @@
     <string name="pre_login_usuario_label">Usuário</string>
     <string name="pre_login_senha_label">Senha</string>
     <string name="pre_login_entrar_label">Entrar</string>
+    <string name="pre_login_biometria_titulo">@string/app_name</string>
+    <string name="pre_login_biometria_subtitulo">Autenticação necessária para continuar</string>
+    <string name="pre_login_biometria_descricao">A aplicação usa biomentria para proteger seus dados.</string>
 
     <!-- Cadastro usuario -->
     <string name="usuario_cadastro_titulo">Cadastrar Usuário</string>
@@ -15,8 +18,15 @@
     <string name="usuario_cadastro_senha_label">Senha</string>
     <string name="usuario_cadastro_repetir_senha_label">Repetir Senha</string>
 
-
     <!-- Genericos -->
+    <string name="generico_vazio_erro">Informar %1$s!</string>
     <string name="generico_salvar_label">Salvar</string>
     <string name="generico_cancelar_label">Cancelar</string>
+
+    <!-- Bottom Navegator -->
+    <string name="bottom_navegator_home">Home</string>
+    <string name="bottom_navegator_tarefa">Tarefas</string>
+    <string name="bottom_navegator_tags">Tags</string>
+    <string name="bottom_navegator_equipe">Equipe</string>
+    <string name="bottom_navegator_notificacoes">Notificações</string>
 </resources>
