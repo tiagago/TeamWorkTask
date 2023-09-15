@@ -1,13 +1,12 @@
-package br.pucminas.teamworktask.privada
+package br.pucminas.teamworktask.ui.privada.projeto
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import br.pucminas.teamworktask.R
 import br.pucminas.teamworktask.databinding.FragmentDashboardBinding
-import br.pucminas.teamworktask.databinding.FragmentPreLoginBinding
+
 
 
 /**
@@ -27,21 +26,5 @@ class DashboardFragment : Fragment() {
 
 
         return binding.root
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment Dashboard.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance() =
-            DashboardFragment().apply {
-                arguments = Bundle().apply {
-                }
-            }
     }
 }

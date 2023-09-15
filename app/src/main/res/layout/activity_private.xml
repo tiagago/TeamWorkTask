@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".privada.PrivateActivity">
+    tools:context=".ui.privada.PrivateActivity">
 
     <ImageView
         android:layout_width="0dp"
@@ -18,24 +18,26 @@
         />
 
     <FrameLayout
-        android:id="@+id/private_fl"
+        android:id="@+id/privado_fl"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:backgroundTint="@color/white_oppacite_70"
+        android:background="@color/white_oppacite_70"
+        android:padding="@dimen/margem_padrao"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/private_fl"
+        app:layout_constraintBottom_toTopOf="@id/privado_bnv"
         app:layout_constraintEnd_toEndOf="parent"
         />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="+@id/private_bnv"
+        android:id="@+id/privado_bnv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:backgroundTint="@color/white_oppacite_70"
+        app:menu="@menu/bottom_nav"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

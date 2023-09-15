@@ -1,17 +1,11 @@
-package br.pucminas.teamworktask.publica.login
+package br.pucminas.teamworktask.ui.publica
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import br.pucminas.teamworktask.R
-import br.pucminas.teamworktask.databinding.FragmentDashboardBinding
-import br.pucminas.teamworktask.databinding.FragmentPreLoginBinding
 import br.pucminas.teamworktask.databinding.FragmentUsuarioCadastroBinding
 
 /**
@@ -37,21 +31,6 @@ class UsuarioCadastroFragment : Fragment() {
         configurarBotaoCancelar()
         configurarBotaoSalvar()
     }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         * @return A new instance of fragment UsuarioCadastro.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance() =
-            UsuarioCadastroFragment().apply {
-
-            }
-    }
-
 
     private fun configurarBotaoCancelar() {
         binding.usuarioCadastroCancelarBt.setOnClickListener {

@@ -1,4 +1,4 @@
-package br.pucminas.teamworktask.publica.login
+package br.pucminas.teamworktask.ui.publica
 
 import android.hardware.biometrics.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import android.hardware.biometrics.BiometricManager.Authenticators.DEVICE_CREDENTIAL
@@ -15,7 +15,6 @@ import android.os.Build
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import android.os.CancellationSignal
-import br.pucminas.teamworktask.publica.PublicActivity
 
 /**
  * A simple [Fragment] subclass.
@@ -61,7 +60,7 @@ class PreLoginFragment : Fragment() {
     fun configurarBotaoUsuarioCadastro(){
         binding.loginAddUserIv.setOnClickListener {
             if(activity is PublicActivity){
-                (activity as PublicActivity).changeFragment(UsuarioCadastroFragment.newInstance())
+                (activity as PublicActivity).changeFragment(UsuarioCadastroFragment())
             }
         }
     }
@@ -78,23 +77,6 @@ class PreLoginFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @return A new instance of fragment PreLoginFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance() =
-            PreLoginFragment().apply {
-                arguments = Bundle().apply {
-                }
-            }
-    }
-
 
     private val authenticationCallback: BiometricPrompt.AuthenticationCallback
         get() = @RequiresApi(Build.VERSION_CODES.P)

@@ -1,12 +1,11 @@
-package br.pucminas.teamworktask.publica
+package br.pucminas.teamworktask.ui.publica
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import br.pucminas.teamworktask.databinding.ActivityPublicBinding
-import br.pucminas.teamworktask.privada.PrivateActivity
-import br.pucminas.teamworktask.publica.login.PreLoginFragment
+import br.pucminas.teamworktask.ui.privada.PrivateActivity
 
 
 class PublicActivity : AppCompatActivity() {
@@ -21,7 +20,7 @@ class PublicActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        changeFragment(PreLoginFragment.newInstance())
+        changeFragment(PreLoginFragment())
     }
 
     fun changeFragment(fragment: Fragment){

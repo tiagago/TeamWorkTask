@@ -29,4 +29,16 @@
     <string name="bottom_navegator_tags">Tags</string>
     <string name="bottom_navegator_equipe">Equipe</string>
     <string name="bottom_navegator_notificacoes">Notificações</string>
+
+
+    <!-- Dashboard -->
+    <string name="dashboard_title">Bem vindo, %1$s!</string>
+    <!-- Tarefas -->
+    <string name="tarefas_title">@string/bottom_navegator_tarefa</string>
+    <!-- Tags -->
+    <string name="tags_title">@string/bottom_navegator_tags</string>
+    <!-- Equipe -->
+    <string name="equipe_title">@string/bottom_navegator_equipe</string>
+    <!-- Notificacao -->
+    <string name="notificacao_title">@string/bottom_navegator_notificacoes</string>
 </resources>

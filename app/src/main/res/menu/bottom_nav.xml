@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="@string/bottom_navegator_home" android:icon="@drawable/ic_home"/>
-    <item android:title="@string/bottom_navegator_tarefa" android:icon="@drawable/ic_tarefas"/>
-    <item android:title="@string/bottom_navegator_tags" android:icon="@drawable/ic_tags"/>
-    <item android:title="@string/bottom_navegator_equipe" android:icon="@drawable/ic_equipe"/>
-    <item android:title="@string/bottom_navegator_notificacoes" android:icon="@drawable/ic_notificacao"/>
+    <item
+        android:id="@+id/bottom_nav_home"
+        android:title="@string/bottom_navegator_home"
+        android:icon="@drawable/ic_home"/>
+    <item
+        android:id="@+id/bottom_nav_tarefa"
+        android:title="@string/bottom_navegator_tarefa"
+        android:icon="@drawable/ic_tarefas"/>
+    <item
+        android:id="@+id/bottom_nav_tags"
+        android:title="@string/bottom_navegator_tags"
+        android:icon="@drawable/ic_tags"/>
+    <item
+        android:id="@+id/bottom_nav_equipe"
+        android:title="@string/bottom_navegator_equipe"
+        android:icon="@drawable/ic_equipe"/>
+    <item
+        android:id="@+id/bottom_nav_notificacao"
+        android:title="@string/bottom_navegator_notificacoes"
+        android:icon="@drawable/ic_notificacao"/>
 </menu>

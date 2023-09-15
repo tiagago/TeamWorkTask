@@ -7,10 +7,10 @@
 
 
     <ImageView
-        android:id="@+id/dashboard_logo_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_person_24"
+        android:id="@+id/tarefa_logo_iv"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_tarefas"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -18,11 +18,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/genericTittle"
-        android:text="@string/dashboard_title"
+        android:text="@string/tarefas_title"
         android:layout_marginStart="@dimen/margem_padrao"
-        app:layout_constraintStart_toEndOf="@id/dashboard_logo_iv"
-        app:layout_constraintTop_toTopOf="@id/dashboard_logo_iv"
-        app:layout_constraintBottom_toBottomOf="@id/dashboard_logo_iv"
+        app:layout_constraintStart_toEndOf="@id/tarefa_logo_iv"
+        app:layout_constraintTop_toTopOf="@id/tarefa_logo_iv"
+        app:layout_constraintBottom_toBottomOf="@id/tarefa_logo_iv"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
