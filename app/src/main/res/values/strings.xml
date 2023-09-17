@@ -33,6 +33,11 @@
 
     <!-- Dashboard -->
     <string name="dashboard_title">Bem vindo, %1$s!</string>
+    <string name="dashboard_fab_novo_projeto">Novo Projeto</string>
+    <string name="dashboard_fab_editar_projeto">Editar Projeto</string>
+    <string name="dashboard_fab_participar_projeto">Juntar-se a um Projeto</string>
+
+
     <!-- Tarefas -->
     <string name="tarefas_title">@string/bottom_navegator_tarefa</string>
     <!-- Tags -->

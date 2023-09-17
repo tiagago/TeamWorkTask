@@ -3,14 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/dashboard_logo_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/baseline_person_24"
+        android:src="@drawable/ic_user"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,6 +22,103 @@
         app:layout_constraintStart_toEndOf="@id/dashboard_logo_iv"
         app:layout_constraintTop_toTopOf="@id/dashboard_logo_iv"
         app:layout_constraintBottom_toBottomOf="@id/dashboard_logo_iv"
+        />
+
+    <ImageView
+        android:id="@+id/dashboard_logout_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/dashboard_main_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        style="@style/floatButtonMain"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/dashboard_participar_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:visibility="gone"
+        style="@style/floatButtonSubMenu"
+        app:srcCompat="@drawable/ic_join"
+        app:layout_constraintBottom_toTopOf="@id/dashboard_main_fab"
+        app:layout_constraintStart_toStartOf="@id/dashboard_main_fab"
+        app:layout_constraintEnd_toEndOf="@id/dashboard_main_fab"
+        tools:visibility="visible"
+        />
+
+    <TextView
+        android:id="@+id/dashboard_participar_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/floatButtonSubMenuText"
+        android:text="@string/dashboard_fab_participar_projeto"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@id/dashboard_participar_fab"
+        app:layout_constraintTop_toTopOf="@id/dashboard_participar_fab"
+        app:layout_constraintBottom_toBottomOf="@id/dashboard_participar_fab"
+        tools:visibility="visible"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/dashboard_editar_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:visibility="gone"
+        style="@style/floatButtonSubMenu"
+        app:srcCompat="@drawable/ic_edit"
+        app:layout_constraintBottom_toTopOf="@id/dashboard_participar_fab"
+        app:layout_constraintStart_toStartOf="@id/dashboard_main_fab"
+        app:layout_constraintEnd_toEndOf="@id/dashboard_main_fab"
+        tools:visibility="visible"
+        />
+    <TextView
+        android:id="@+id/dashboard_editar_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/floatButtonSubMenuText"
+        android:text="@string/dashboard_fab_editar_projeto"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@id/dashboard_editar_fab"
+        app:layout_constraintTop_toTopOf="@id/dashboard_editar_fab"
+        app:layout_constraintBottom_toBottomOf="@id/dashboard_editar_fab"
+        tools:visibility="visible"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/dashboard_novo_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:visibility="gone"
+        style="@style/floatButtonSubMenu"
+        app:srcCompat="@drawable/ic_new_project"
+        app:layout_constraintBottom_toTopOf="@id/dashboard_editar_fab"
+        app:layout_constraintStart_toStartOf="@id/dashboard_main_fab"
+        app:layout_constraintEnd_toEndOf="@id/dashboard_main_fab"
+        tools:visibility="visible"
+        />
+    <TextView
+        android:id="@+id/dashboard_novo_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/floatButtonSubMenuText"
+        android:text="@string/dashboard_fab_novo_projeto"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@id/dashboard_novo_fab"
+        app:layout_constraintTop_toTopOf="@id/dashboard_novo_fab"
+        app:layout_constraintBottom_toBottomOf="@id/dashboard_novo_fab"
+        tools:visibility="visible"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,4 +19,29 @@
         <item name="android:textColorHint">@color/secondary_color_dark</item>
         <item name="android:textColor">@color/secondary_color</item>
     </style>
+
+    <style name="floatButtonMain">
+        <item name="rippleColor">@color/primary_color_dark</item>
+        <item name="tint">@color/white</item>
+        <item name="backgroundTint">@color/purple_700</item>
+        <item name="android:layout_marginEnd">@dimen/margem_pequena</item>
+        <item name="android:layout_marginBottom">@dimen/margem_pequena</item>
+        <item name="android:elevation">@dimen/margem_pequena</item>
+    </style>
+    <style name="floatButtonSubMenu">
+        <item name="rippleColor">@color/primary_color_dark</item>
+        <item name="tint">@color/white</item>
+        <item name="backgroundTint">@color/purple_500</item>
+        <item name="android:layout_marginBottom">@dimen/margem_pequena</item>
+        <item name="fabSize">mini</item>
+        <item name="android:elevation">@dimen/margem_pequena</item>
+    </style>
+    <style name="floatButtonSubMenuText">
+        <item name="android:textSize">@dimen/titulo_tamanho</item>
+        <item name="android:textColor">@color/purple_500</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:elevation">@dimen/margem_pequena</item>
+        <item name="android:padding">@dimen/margem_pequena</item>
+        <item name="android:background">@drawable/fab_text_bg</item>
+    </style>
 </resources>

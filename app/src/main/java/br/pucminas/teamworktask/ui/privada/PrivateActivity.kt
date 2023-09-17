@@ -9,6 +9,7 @@ import br.pucminas.teamworktask.ui.privada.equipe.EquipeFragment
 import br.pucminas.teamworktask.ui.privada.notificacao.NotificacaoFragment
 import br.pucminas.teamworktask.ui.privada.projeto.DashboardFragment
 import br.pucminas.teamworktask.ui.privada.tags.TagsFragment
+import br.pucminas.teamworktask.ui.privada.tarefa.TarefasFragment
 
 class PrivateActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPrivateBinding
@@ -23,7 +24,7 @@ class PrivateActivity : AppCompatActivity() {
         binding.privadoBnv.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.bottom_nav_home -> changeFragment(DashboardFragment())
-                R.id.bottom_nav_tarefa -> changeFragment(TagsFragment())
+                R.id.bottom_nav_tarefa -> changeFragment(TarefasFragment())
                 R.id.bottom_nav_tags -> changeFragment(TagsFragment())
                 R.id.bottom_nav_equipe -> changeFragment(EquipeFragment())
                 R.id.bottom_nav_notificacao -> changeFragment(NotificacaoFragment())
