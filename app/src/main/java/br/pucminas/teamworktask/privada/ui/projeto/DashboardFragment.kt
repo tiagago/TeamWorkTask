@@ -1,4 +1,4 @@
-package br.pucminas.teamworktask.ui.privada.projeto
+package br.pucminas.teamworktask.privada.ui.projeto
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

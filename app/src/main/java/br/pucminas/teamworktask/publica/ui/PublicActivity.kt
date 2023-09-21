@@ -1,11 +1,11 @@
-package br.pucminas.teamworktask.ui.publica
+package br.pucminas.teamworktask.publica.ui
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import br.pucminas.teamworktask.databinding.ActivityPublicBinding
-import br.pucminas.teamworktask.ui.privada.PrivateActivity
+import br.pucminas.teamworktask.privada.ui.PrivateActivity
 
 
 class PublicActivity : AppCompatActivity() {

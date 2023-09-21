@@ -1,4 +1,4 @@
-package br.pucminas.teamworktask.ui.publica
+package br.pucminas.teamworktask.publica.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

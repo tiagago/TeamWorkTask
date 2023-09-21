@@ -1,4 +1,4 @@
-package br.pucminas.teamworktask.ui.publica
+package br.pucminas.teamworktask.publica.ui
 
 import android.hardware.biometrics.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import android.hardware.biometrics.BiometricManager.Authenticators.DEVICE_CREDENTIAL
@@ -15,6 +15,13 @@ import android.os.Build
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import android.os.CancellationSignal
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import br.pucminas.teamworktask.models.Usuario
+import br.pucminas.teamworktask.repositories.UsuarioRepository
+import br.pucminas.teamworktask.request.RetrofitService
+import br.pucminas.teamworktask.viewmodels.MainViewModelFactory
+import br.pucminas.teamworktask.viewmodels.UsuarioViewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -27,8 +34,10 @@ class PreLoginFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private var cancellationSignal: CancellationSignal? = null
+    private val retrofitService = RetrofitService.getInstance()
+    lateinit var viewModel: UsuarioViewModel
 
-    @RequiresApi(Build.VERSION_CODES.P)
+            @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _binding = FragmentPreLoginBinding.inflate(inflater, container, false)
@@ -40,9 +49,27 @@ class PreLoginFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.P)
     fun prepararListeners(){
+        configurarViewModels()
         configurarBotaoBiometria()
         configurarBotaoUsuarioCadastro()
         configurarBotaoEntrar()
+    }
+
+    private fun configurarViewModels() {
+        viewModel =
+            ViewModelProvider(this, MainViewModelFactory(UsuarioRepository(retrofitService))).get(
+                UsuarioViewModel::class.java
+            )
+
+        viewModel.usuario.observe(viewLifecycleOwner) {
+            if (activity is PublicActivity) {
+                (activity as PublicActivity).doLogin()
+            }
+        }
+
+        viewModel.errorMessage.observe(viewLifecycleOwner) {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -67,11 +94,31 @@ class PreLoginFragment : Fragment() {
 
     fun configurarBotaoEntrar(){
         binding.loginEntrarBt.setOnClickListener {
-            if(activity is PublicActivity){
-                (activity as PublicActivity).doLogin()
+            var achouProblema = false
+            val email: String = binding.loginUsuarioTie.text.toString()
+            val senha: String = binding.loginSenhaTie.text.toString()
+
+            if(email.isBlank() || email == getString(R.string.pre_login_usuario_label)){
+                binding.loginUsuarioTil.error = getString(R.string.generico_vazio_erro, getString(R.string.pre_login_usuario_label))
+                achouProblema = true
+            } else {
+                binding.loginUsuarioTil.error = null
+            }
+
+            if(senha.isBlank() || senha == getString(R.string.pre_login_senha_label)){
+                binding.loginSenhaTil.error = getString(R.string.generico_vazio_erro, getString(R.string.pre_login_senha_label))
+                achouProblema = true
+            } else {
+                binding.loginSenhaTil.error = null
+            }
+
+            if(!achouProblema){
+                viewModel.doLogin(Usuario(0, email, "", senha))
             }
         }
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

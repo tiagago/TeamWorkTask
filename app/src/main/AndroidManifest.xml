@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -13,17 +15,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeamWorkTask"
         android:screenOrientation="portrait"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.privada.PrivateActivity"
+            android:name=".privada.ui.PrivateActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".ui.publica.PublicActivity"
+            android:name=".publica.ui.PublicActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".ui.publica.SplashScreen"
+            android:name=".publica.ui.SplashScreen"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>

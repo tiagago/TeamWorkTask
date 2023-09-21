@@ -1,15 +1,15 @@
-package br.pucminas.teamworktask.ui.privada
+package br.pucminas.teamworktask.privada.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import br.pucminas.teamworktask.R
 import br.pucminas.teamworktask.databinding.ActivityPrivateBinding
-import br.pucminas.teamworktask.ui.privada.equipe.EquipeFragment
-import br.pucminas.teamworktask.ui.privada.notificacao.NotificacaoFragment
-import br.pucminas.teamworktask.ui.privada.projeto.DashboardFragment
-import br.pucminas.teamworktask.ui.privada.tags.TagsFragment
-import br.pucminas.teamworktask.ui.privada.tarefa.TarefasFragment
+import br.pucminas.teamworktask.privada.ui.equipe.EquipeFragment
+import br.pucminas.teamworktask.privada.ui.notificacao.NotificacaoFragment
+import br.pucminas.teamworktask.privada.ui.projeto.DashboardFragment
+import br.pucminas.teamworktask.privada.ui.tags.TagsFragment
+import br.pucminas.teamworktask.privada.ui.tarefa.TarefasFragment
 
 class PrivateActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPrivateBinding

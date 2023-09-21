@@ -1,4 +1,4 @@
-package br.pucminas.teamworktask.ui.publica
+package br.pucminas.teamworktask.publica.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
