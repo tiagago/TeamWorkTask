@@ -7,9 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AlertDialog
 import br.pucminas.teamworktask.R
 import br.pucminas.teamworktask.databinding.FragmentDashboardBinding
-
+import br.pucminas.teamworktask.privada.ui.PrivateActivity
+import br.pucminas.teamworktask.publica.ui.PublicActivity
+import br.pucminas.teamworktask.publica.ui.UsuarioCadastroFragment
 
 
 /**
@@ -34,12 +37,24 @@ class DashboardFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
 
+        configurarLogoutButton()
+        configurarFloatingButton()
 
+        return binding.root
+    }
+
+    private fun configurarLogoutButton() {
+        binding.dashboardLogoutIv.setOnClickListener {
+            if(activity is PrivateActivity){
+                (activity as PrivateActivity).chamarPopupLogout()
+            }
+        }
+    }
+
+    fun configurarFloatingButton(){
         binding.dashboardMainFab.setOnClickListener {
             onAddButtonClicked()
         }
-
-        return binding.root
     }
 
     private fun onAddButtonClicked() {
@@ -68,8 +83,5 @@ class DashboardFragment : Fragment() {
     }
 
 
-    fun configurarFloatingButton(){
-        //binding.floatingActionButton.
-    }
 
 }

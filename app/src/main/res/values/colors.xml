@@ -19,7 +19,15 @@
     <color name="backgroud_default">#81B94E</color>
 
 
+    <!-- Information Colors -->
+    <color name="colorSuccess">#1DF120</color>
+    <color name="colorWarning">#EDCF36</color>
+    <color name="colorError">#F61F26</color>
+
     <color name="white_oppacite_70">#88FFFFFF</color>
 
     <color name="splashscreen_background">#E4FAE3</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="light_gray">#8C8C8C</color>
 </resources>

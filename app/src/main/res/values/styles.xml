@@ -44,4 +44,49 @@
         <item name="android:padding">@dimen/margem_pequena</item>
         <item name="android:background">@drawable/fab_text_bg</item>
     </style>
+
+    <!-- Top Alert view styles -->
+    <style name="TopAlertWindowSlide" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/slide_down_from_top</item>
+        <item name="android:windowExitAnimation">@anim/slide_up_of_top</item>
+    </style>
+
+    <style name="TopAlertLayout">
+        <item name="android:background">@color/white</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="TopAlertDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TopAlertMessage">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:maxLines">10</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="TopAlertTitle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="TopAlertSeparator">
+        <item name="android:background">@color/light_gray</item>
+    </style>
+
 </resources>

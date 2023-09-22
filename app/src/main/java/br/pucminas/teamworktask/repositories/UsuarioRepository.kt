@@ -5,6 +5,8 @@ import br.pucminas.teamworktask.request.RetrofitService
 
 class UsuarioRepository constructor(private val retrofitService: RetrofitService) {
 
-    fun doLogin(usuarioRequest: Usuario) = retrofitService.doLogin(usuarioRequest.email, usuarioRequest.senha)
+    fun doLogin(email: String, senha: String) = retrofitService.doLogin(email, senha)
+
+    fun criarUsuario(usuario: Usuario) = retrofitService.criarUsuario(usuario)
 
 }

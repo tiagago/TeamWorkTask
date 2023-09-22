@@ -2,30 +2,35 @@ package br.pucminas.teamworktask.publica.ui
 
 import android.hardware.biometrics.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import android.hardware.biometrics.BiometricManager.Authenticators.DEVICE_CREDENTIAL
+import android.hardware.biometrics.BiometricPrompt
+import android.os.Build
 import android.os.Bundle
+import android.os.CancellationSignal
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import br.pucminas.teamworktask.R
-import br.pucminas.teamworktask.databinding.FragmentPreLoginBinding
-import br.pucminas.teamworktask.utils.PermissionUtils
-import android.hardware.biometrics.BiometricPrompt
-import android.os.Build
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import android.os.CancellationSignal
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import br.pucminas.teamworktask.R
+import br.pucminas.teamworktask.databinding.FragmentPreLoginBinding
 import br.pucminas.teamworktask.models.Usuario
 import br.pucminas.teamworktask.repositories.UsuarioRepository
 import br.pucminas.teamworktask.request.RetrofitService
+import br.pucminas.teamworktask.utils.PermissionUtils
+import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_EMAIL
+import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_ID
+import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_NOME
+import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_SENHA
+import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.obterPreferencia
+import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.obterPreferenciaInt
 import br.pucminas.teamworktask.viewmodels.MainViewModelFactory
 import br.pucminas.teamworktask.viewmodels.UsuarioViewModel
 
 /**
  * A simple [Fragment] subclass.
- * Use the [PreLoginFragment.newInstance] factory method to
+ * Use the [PreLoginFragment] factory method to
  * create an instance of this fragment.
  */
 class PreLoginFragment : Fragment() {
@@ -38,21 +43,31 @@ class PreLoginFragment : Fragment() {
     lateinit var viewModel: UsuarioViewModel
 
             @RequiresApi(Build.VERSION_CODES.P)
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         _binding = FragmentPreLoginBinding.inflate(inflater, container, false)
-
         prepararListeners()
-
         return binding.root
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
     fun prepararListeners(){
+        configurarEmail()
         configurarViewModels()
-        configurarBotaoBiometria()
         configurarBotaoUsuarioCadastro()
         configurarBotaoEntrar()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.P)
+    private fun configurarEmail() {
+        val email : String = obterPreferencia(requireContext(), USUARIO_EMAIL)
+        if(email.isNotBlank()){
+            binding.loginUsuarioTie.setText(email)
+            binding.loginFingerprintIv.visibility = View.VISIBLE
+            configurarBotaoBiometria()
+        } else {
+            binding.loginFingerprintIv.visibility = View.GONE
+        }
     }
 
     private fun configurarViewModels() {
@@ -61,9 +76,13 @@ class PreLoginFragment : Fragment() {
                 UsuarioViewModel::class.java
             )
 
-        viewModel.usuario.observe(viewLifecycleOwner) {
-            if (activity is PublicActivity) {
-                (activity as PublicActivity).doLogin()
+        viewModel.usuarioResponse.observe(viewLifecycleOwner) {
+            if(it?.usuario != null && it.success){
+                if (activity is PublicActivity) {
+                    (activity as PublicActivity).doLogin(it.usuario!!)
+                }
+            } else {
+                Toast.makeText(context, it?.message, Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -75,12 +94,12 @@ class PreLoginFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.P)
     fun configurarBotaoBiometria(){
         if(PermissionUtils.checkBiometricSupport(requireContext())){
-            binding.loginFingerprintIv.visibility = View.VISIBLE;
+            binding.loginFingerprintIv.visibility = View.VISIBLE
             binding.loginFingerprintIv.setOnClickListener {
-                authenticateUser();
+                authenticateUser()
             }
         } else {
-            binding.loginFingerprintIv.visibility = View.GONE;
+            binding.loginFingerprintIv.visibility = View.GONE
         }
     }
 
@@ -113,7 +132,7 @@ class PreLoginFragment : Fragment() {
             }
 
             if(!achouProblema){
-                viewModel.doLogin(Usuario(0, email, "", senha))
+                viewModel.doLogin(email, senha)
             }
         }
     }
@@ -147,8 +166,7 @@ class PreLoginFragment : Fragment() {
             override fun onAuthenticationSucceeded(result:
                                                    BiometricPrompt.AuthenticationResult) {
                 super.onAuthenticationSucceeded(result)
-                notifyUser("Authentication Succeeded")
-
+                efetuarLoginFingerPrint()
             }
         }
     @RequiresApi(Build.VERSION_CODES.P)
@@ -170,6 +188,18 @@ class PreLoginFragment : Fragment() {
             notifyUser("Cancelled via signal")
         }
         return cancellationSignal as CancellationSignal
+    }
+
+    private fun efetuarLoginFingerPrint(){
+        if(activity is PublicActivity){
+            var usuario = Usuario()
+            usuario.id = Integer(obterPreferenciaInt(requireContext(), USUARIO_ID))
+            usuario.email = obterPreferencia(requireContext(), USUARIO_EMAIL)
+            usuario.nomeExibicao = obterPreferencia(requireContext(), USUARIO_NOME)
+            usuario.senha = obterPreferencia(requireContext(), USUARIO_SENHA)
+
+            (activity as PublicActivity).doLogin(usuario)
+        }
     }
 
     private fun notifyUser(message: String) {

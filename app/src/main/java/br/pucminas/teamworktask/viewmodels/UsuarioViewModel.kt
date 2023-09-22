@@ -4,26 +4,55 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.pucminas.teamworktask.models.Usuario
 import br.pucminas.teamworktask.repositories.UsuarioRepository
+import br.pucminas.teamworktask.response.UsuarioResponse
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class UsuarioViewModel constructor(private val repository: UsuarioRepository)  : ViewModel() {
 
-    val usuario = MutableLiveData<Usuario>()
+    val usuarioResponse = MutableLiveData<UsuarioResponse>()
     val errorMessage = MutableLiveData<String>()
 
-    fun doLogin(usuarioRequest: Usuario) {
+    fun doLogin(email: String, senha: String) {
 
-        val response = repository.doLogin(usuarioRequest)
-        response.enqueue(object : Callback<Usuario> {
-            override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
-                usuario.postValue(response.body())
+        val response = repository.doLogin(email, senha)
+        response.enqueue(object : Callback<UsuarioResponse> {
+            override fun onResponse(call: Call<UsuarioResponse>, response: Response<UsuarioResponse>) {
+                if(response.body() != null){
+                    usuarioResponse.postValue(response.body())
+                } else if(response.errorBody() != null){
+                    val jObjError = JSONObject(response.errorBody()!!.string())
+                    errorMessage.postValue(jObjError.getString("message"))
+                } else {
+                    errorMessage.postValue("Error")
+                }
             }
-
-            override fun onFailure(call: Call<Usuario>, t: Throwable) {
+            override fun onFailure(call: Call<UsuarioResponse>, t: Throwable) {
                 errorMessage.postValue(t.message)
             }
         })
     }
+
+    fun criarUsuario(usuario: Usuario) {
+        val response = repository.criarUsuario(usuario)
+        response.enqueue(object : Callback<UsuarioResponse> {
+            override fun onResponse(call: Call<UsuarioResponse>, response: Response<UsuarioResponse>) {
+                if(response.body() != null){
+                    usuarioResponse.postValue(response.body())
+                } else if(response.errorBody() != null){
+                    val jObjError = JSONObject(response.errorBody()!!.string())
+                    errorMessage.postValue(jObjError.getString("message"))
+                } else {
+                    errorMessage.postValue("Error")
+                }
+            }
+            override fun onFailure(call: Call<UsuarioResponse>, t: Throwable) {
+                errorMessage.postValue(t.message)
+            }
+        })
+    }
+
 }

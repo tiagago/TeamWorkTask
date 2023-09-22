@@ -9,19 +9,23 @@
     <string name="pre_login_biometria_titulo">@string/app_name</string>
     <string name="pre_login_biometria_subtitulo">Autenticação necessária para continuar</string>
     <string name="pre_login_biometria_descricao">A aplicação usa biomentria para proteger seus dados.</string>
+    <string name="pre_login_sair_title">Sair!</string>
+    <string name="pre_login_sair_descricao">Deseja encerrar a aplicação?</string>
 
     <!-- Cadastro usuario -->
     <string name="usuario_cadastro_titulo">Cadastrar Usuário</string>
-    <string name="usuario_cadastro_nome_label">Nome</string>
-    <string name="usuario_cadastro_sobrenome_label">Sobrenome</string>
+    <string name="usuario_cadastro_nome_label">Nome Exibição</string>
     <string name="usuario_cadastro_email_label">E-mail</string>
     <string name="usuario_cadastro_senha_label">Senha</string>
     <string name="usuario_cadastro_repetir_senha_label">Repetir Senha</string>
+
 
     <!-- Genericos -->
     <string name="generico_vazio_erro">Informar %1$s!</string>
     <string name="generico_salvar_label">Salvar</string>
     <string name="generico_cancelar_label">Cancelar</string>
+    <string name="generico_confirmar">Sim</string>
+    <string name="generico_negar">Não</string>
 
     <!-- Bottom Navegator -->
     <string name="bottom_navegator_home">Home</string>
@@ -36,7 +40,8 @@
     <string name="dashboard_fab_novo_projeto">Novo Projeto</string>
     <string name="dashboard_fab_editar_projeto">Editar Projeto</string>
     <string name="dashboard_fab_participar_projeto">Juntar-se a um Projeto</string>
-
+    <string name="dashboard_logout_title">Logout</string>
+    <string name="dashboard_logout_descricao">Deseja fazer Logout?</string>
 
     <!-- Tarefas -->
     <string name="tarefas_title">@string/bottom_navegator_tarefa</string>

@@ -1,9 +1,7 @@
 package br.pucminas.teamworktask.models
-
-
-data class Usuario (
-    var id : Int,
-    var email : String,
-    var nomeExibicao : String,
-    var senha : String
-)
+class Usuario  {
+    lateinit var id : Integer
+    lateinit var email : String
+    lateinit var nomeExibicao : String
+    lateinit var senha : String
+}
