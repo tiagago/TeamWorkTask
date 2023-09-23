@@ -1,4 +1,4 @@
-package br.pucminas.teamworktask.componentes.topAlert
+package br.pucminas.teamworktask.componentes.topAlert.`object`
 
 import android.graphics.Typeface
 import java.io.Serializable

@@ -7,6 +7,7 @@ import android.os.Build.VERSION
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertTextObject
 
 internal object TopAlertUtils {
     fun setTextUISettings(

@@ -18,6 +18,7 @@
     <string name="usuario_cadastro_email_label">E-mail</string>
     <string name="usuario_cadastro_senha_label">Senha</string>
     <string name="usuario_cadastro_repetir_senha_label">Repetir Senha</string>
+    <string name="usuario_cadastro_sucesso">Usuário cadastrado com sucesso!</string>
 
 
     <!-- Genericos -->
@@ -26,6 +27,7 @@
     <string name="generico_cancelar_label">Cancelar</string>
     <string name="generico_confirmar">Sim</string>
     <string name="generico_negar">Não</string>
+    <string name="generico_erro_servico">Ocorreu um erro ao realizar a requisição, por favor tente mais tarde!</string>
 
     <!-- Bottom Navegator -->
     <string name="bottom_navegator_home">Home</string>

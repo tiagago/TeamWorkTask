@@ -1,4 +1,4 @@
-package br.pucminas.teamworktask.privada.ui.projeto
+package br.pucminas.teamworktask.ui.privada.projeto
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,12 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import androidx.appcompat.app.AlertDialog
 import br.pucminas.teamworktask.R
 import br.pucminas.teamworktask.databinding.FragmentDashboardBinding
-import br.pucminas.teamworktask.privada.ui.PrivateActivity
-import br.pucminas.teamworktask.publica.ui.PublicActivity
-import br.pucminas.teamworktask.publica.ui.UsuarioCadastroFragment
+import br.pucminas.teamworktask.ui.privada.PrivateActivity
 
 
 /**

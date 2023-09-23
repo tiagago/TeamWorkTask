@@ -18,15 +18,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".privada.ui.PrivateActivity"
+            android:name=".ui.privada.PrivateActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".publica.ui.PublicActivity"
+            android:name=".ui.publica.PublicActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".publica.ui.SplashScreen"
+            android:name=".ui.publica.SplashScreen"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>

@@ -1,19 +1,19 @@
-package br.pucminas.teamworktask.publica.ui
+package br.pucminas.teamworktask.ui.publica
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import br.pucminas.teamworktask.R
-import br.pucminas.teamworktask.componentes.topAlert.TopAlertTextObject
-import br.pucminas.teamworktask.componentes.topAlert.TopAlertView
+import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertMessageObject
+import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertType
 import br.pucminas.teamworktask.databinding.FragmentUsuarioCadastroBinding
 import br.pucminas.teamworktask.models.Usuario
 import br.pucminas.teamworktask.repositories.UsuarioRepository
 import br.pucminas.teamworktask.request.RetrofitService
+import br.pucminas.teamworktask.ui.GenericFragment
 import br.pucminas.teamworktask.viewmodels.MainViewModelFactory
 import br.pucminas.teamworktask.viewmodels.UsuarioViewModel
 
@@ -22,7 +22,7 @@ import br.pucminas.teamworktask.viewmodels.UsuarioViewModel
  * Use the [UsuarioCadastroFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class UsuarioCadastroFragment : Fragment() {
+class UsuarioCadastroFragment : GenericFragment() {
     private var _binding: FragmentUsuarioCadastroBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -45,11 +45,8 @@ class UsuarioCadastroFragment : Fragment() {
     }
 
     private fun configurarBotaoCancelar() {
-        val alert: TopAlertView = TopAlertView
-            .createTopAlert(TopAlertView.TopAlertType.SUCCESS.id(), TopAlertTextObject("Teste Testando") )
-        alert.show(parentFragmentManager, TopAlertView.TAG)
         binding.usuarioCadastroCancelarBt.setOnClickListener {
-
+            onBackPressed()
         }
     }
 
@@ -67,16 +64,14 @@ class UsuarioCadastroFragment : Fragment() {
 
         viewModel.usuarioResponse.observe(viewLifecycleOwner) {
             if(it?.usuario != null && it.success){
-                if (activity is PublicActivity) {
-
-                }
+                onBackPressed(TopAlertMessageObject(TopAlertType.SUCCESS, getString(R.string.usuario_cadastro_sucesso)))
             } else {
-                Toast.makeText(context, it?.message, Toast.LENGTH_SHORT).show()
+                retornoErroServico(it)
             }
         }
 
         viewModel.errorMessage.observe(viewLifecycleOwner) {
-            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            showErrorMessage(it)
         }
     }
 

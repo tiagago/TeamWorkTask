@@ -1,4 +1,4 @@
-package br.pucminas.teamworktask.publica.ui
+package br.pucminas.teamworktask.ui.publica
 
 import android.hardware.biometrics.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import android.hardware.biometrics.BiometricManager.Authenticators.DEVICE_CREDENTIAL
@@ -9,15 +9,17 @@ import android.os.CancellationSignal
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import br.pucminas.teamworktask.R
+import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertMessageObject
+import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertType
 import br.pucminas.teamworktask.databinding.FragmentPreLoginBinding
 import br.pucminas.teamworktask.models.Usuario
 import br.pucminas.teamworktask.repositories.UsuarioRepository
 import br.pucminas.teamworktask.request.RetrofitService
+import br.pucminas.teamworktask.ui.GenericFragment
 import br.pucminas.teamworktask.utils.PermissionUtils
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_EMAIL
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_ID
@@ -33,7 +35,7 @@ import br.pucminas.teamworktask.viewmodels.UsuarioViewModel
  * Use the [PreLoginFragment] factory method to
  * create an instance of this fragment.
  */
-class PreLoginFragment : Fragment() {
+class PreLoginFragment : GenericFragment() {
     private var _binding: FragmentPreLoginBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -77,17 +79,19 @@ class PreLoginFragment : Fragment() {
             )
 
         viewModel.usuarioResponse.observe(viewLifecycleOwner) {
+            showLoading(false)
             if(it?.usuario != null && it.success){
                 if (activity is PublicActivity) {
                     (activity as PublicActivity).doLogin(it.usuario!!)
                 }
             } else {
-                Toast.makeText(context, it?.message, Toast.LENGTH_SHORT).show()
+                retornoErroServico(it)
             }
         }
 
         viewModel.errorMessage.observe(viewLifecycleOwner) {
-            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            showLoading(false)
+            showErrorMessage(it)
         }
     }
 
@@ -105,9 +109,7 @@ class PreLoginFragment : Fragment() {
 
     fun configurarBotaoUsuarioCadastro(){
         binding.loginAddUserIv.setOnClickListener {
-            if(activity is PublicActivity){
-                (activity as PublicActivity).changeFragment(UsuarioCadastroFragment())
-            }
+            changeFragment(UsuarioCadastroFragment())
         }
     }
 
@@ -132,12 +134,11 @@ class PreLoginFragment : Fragment() {
             }
 
             if(!achouProblema){
+                showLoading(true)
                 viewModel.doLogin(email, senha)
             }
         }
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -150,7 +151,7 @@ class PreLoginFragment : Fragment() {
             override fun onAuthenticationError(errorCode: Int,
                                                errString: CharSequence) {
                 super.onAuthenticationError(errorCode, errString)
-                notifyUser("Authentication error: $errString")
+                showErrorMessage( "Authentication error: $errString")
             }
 
             override fun onAuthenticationHelp(helpCode: Int,
@@ -160,7 +161,7 @@ class PreLoginFragment : Fragment() {
 
             override fun onAuthenticationFailed() {
                 super.onAuthenticationFailed()
-                notifyUser("Authentication Failed")
+                showErrorMessage("Authentication Failed")
             }
 
             override fun onAuthenticationSucceeded(result:
@@ -185,7 +186,7 @@ class PreLoginFragment : Fragment() {
 
         cancellationSignal = CancellationSignal()
         cancellationSignal?.setOnCancelListener {
-            notifyUser("Cancelled via signal")
+            showWarningMessage("Cancelled via signal")
         }
         return cancellationSignal as CancellationSignal
     }
@@ -202,9 +203,5 @@ class PreLoginFragment : Fragment() {
         }
     }
 
-    private fun notifyUser(message: String) {
-        Toast.makeText(context,
-            message,
-            Toast.LENGTH_LONG).show()
-    }
+
 }

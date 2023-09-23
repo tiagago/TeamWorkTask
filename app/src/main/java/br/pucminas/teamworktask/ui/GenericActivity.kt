@@ -1,0 +1,106 @@
+package br.pucminas.teamworktask.ui
+
+import android.app.ProgressDialog
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import br.pucminas.teamworktask.R
+import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertTextObject
+import br.pucminas.teamworktask.componentes.topAlert.TopAlertView
+import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertMessageObject
+
+open class GenericActivity : AppCompatActivity() {
+
+    var loadingDialog: ProgressDialog? = null
+
+    fun showAlert(topAlertMessageObject: TopAlertMessageObject?){
+        if(topAlertMessageObject == null) {
+            return
+        }
+
+        val alert: TopAlertView = TopAlertView.createTopAlert(topAlertMessageObject.alertType.id(), TopAlertTextObject(topAlertMessageObject.message) )
+        alert.show(supportFragmentManager, TopAlertView.TAG)
+    }
+
+    // Declare the onBackPressed method when the back button is pressed this method will call
+    override fun onBackPressed() {
+        val count = supportFragmentManager.backStackEntryCount
+
+        if (count == 1) {
+            chamarPopupLogout()
+        } else {
+            supportFragmentManager.popBackStack();
+        }
+    }
+
+    fun changeFragment(fragment: Fragment, topAlertMessageObject: TopAlertMessageObject? = null){
+        supportFragmentManager.beginTransaction()
+            .replace(obterFramelayoutID() , fragment)
+            .addToBackStack(null).commit()
+        showAlert(topAlertMessageObject)
+    }
+
+    open fun obterFramelayoutID(): Int = -1
+
+    fun chamarPopupLogout() {
+        // Create the object of AlertDialog Builder class
+        val builder = AlertDialog.Builder(this)
+
+        // Set the message show for the Alert time
+        builder.setMessage(obterMensagemLogout())
+
+        // Set Alert Title
+        builder.setTitle(obterTituloLogout())
+
+        // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
+        builder.setCancelable(false)
+
+        // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
+        builder.setPositiveButton(R.string.generico_confirmar) {
+            // When the user click yes button then app will close
+                dialog, which -> executarLogout()
+        }
+
+        // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
+        builder.setNegativeButton(R.string.generico_negar) {
+            // If user click no then dialog box is canceled.
+                dialog, which ->
+            dialog.cancel()
+        }
+
+        // Create the Alert dialog
+        val alertDialog = builder.create()
+        // Show the Alert Dialog box
+        alertDialog.show()
+    }
+
+    fun onBackPressed(topAlertMessageObject: TopAlertMessageObject){
+        supportFragmentManager.popBackStack()
+        showAlert(topAlertMessageObject)
+    }
+
+    open fun obterMensagemLogout(): String = ""
+
+    open fun obterTituloLogout(): String = ""
+
+    open fun executarLogout(){}
+
+    fun showLoading(isLoading: Boolean) {
+        if(loadingDialog == null) {
+            loadingDialog = ProgressDialog(this)
+            loadingDialog!!.setIndeterminate(true)
+        }
+        loadingDialog.let {
+            if (isLoading && !loadingDialog?.isShowing!!) {
+                loadingDialog?.show()
+            } else {
+                loadingDialog?.dismiss()
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        loadingDialog!!.dismiss()
+    }
+}

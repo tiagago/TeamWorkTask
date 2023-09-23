@@ -1,4 +1,4 @@
-package br.pucminas.teamworktask.privada.ui.notificacao
+package br.pucminas.teamworktask.ui.privada.equipe
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,15 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.pucminas.teamworktask.R
-import br.pucminas.teamworktask.databinding.FragmentNotificacaoBinding
+import br.pucminas.teamworktask.databinding.FragmentEquipeBinding
 
 /**
  * A simple [Fragment] subclass.
- * Use the [NotificacaoFragment.newInstance] factory method to
+ * Use the [EquipeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class NotificacaoFragment : Fragment() {
-    private var _binding: FragmentNotificacaoBinding? = null
+class EquipeFragment : Fragment() {
+    private var _binding: FragmentEquipeBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -22,7 +22,7 @@ class NotificacaoFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentNotificacaoBinding.inflate(inflater, container, false)
+        _binding = FragmentEquipeBinding.inflate(inflater, container, false)
 
 
         return binding.root

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import br.pucminas.teamworktask.models.Usuario
 import br.pucminas.teamworktask.repositories.UsuarioRepository
 import br.pucminas.teamworktask.response.UsuarioResponse
+import br.pucminas.teamworktask.utils.ViewModelUtils
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,11 +24,8 @@ class UsuarioViewModel constructor(private val repository: UsuarioRepository)  :
             override fun onResponse(call: Call<UsuarioResponse>, response: Response<UsuarioResponse>) {
                 if(response.body() != null){
                     usuarioResponse.postValue(response.body())
-                } else if(response.errorBody() != null){
-                    val jObjError = JSONObject(response.errorBody()!!.string())
-                    errorMessage.postValue(jObjError.getString("message"))
                 } else {
-                    errorMessage.postValue("Error")
+                    errorMessage.postValue(ViewModelUtils.tratarJsonRespostaErro(response.errorBody()))
                 }
             }
             override fun onFailure(call: Call<UsuarioResponse>, t: Throwable) {
@@ -42,11 +40,8 @@ class UsuarioViewModel constructor(private val repository: UsuarioRepository)  :
             override fun onResponse(call: Call<UsuarioResponse>, response: Response<UsuarioResponse>) {
                 if(response.body() != null){
                     usuarioResponse.postValue(response.body())
-                } else if(response.errorBody() != null){
-                    val jObjError = JSONObject(response.errorBody()!!.string())
-                    errorMessage.postValue(jObjError.getString("message"))
                 } else {
-                    errorMessage.postValue("Error")
+                    errorMessage.postValue(ViewModelUtils.tratarJsonRespostaErro(response.errorBody()))
                 }
             }
             override fun onFailure(call: Call<UsuarioResponse>, t: Throwable) {
