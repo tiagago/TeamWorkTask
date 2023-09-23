@@ -91,7 +91,10 @@ class PreLoginFragment : GenericFragment() {
 
         viewModel.errorMessage.observe(viewLifecycleOwner) {
             showLoading(false)
-            showErrorMessage(it)
+            if(it != null){
+                showErrorGenericServer()
+                viewModel.errorMessage.postValue(null)
+            }
         }
     }
 
@@ -148,20 +151,9 @@ class PreLoginFragment : GenericFragment() {
     private val authenticationCallback: BiometricPrompt.AuthenticationCallback
         get() = @RequiresApi(Build.VERSION_CODES.P)
         object : BiometricPrompt.AuthenticationCallback() {
-            override fun onAuthenticationError(errorCode: Int,
-                                               errString: CharSequence) {
-                super.onAuthenticationError(errorCode, errString)
-                showErrorMessage( "Authentication error: $errString")
-            }
-
             override fun onAuthenticationHelp(helpCode: Int,
                                               helpString: CharSequence) {
                 super.onAuthenticationHelp(helpCode, helpString)
-            }
-
-            override fun onAuthenticationFailed() {
-                super.onAuthenticationFailed()
-                showErrorMessage("Authentication Failed")
             }
 
             override fun onAuthenticationSucceeded(result:

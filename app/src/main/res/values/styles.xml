@@ -51,11 +51,6 @@
         <item name="android:windowExitAnimation">@anim/slide_up_of_top</item>
     </style>
 
-    <style name="TopAlertLayout">
-        <item name="android:background">@color/white</item>
-        <item name="android:gravity">center_vertical</item>
-    </style>
-
     <style name="TopAlertDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowBackground">@color/transparent</item>

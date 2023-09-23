@@ -9,20 +9,23 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/layout_top_view_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
         android:gravity="center_vertical"
         android:minHeight="80dp"
-        style="@style/TopAlertLayout"
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/layout_top_view_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_margin="15dp"
+            android:layout_margin="@dimen/margem_padrao"
+            android:background="@drawable/top_alert_background"
+            android:gravity="center_vertical"
+            android:paddingTop="@dimen/margem_pequena"
+            android:paddingBottom="@dimen/margem_pequena"
             android:orientation="horizontal">
 
             <ImageView
@@ -57,12 +60,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <View
-        android:id="@+id/bottom_line"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        style="@style/TopAlertSeparator"
-        android:layout_below="@id/layout_top_view_content" />
 
 </RelativeLayout>

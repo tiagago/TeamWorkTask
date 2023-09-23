@@ -11,10 +11,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import br.pucminas.teamworktask.R
-import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertTextObject
+import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertMessageObject
 import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertType
 import br.pucminas.teamworktask.databinding.FragmentTopAlertViewBinding
 import java.util.*
@@ -23,22 +24,8 @@ import java.util.*
 class TopAlertView : DialogFragment() {
     private var _binding: FragmentTopAlertViewBinding? = null
     private val binding get() = _binding!!
-
-    var mTopAlertType: TopAlertType? = null
-    var mTitleInfo: TopAlertTextObject? = null
-    var mMessageInfo: TopAlertTextObject? = null
-    var mIconDrawable: Drawable? = null
-    var mIconVisible: Boolean = true
-    var mTimer: Int? = null
-    var mBackgroundColor: Int? = null
-    private var dialog: Dialog? = null
-    private var context: Context? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        mTopAlertType = TopAlertType.fromId(this.requireArguments().getInt("type"))
-        mMessageInfo = this.requireArguments().getSerializable("message") as TopAlertTextObject?
-    }
+    var topAlertMessageObject: TopAlertMessageObject = TopAlertMessageObject()
+    var mTimer: Int = 5000
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
         // Inflate the layout for this fragment
@@ -48,34 +35,30 @@ class TopAlertView : DialogFragment() {
         return binding.root
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        this.context = context
-    }
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        dialog = Dialog(requireContext(), R.style.TopAlertDialog)
-        if (dialog!!.window != null) {
-            dialog!!.window!!.requestFeature(1)
+        val dialog = Dialog(requireContext(), R.style.TopAlertDialog)
+        if (dialog.window != null) {
+            dialog.window!!.requestFeature(1)
         }
-        return dialog!!
+        return dialog
     }
 
     override fun onStart() {
         super.onStart()
+
         if (dialog != null) {
             dialog!!.setCancelable(true)
             dialog!!.setCanceledOnTouchOutside(true)
         }
-        val t = Timer()
-        if (mTimer == null) {
-            if (mMessageInfo != null && mMessageInfo!!.textContent != null && mMessageInfo!!.textContent.length <= 100) {
-                mTimer = 5000
-            } else {
-                mTimer = 10000
-            }
+        val timer = Timer()
+
+        mTimer = if (topAlertMessageObject.message.length <= 100) {
+            5000
+        } else {
+            10000
         }
-        t.schedule(object : TimerTask() {
+
+        timer.schedule(object : TimerTask() {
             override fun run() {
                 if (dialog != null) {
                     try {
@@ -84,15 +67,15 @@ class TopAlertView : DialogFragment() {
                         Log.e(TAG, "dismiss ERROR :$var2")
                     }
                 }
-                t.cancel()
+                timer.cancel()
             }
-        }, mTimer!!.toLong())
+        }, mTimer.toLong())
 
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        getDialog()!!.window!!.attributes.windowAnimations = R.style.TopAlertWindowSlide
+        dialog!!.window!!.attributes.windowAnimations = R.style.TopAlertWindowSlide
     }
 
     override fun onResume() {
@@ -113,25 +96,23 @@ class TopAlertView : DialogFragment() {
     }
 
     private fun setUISettings() {
-        if (mIconDrawable != null) {
-            binding.topInfoIcon.background = mIconDrawable
+        setIconFromType()
+        setTextUISettings(topAlertMessageObject.message, binding.messageTv)
+        setTextUISettings(topAlertMessageObject.title, binding.titleTv)
+        setBackgroundColorFromType()
+    }
+
+    private fun setTextUISettings(message: String?, textView: TextView) {
+        if (message == null || message.isEmpty()) {
+            textView.visibility = View.GONE
         } else {
-            setIconFromType()
-        }
-        TopAlertUtils.setTextUISettings(mMessageInfo, binding.messageTv, requireContext())
-        TopAlertUtils.setTextUISettings(mTitleInfo, binding.titleTv, requireContext())
-        if (!mIconVisible) {
-            binding.topInfoIcon.visibility = View.GONE
-        }
-        if (mBackgroundColor != null) {
-            setBackgroundColorOnLayout(mBackgroundColor!!)
-        } else {
-            setBackgroundColorFromType()
+            textView.visibility = View.VISIBLE
+            textView.text = message
         }
     }
 
     private fun setIconFromType() {
-        when (mTopAlertType) {
+        when (topAlertMessageObject.alertType) {
             TopAlertType.OTHER -> binding.topInfoIcon.visibility = View.GONE
             TopAlertType.INFORMATION -> binding.topInfoIcon.background = this.resources.getDrawable(R.drawable.ic_info)
             TopAlertType.ERROR -> binding.topInfoIcon.background = this.resources.getDrawable(R.drawable.ic_error)
@@ -142,7 +123,7 @@ class TopAlertView : DialogFragment() {
     }
 
     private fun setBackgroundColorFromType() {
-        when (mTopAlertType) {
+        when (topAlertMessageObject.alertType) {
             TopAlertType.OTHER -> {}
             TopAlertType.INFORMATION -> setBackgroundColorOnLayout(R.color.teal_700)
             TopAlertType.ERROR -> setBackgroundColorOnLayout(R.color.colorError)
@@ -153,29 +134,11 @@ class TopAlertView : DialogFragment() {
     }
 
     private fun setBackgroundColorOnLayout(backgroundColor: Int) {
-        if (VERSION.SDK_INT >= 23) {
-            binding.layoutTopViewContent.setBackgroundColor(this.resources.getColor(backgroundColor, null))
-        } else {
-            binding.layoutTopViewContent.setBackgroundColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    backgroundColor
-                )
-            )
-        }
+        binding.layoutTopViewContent.backgroundTintList =
+            this.resources.getColorStateList(backgroundColor, null)
     }
 
-
-
     companion object {
-        val TAG = TopAlertView::class.java.simpleName
-        fun createTopAlert(type: Int, message: TopAlertTextObject): TopAlertView {
-            val topInfoFragment = TopAlertView()
-            val args = Bundle()
-            args.putInt("type", type)
-            args.putSerializable("message", message)
-            topInfoFragment.arguments = args
-            return topInfoFragment
-        }
+        val TAG: String = TopAlertView::class.java.simpleName
     }
 }

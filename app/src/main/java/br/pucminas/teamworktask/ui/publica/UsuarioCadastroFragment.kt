@@ -71,7 +71,7 @@ class UsuarioCadastroFragment : GenericFragment() {
         }
 
         viewModel.errorMessage.observe(viewLifecycleOwner) {
-            showErrorMessage(it)
+            showErrorGenericServer()
         }
     }
 

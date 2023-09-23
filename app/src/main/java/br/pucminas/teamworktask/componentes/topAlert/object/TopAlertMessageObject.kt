@@ -14,4 +14,6 @@ class TopAlertMessageObject : Serializable {
         this.message = message
         this.alertType = alertType
     }
+
+    constructor()
 }

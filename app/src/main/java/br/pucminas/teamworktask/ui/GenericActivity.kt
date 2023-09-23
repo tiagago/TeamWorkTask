@@ -5,20 +5,25 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import br.pucminas.teamworktask.R
-import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertTextObject
 import br.pucminas.teamworktask.componentes.topAlert.TopAlertView
 import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertMessageObject
 
 open class GenericActivity : AppCompatActivity() {
 
-    var loadingDialog: ProgressDialog? = null
+    private val loadingDialog: ProgressDialog  by lazy(mode = LazyThreadSafetyMode.NONE) {
+        ProgressDialog(this)
+    }
+
+    private val alert: TopAlertView by lazy(mode = LazyThreadSafetyMode.NONE) {
+        TopAlertView()
+    }
+
 
     fun showAlert(topAlertMessageObject: TopAlertMessageObject?){
         if(topAlertMessageObject == null) {
             return
         }
-
-        val alert: TopAlertView = TopAlertView.createTopAlert(topAlertMessageObject.alertType.id(), TopAlertTextObject(topAlertMessageObject.message) )
+        alert.topAlertMessageObject = topAlertMessageObject
         alert.show(supportFragmentManager, TopAlertView.TAG)
     }
 
@@ -86,10 +91,6 @@ open class GenericActivity : AppCompatActivity() {
     open fun executarLogout(){}
 
     fun showLoading(isLoading: Boolean) {
-        if(loadingDialog == null) {
-            loadingDialog = ProgressDialog(this)
-            loadingDialog!!.setIndeterminate(true)
-        }
         loadingDialog.let {
             if (isLoading && !loadingDialog?.isShowing!!) {
                 loadingDialog?.show()

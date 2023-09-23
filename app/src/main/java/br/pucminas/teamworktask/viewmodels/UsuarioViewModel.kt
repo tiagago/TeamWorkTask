@@ -13,7 +13,6 @@ import retrofit2.Response
 
 
 class UsuarioViewModel constructor(private val repository: UsuarioRepository)  : ViewModel() {
-
     val usuarioResponse = MutableLiveData<UsuarioResponse>()
     val errorMessage = MutableLiveData<String>()
 

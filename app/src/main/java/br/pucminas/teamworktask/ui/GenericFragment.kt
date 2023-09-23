@@ -12,8 +12,12 @@ open class GenericFragment : Fragment() {
         if(response != null && response.message.isNotBlank()){
             showErrorMessage(response.message)
         } else {
-            showErrorMessage(getString(R.string.generico_erro_servico))
+            showErrorGenericServer()
         }
+    }
+
+    fun showErrorGenericServer(){
+        showErrorMessage(getString(R.string.generico_erro_servico))
     }
 
     fun showErrorMessage(message: String, titulo: String? = null){
