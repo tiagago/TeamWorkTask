@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/usuario_cadastro_logo_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_user"
+        android:id="@+id/projeto_cadastro_logo_iv"
+        android:layout_width="@dimen/imagem_titulo_tamanho"
+        android:layout_height="@dimen/imagem_titulo_tamanho"
+        android:src="@drawable/ic_project"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -17,27 +17,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/genericTittle"
-        android:text="@string/usuario_cadastro_titulo"
+        android:text="@string/projeto_cadastro_titulo"
         android:layout_marginStart="@dimen/margem_padrao"
-        app:layout_constraintStart_toEndOf="@id/usuario_cadastro_logo_iv"
-        app:layout_constraintTop_toTopOf="@id/usuario_cadastro_logo_iv"
-        app:layout_constraintBottom_toBottomOf="@id/usuario_cadastro_logo_iv"
+        app:layout_constraintStart_toEndOf="@id/projeto_cadastro_logo_iv"
+        app:layout_constraintTop_toTopOf="@id/projeto_cadastro_logo_iv"
+        app:layout_constraintBottom_toBottomOf="@id/projeto_cadastro_logo_iv"
         />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/usuario_cadastro_nome_til"
+        android:id="@+id/projeto_cadastro_nome_til"
         style="@style/textInputLayoutDefault"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margem_dobro"
-        android:hint="@string/usuario_cadastro_nome_label"
+        android:hint="@string/projeto_cadastro_nome_label"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/usuario_cadastro_logo_iv">
+        app:layout_constraintTop_toBottomOf="@id/projeto_cadastro_logo_iv">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/usuario_cadastro_nome_tie"
+            android:id="@+id/projeto_cadastro_nome_tie"
             style="@style/textInputEditTextDefault"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -45,91 +45,87 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/usuario_cadastro_email_til"
+        android:id="@+id/projeto_cadastro_descricao_til"
         style="@style/textInputLayoutDefault"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margem_padrao"
-        android:hint="@string/usuario_cadastro_email_label"
+        android:hint="@string/projeto_cadastro_descricao_label"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/usuario_cadastro_nome_til">
+        app:layout_constraintTop_toBottomOf="@id/projeto_cadastro_nome_til">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/usuario_cadastro_email_tie"
+            android:id="@+id/projeto_cadastro_descricao_tie"
             style="@style/textInputEditTextDefault"
+            android:singleLine="false"
+            android:maxLines="5"
+            android:lineBreakStyle="normal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textEmailAddress" />
+            android:inputType="textMultiLine" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/usuario_cadastro_senha_til"
-        style="@style/textInputLayoutDefault"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margem_padrao"
-        android:hint="@string/usuario_cadastro_senha_label"
-        app:endIconMode="password_toggle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/usuario_cadastro_email_til">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/usuario_cadastro_senha_tie"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            style="@style/textInputEditTextDefault"
-            android:inputType="textPassword" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/usuario_cadastro_repetir_senha_til"
-        style="@style/textInputLayoutDefault"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margem_padrao"
-        android:hint="@string/usuario_cadastro_repetir_senha_label"
-        app:endIconMode="password_toggle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/usuario_cadastro_senha_til">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/usuario_cadastro_repetir_senha_tie"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            style="@style/textInputEditTextDefault"
-            android:inputType="textPassword" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/usuario_cadastro_salvar_bt"
+    <TextView
+        android:id="@+id/projeto_cadastro_codigo_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margem_quadruplo"
+        style="@style/textViewLayoutDefault"
+        android:text="@string/projeto_cadastro_codigo_label"
+        android:layout_marginTop="@dimen/margem_padrao"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/projeto_cadastro_descricao_til"
+        />
+
+    <TextView
+        android:id="@+id/projeto_cadastro_criado_em_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/textViewLayoutDefault"
+        android:text="@string/projeto_cadastro_criado_em_label"
+        android:layout_marginTop="@dimen/margem_padrao"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/projeto_cadastro_codigo_tv"
+        />
+
+    <TextView
+        android:id="@+id/projeto_cadastro_criado_por_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/textViewLayoutDefault"
+        android:text="@string/projeto_cadastro_criado_por_label"
+        android:layout_marginTop="@dimen/margem_padrao"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/projeto_cadastro_criado_em_tv"
+        />
+
+
+    <Button
+        android:id="@+id/projeto_cadastro_salvar_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margem_padrao"
         android:paddingStart="@dimen/margem_dobro"
         android:paddingEnd="@dimen/margem_dobro"
         android:backgroundTint="@color/primary_color"
         android:text="@string/generico_salvar_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/usuario_cadastro_repetir_senha_til" />
+        app:layout_constraintBottom_toTopOf="@id/projeto_cadastro_cancelar_bt" />
 
     <Button
-        android:id="@+id/usuario_cadastro_cancelar_bt"
+        android:id="@+id/projeto_cadastro_cancelar_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margem_padrao"
+        android:layout_marginBottom="@dimen/margem_padrao"
         android:paddingStart="@dimen/margem_dobro"
         android:paddingEnd="@dimen/margem_dobro"
         android:backgroundTint="@color/primary_color"
         android:text="@string/generico_cancelar_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/usuario_cadastro_salvar_bt"/>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

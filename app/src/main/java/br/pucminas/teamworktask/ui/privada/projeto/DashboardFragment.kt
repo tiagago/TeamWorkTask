@@ -9,6 +9,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import br.pucminas.teamworktask.R
 import br.pucminas.teamworktask.databinding.FragmentDashboardBinding
+import br.pucminas.teamworktask.ui.GenericFragment
 import br.pucminas.teamworktask.ui.privada.PrivateActivity
 
 
@@ -17,7 +18,7 @@ import br.pucminas.teamworktask.ui.privada.PrivateActivity
  * Use the [DashboardFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class DashboardFragment : Fragment() {
+class DashboardFragment : GenericFragment() {
     private var _binding: FragmentDashboardBinding? = null
 
     // This property is only valid between onCreateView and
@@ -34,10 +35,16 @@ class DashboardFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
 
+        configurarTitulo()
         configurarLogoutButton()
         configurarFloatingButton()
 
         return binding.root
+    }
+
+    private fun configurarTitulo(){
+        var usuario = obterUsuarioPreference()
+        binding.dashboardTituloTv.text = getString(R.string.dashboard_title, usuario.nomeExibicao)
     }
 
     private fun configurarLogoutButton() {
@@ -51,6 +58,15 @@ class DashboardFragment : Fragment() {
     fun configurarFloatingButton(){
         binding.dashboardMainFab.setOnClickListener {
             onAddButtonClicked()
+        }
+        binding.dashboardEditarFab.setOnClickListener {
+
+        }
+        binding.dashboardNovoFab.setOnClickListener {
+            changeFragment(ProjetoCadastroFragment())
+        }
+        binding.dashboardParticiparFab.setOnClickListener {
+
         }
     }
 
@@ -78,7 +94,4 @@ class DashboardFragment : Fragment() {
         binding.dashboardParticiparTv.startAnimation(if(clicked) toBottom else fromBottom)
         binding.dashboardMainFab.startAnimation(if(clicked) rotateClose else rotateOpen)
     }
-
-
-
 }

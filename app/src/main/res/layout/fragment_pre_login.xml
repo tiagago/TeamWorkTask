@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margem_dobro"
         android:hint="@string/pre_login_usuario_label"
+        app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_logo_iv">
@@ -43,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margem_padrao"
         android:hint="@string/pre_login_senha_label"
+        app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_usuario_til">

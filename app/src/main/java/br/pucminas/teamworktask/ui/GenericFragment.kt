@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import br.pucminas.teamworktask.R
 import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertMessageObject
 import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertType
+import br.pucminas.teamworktask.models.Usuario
 import br.pucminas.teamworktask.response.GenericResponse
 
 open class GenericFragment : Fragment() {
@@ -36,6 +37,10 @@ open class GenericFragment : Fragment() {
         if (activity is GenericActivity) {
             (activity as GenericActivity).showAlert(topAlertMessageObject)
         }
+    }
+
+    fun obterUsuarioPreference(): Usuario {
+        return (activity as GenericActivity).obterUsuarioPreference()
     }
 
     fun onBackPressed(){

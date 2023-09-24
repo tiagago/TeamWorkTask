@@ -13,11 +13,9 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import br.pucminas.teamworktask.R
-import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertMessageObject
-import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertType
 import br.pucminas.teamworktask.databinding.FragmentPreLoginBinding
 import br.pucminas.teamworktask.models.Usuario
-import br.pucminas.teamworktask.repositories.UsuarioRepository
+import br.pucminas.teamworktask.repositories.Repository
 import br.pucminas.teamworktask.request.RetrofitService
 import br.pucminas.teamworktask.ui.GenericFragment
 import br.pucminas.teamworktask.utils.PermissionUtils
@@ -74,7 +72,7 @@ class PreLoginFragment : GenericFragment() {
 
     private fun configurarViewModels() {
         viewModel =
-            ViewModelProvider(this, MainViewModelFactory(UsuarioRepository(retrofitService))).get(
+            ViewModelProvider(this, MainViewModelFactory(Repository(retrofitService))).get(
                 UsuarioViewModel::class.java
             )
 

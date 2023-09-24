@@ -10,6 +10,12 @@
         <item name="android:textColor">@color/primary_color</item>
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
+    <style name="textViewLayoutDefault">
+        <item name="android:textSize">@dimen/titulo_tamanho</item>
+        <item name="android:textColor">@color/secondary_color_dark</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
     <style name="textInputLayoutDefault" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:textColorHint">@color/secondary_color_dark</item>
         <item name="boxStrokeColor">@color/text_input_layout_stroke_color</item>

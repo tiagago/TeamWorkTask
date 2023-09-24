@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import br.pucminas.teamworktask.R
 import br.pucminas.teamworktask.databinding.ActivityPrivateBinding
+import br.pucminas.teamworktask.models.Usuario
 import br.pucminas.teamworktask.ui.GenericActivity
 import br.pucminas.teamworktask.ui.privada.equipe.EquipeFragment
 import br.pucminas.teamworktask.ui.privada.notificacao.NotificacaoFragment
@@ -14,6 +15,13 @@ import br.pucminas.teamworktask.ui.privada.projeto.DashboardFragment
 import br.pucminas.teamworktask.ui.privada.tags.TagsFragment
 import br.pucminas.teamworktask.ui.privada.tarefa.TarefasFragment
 import br.pucminas.teamworktask.ui.publica.PublicActivity
+import br.pucminas.teamworktask.utils.SharedPreferenceUtils
+import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_EMAIL
+import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_ID
+import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_NOME
+import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_SENHA
+import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.obterPreferencia
+import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.obterPreferenciaInt
 
 class PrivateActivity : GenericActivity() {
     private lateinit var binding: ActivityPrivateBinding
@@ -25,7 +33,7 @@ class PrivateActivity : GenericActivity() {
         setContentView(view)
 
         binding.privadoBnv.setOnItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.bottom_nav_home -> changeFragment(DashboardFragment())
                 R.id.bottom_nav_tarefa -> changeFragment(TarefasFragment())
                 R.id.bottom_nav_tags -> changeFragment(TagsFragment())
@@ -49,7 +57,7 @@ class PrivateActivity : GenericActivity() {
 
     override fun obterTituloLogout(): String = getString(R.string.dashboard_logout_title)
 
-    override fun executarLogout(){
+    override fun executarLogout() {
         val intent = Intent(this, PublicActivity::class.java)
         startActivity(intent)
         finish()

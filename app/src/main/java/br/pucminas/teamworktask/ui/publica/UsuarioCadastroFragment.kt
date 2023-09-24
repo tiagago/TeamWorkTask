@@ -11,7 +11,7 @@ import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertMessageObj
 import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertType
 import br.pucminas.teamworktask.databinding.FragmentUsuarioCadastroBinding
 import br.pucminas.teamworktask.models.Usuario
-import br.pucminas.teamworktask.repositories.UsuarioRepository
+import br.pucminas.teamworktask.repositories.Repository
 import br.pucminas.teamworktask.request.RetrofitService
 import br.pucminas.teamworktask.ui.GenericFragment
 import br.pucminas.teamworktask.viewmodels.MainViewModelFactory
@@ -58,7 +58,7 @@ class UsuarioCadastroFragment : GenericFragment() {
 
     private fun configurarViewModels() {
         viewModel =
-            ViewModelProvider(this, MainViewModelFactory(UsuarioRepository(retrofitService))).get(
+            ViewModelProvider(this, MainViewModelFactory(Repository(retrofitService))).get(
                 UsuarioViewModel::class.java
             )
 
@@ -91,21 +91,21 @@ class UsuarioCadastroFragment : GenericFragment() {
                 usuarioCadastroNomeTil.error = null
             }
 
-            if(email.isBlank() || nome == getString(R.string.usuario_cadastro_email_label)){
+            if(email.isBlank() || email == getString(R.string.usuario_cadastro_email_label)){
                 usuarioCadastroEmailTil.error = getString(R.string.generico_vazio_erro, getString(R.string.usuario_cadastro_email_label))
                 achouProblema = true
             } else {
                 usuarioCadastroEmailTil.error = null
             }
 
-            if(senha.isBlank() || nome == getString(R.string.usuario_cadastro_senha_label)){
+            if(senha.isBlank() || senha == getString(R.string.usuario_cadastro_senha_label)){
                 usuarioCadastroSenhaTil.error = getString(R.string.generico_vazio_erro, getString(R.string.usuario_cadastro_senha_label))
                 achouProblema = true
             } else {
                 usuarioCadastroSenhaTil.error = null
             }
 
-            if(senhaRepetida.isBlank() || nome == getString(R.string.usuario_cadastro_repetir_senha_label)){
+            if(senhaRepetida.isBlank() || senhaRepetida == getString(R.string.usuario_cadastro_repetir_senha_label)){
                 usuarioCadastroRepetirSenhaTil.error = getString(R.string.generico_vazio_erro, getString(R.string.usuario_cadastro_repetir_senha_label))
                 achouProblema = true
             } else {

@@ -4,4 +4,5 @@ class Usuario  {
     lateinit var email : String
     lateinit var nomeExibicao : String
     lateinit var senha : String
+    lateinit var participa : List<Projeto>
 }

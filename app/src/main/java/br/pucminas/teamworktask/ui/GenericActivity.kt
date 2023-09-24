@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import br.pucminas.teamworktask.R
 import br.pucminas.teamworktask.componentes.topAlert.TopAlertView
 import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertMessageObject
+import br.pucminas.teamworktask.models.Usuario
+import br.pucminas.teamworktask.utils.SharedPreferenceUtils
 
 open class GenericActivity : AppCompatActivity() {
 
@@ -103,5 +105,23 @@ open class GenericActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         loadingDialog!!.dismiss()
+    }
+
+    fun obterUsuarioPreference(): Usuario {
+        var usuario = Usuario()
+        usuario.id = Integer(
+            SharedPreferenceUtils.obterPreferenciaInt(
+                this,
+                SharedPreferenceUtils.USUARIO_ID
+            )
+        )
+        usuario.email =
+            SharedPreferenceUtils.obterPreferencia(this, SharedPreferenceUtils.USUARIO_EMAIL)
+        usuario.senha =
+            SharedPreferenceUtils.obterPreferencia(this, SharedPreferenceUtils.USUARIO_SENHA)
+        usuario.nomeExibicao =
+            SharedPreferenceUtils.obterPreferencia(this, SharedPreferenceUtils.USUARIO_NOME)
+
+        return usuario
     }
 }
