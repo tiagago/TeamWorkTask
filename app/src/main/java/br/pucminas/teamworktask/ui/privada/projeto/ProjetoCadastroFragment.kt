@@ -34,7 +34,7 @@ class ProjetoCadastroFragment : GenericFragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private var projeto: Projeto = Projeto()
+    var projeto: Projeto = Projeto()
     var nomeCriador: String? = null
     private val retrofitService = RetrofitService.getInstance()
     lateinit var viewModel: ProjetoViewModel
@@ -44,11 +44,9 @@ class ProjetoCadastroFragment : GenericFragment() {
         // Inflate the layout for this fragment
         _binding = FragmentProjetoCadastroBinding.inflate(inflater, container, false)
 
-        if(projeto.id < 0) {
-            projeto.dataCriacao = Date()
-            projeto.codigo = GeradorCodigo.geraCodigoProjeto()
-            projeto.usuario = obterUsuarioPreference()
-        }
+        projeto.dataCriacao = Date()
+        projeto.codigo = GeradorCodigo.geraCodigoProjeto()
+        projeto.usuario = obterUsuarioPreference()
 
         configurarViewModels()
         configurarTextViews()
