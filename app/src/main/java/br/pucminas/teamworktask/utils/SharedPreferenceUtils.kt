@@ -9,6 +9,7 @@ class SharedPreferenceUtils {
         const val USUARIO_EMAIL = "email"
         const val USUARIO_NOME = "nome"
         const val USUARIO_SENHA = "senha"
+        const val PROJETO_ID = "PROJETO_ID"
         const val USUARIO_HAS_FINGER = "has_finger_print"
 
         fun guardarPreferencia(context: Context, key: String, value: String){

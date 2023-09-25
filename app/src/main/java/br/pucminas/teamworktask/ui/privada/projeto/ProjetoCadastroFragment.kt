@@ -35,10 +35,8 @@ class ProjetoCadastroFragment : GenericFragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     var projeto: Projeto = Projeto()
-    var nomeCriador: String? = null
     private val retrofitService = RetrofitService.getInstance()
     lateinit var viewModel: ProjetoViewModel
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -56,9 +54,9 @@ class ProjetoCadastroFragment : GenericFragment() {
     }
 
     fun configurarTextViews(){
-        binding.projetoCadastroCriadoEmTv.text = getString(R.string.projeto_cadastro_criado_em_label, FormatterUtils.formatDateToString(projeto.dataCriacao))
-        binding.projetoCadastroCriadoPorTv.text = getString(R.string.projeto_cadastro_criado_por_label, projeto.usuario.nomeExibicao)
-        binding.projetoCadastroCodigoTv.text = getString(R.string.projeto_cadastro_codigo_label, projeto.codigo)
+        binding.projetoCadastroCriadoEmTv.text = FormatterUtils.formatDateToString(projeto.dataCriacao)
+        binding.projetoCadastroCriadoPorTv.text = projeto.usuario.nomeExibicao
+        binding.projetoCadastroCodigoTv.text = projeto.codigo
     }
 
     fun prepararListeners(){

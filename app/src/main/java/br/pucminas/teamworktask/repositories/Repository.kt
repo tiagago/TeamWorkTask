@@ -16,4 +16,6 @@ class Repository constructor(private val retrofitService: RetrofitService) {
 
     // Chamadas do projeto.
     fun criarProjeto(projeto: Projeto) = retrofitService.criarProjeto(projeto)
+
+    fun oberMeusProjetos(idUsuario: Int) = retrofitService.oberMeusProjetos(idUsuario)
 }

@@ -33,6 +33,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <include
+        android:id="@+id/dashboard_card"
+        layout="@layout/layout_projeto_adapter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margem_dobro"
+        app:layout_constraintTop_toBottomOf="@id/dashboard_logout_iv"
+        app:layout_constraintStart_toStartOf="parent"
+         />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/dashboard_main_fab"
         android:layout_width="wrap_content"

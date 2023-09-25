@@ -17,6 +17,14 @@ open class GenericFragment : Fragment() {
         }
     }
 
+    fun retornoErroServicoReturn(response: GenericResponse?) : String{
+        return if(response != null && response.message.isNotBlank()){
+            response.message
+        } else {
+            getString(R.string.generico_erro_servico)
+        }
+    }
+
     fun showErrorGenericServer(){
         showErrorMessage(getString(R.string.generico_erro_servico))
     }

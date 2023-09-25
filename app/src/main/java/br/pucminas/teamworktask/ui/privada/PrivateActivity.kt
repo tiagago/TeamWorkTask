@@ -2,6 +2,7 @@ package br.pucminas.teamworktask.ui.privada
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -31,7 +32,10 @@ class PrivateActivity : GenericActivity() {
         binding = ActivityPrivateBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        configurarBnvListeners()
+    }
 
+    fun configurarBnvListeners(){
         binding.privadoBnv.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.bottom_nav_home -> changeFragment(DashboardFragment())
@@ -44,6 +48,18 @@ class PrivateActivity : GenericActivity() {
             true
         }
     }
+
+
+    fun changeBottomNavigationLayout(isMeuProjeto: Boolean){
+        binding.privadoBnv.menu.clear()
+        binding.privadoBnv.inflateMenu(if(isMeuProjeto) R.menu.bottom_nav_meu_projeto else R.menu.bottom_nav)
+        showBottomNavigator(true)
+    }
+
+    fun showBottomNavigator(isVisible: Boolean){
+        binding.privadoBnv.visibility = if(isVisible) View.VISIBLE else View.GONE
+    }
+
 
     override fun onResume() {
         super.onResume()

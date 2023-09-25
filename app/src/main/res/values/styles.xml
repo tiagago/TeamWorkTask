@@ -12,8 +12,13 @@
     </style>
     <style name="textViewLayoutDefault">
         <item name="android:textSize">@dimen/titulo_tamanho</item>
-        <item name="android:textColor">@color/secondary_color_dark</item>
+        <item name="android:textColor">@color/secondary_color</item>
         <item name="android:fontFamily">sans-serif</item>
+    </style>
+    <style name="textViewLayoutLabelDefault">
+        <item name="android:textSize">@dimen/titulo_tamanho</item>
+        <item name="android:textColor">@color/secondary_color_dark</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
     <style name="textInputLayoutDefault" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">

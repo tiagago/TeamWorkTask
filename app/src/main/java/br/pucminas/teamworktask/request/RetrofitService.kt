@@ -3,6 +3,7 @@ package br.pucminas.teamworktask.request
 import br.pucminas.teamworktask.models.Projeto
 import br.pucminas.teamworktask.models.Usuario
 import br.pucminas.teamworktask.response.ProjetoResponse
+import br.pucminas.teamworktask.response.ProjetosResponse
 import br.pucminas.teamworktask.response.UsuarioResponse
 import br.pucminas.teamworktask.utils.Credentials
 import retrofit2.Call
@@ -25,6 +26,9 @@ interface RetrofitService {
     // Chamadas do projeto.
     @POST("/api/projeto/")
     fun criarProjeto(@Body projeto: Projeto): Call<ProjetoResponse>
+
+    @GET("/api/projeto/obterMeusProjetos/{id}")
+    fun oberMeusProjetos(@Path("id") id: Int): Call<ProjetosResponse>
 
     companion object {
 

@@ -9,4 +9,5 @@ class Projeto  {
     lateinit var codigo : String
     lateinit var dataCriacao : Date
     lateinit var usuario : Usuario
+    lateinit var criador : Integer
 }

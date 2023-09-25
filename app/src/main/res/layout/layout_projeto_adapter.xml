@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/projeto_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margem_padrao"
+    android:padding="@dimen/margem_padrao"
+    android:background="@drawable/card_bg">
+
+    <TextView
+        android:id="@+id/projeto_card_nome_tv"
+        style="@style/textViewLayoutDefault"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margem_pequena"
+        android:lineBreakStyle="normal"
+        app:layout_constraintEnd_toStartOf="@id/projeto_card_arrow_iv"
+        app:layout_constraintStart_toEndOf="@id/projeto_card_nome_label_tv"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Teste nome Projeto" />
+
+    <TextView
+        android:id="@+id/projeto_card_nome_label_tv"
+        style="@style/textViewLayoutLabelDefault"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/projeto_card_nome_label"
+        app:layout_constraintBottom_toBottomOf="@id/projeto_card_nome_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/projeto_card_nome_tv" />
+
+    <TextView
+        android:id="@+id/projeto_card_descricao_tv"
+        style="@style/textViewLayoutDefault"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margem_pequena"
+        android:layout_marginTop="@dimen/margem_pequena"
+        android:lineBreakStyle="normal"
+        app:layout_constraintEnd_toStartOf="@id/projeto_card_arrow_iv"
+        app:layout_constraintStart_toEndOf="@id/projeto_card_descricao_label_tv"
+        app:layout_constraintTop_toBottomOf="@id/projeto_card_nome_tv"
+        tools:text="Teste Descricao Projeto" />
+
+    <TextView
+        android:id="@+id/projeto_card_descricao_label_tv"
+        style="@style/textViewLayoutLabelDefault"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/projeto_card_descricao_label"
+        app:layout_constraintBottom_toBottomOf="@id/projeto_card_descricao_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/projeto_card_descricao_tv" />
+
+    <TextView
+        android:id="@+id/projeto_card_data_criacao_tv"
+        style="@style/textViewLayoutDefault"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margem_pequena"
+        android:layout_marginTop="@dimen/margem_pequena"
+        android:lineBreakStyle="normal"
+        app:layout_constraintEnd_toStartOf="@id/projeto_card_arrow_iv"
+        app:layout_constraintStart_toEndOf="@id/projeto_card_data_criacao_label_tv"
+        app:layout_constraintTop_toBottomOf="@id/projeto_card_descricao_tv"
+        tools:text="01/01/2000" />
+
+    <TextView
+        android:id="@+id/projeto_card_data_criacao_label_tv"
+        style="@style/textViewLayoutLabelDefault"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/projeto_card_criado_em_label"
+        app:layout_constraintBottom_toBottomOf="@id/projeto_card_data_criacao_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/projeto_card_data_criacao_tv" />
+
+    <ImageView
+        android:id="@+id/projeto_card_arrow_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_forward"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

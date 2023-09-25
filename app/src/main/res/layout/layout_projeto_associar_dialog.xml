@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margem_padrao"
+    android:background="@drawable/card_seletor_bg"
+    >
+
+    <TextView
+        android:id="@+id/projeto_associar_titulo_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/genericTittle"
+        android:text="@string/projeto_associar_titulo_label"
+        android:layout_marginStart="@dimen/margem_padrao"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/projeto_associar_codigo_til"
+        style="@style/textInputLayoutDefault"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margem_padrao"
+        android:hint="@string/projeto_associar_codigo_projeto_label"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toStartOf="@id/projeto_associar_qrcode_iv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/projeto_associar_titulo_tv">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/projeto_associar_codigo_tie"
+            style="@style/textInputEditTextDefault"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/projeto_associar_qrcode_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_qrcode"
+        android:padding="@dimen/margem_pequena"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/projeto_associar_codigo_til"
+        app:layout_constraintBottom_toBottomOf="@id/projeto_associar_codigo_til"
+        />
+
+    <Button
+        android:id="@+id/projeto_associar_juntarse_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margem_padrao"
+        android:paddingStart="@dimen/margem_dobro"
+        android:paddingEnd="@dimen/margem_dobro"
+        android:backgroundTint="@color/primary_color"
+        android:text="@string/projeto_associar_botao_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/projeto_associar_codigo_til" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
