@@ -10,4 +10,5 @@ class Projeto  {
     lateinit var dataCriacao : Date
     lateinit var usuario : Usuario
     lateinit var criador : Integer
+    lateinit var associados : List<Usuario>
 }

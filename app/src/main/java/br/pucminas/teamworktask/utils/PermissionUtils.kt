@@ -1,11 +1,12 @@
 package br.pucminas.teamworktask.utils
 
+import android.Manifest
 import android.app.KeyguardManager
 import android.content.Context
 import android.content.pm.PackageManager
-import androidx.core.app.ActivityCompat
-import android.Manifest
 import android.os.Build
+import androidx.core.content.ContextCompat
+
 
 class PermissionUtils {
     companion object {
@@ -29,6 +30,10 @@ class PermissionUtils {
             return if (context.packageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
                 true
             } else true
+        }
+
+        fun checkCameraPermission(context: Context): Boolean {
+            return ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
         }
     }
 }

@@ -66,6 +66,17 @@
         app:layout_constraintTop_toBottomOf="@id/projeto_associar_codigo_til" />
 
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/projeto_associar_obter_grupo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="projeto_associar_titulo_tv,projeto_associar_codigo_til,projeto_associar_qrcode_iv,projeto_associar_juntarse_bt" />
 
+    <com.budiyev.android.codescanner.CodeScannerView
+        android:id="@+id/projeto_associar_scanner_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

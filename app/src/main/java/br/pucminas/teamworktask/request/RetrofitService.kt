@@ -30,6 +30,9 @@ interface RetrofitService {
     @GET("/api/projeto/obterMeusProjetos/{id}")
     fun oberMeusProjetos(@Path("id") id: Int): Call<ProjetosResponse>
 
+    @GET("/api/projeto/obterProjetoComParticipantes/{idProjeto}")
+    fun obterProjetoComParticipantes(@Path("idProjeto") idProjeto: Int): Call<ProjetoResponse>
+
     companion object {
 
         private val retrofitService: RetrofitService by lazy {

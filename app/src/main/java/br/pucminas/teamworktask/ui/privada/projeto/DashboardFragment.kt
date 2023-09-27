@@ -43,31 +43,6 @@ class DashboardFragment : GenericFragment(), ProjetoSeletorOnClickInterface {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val rotateOpen: Animation by lazy {
-        AnimationUtils.loadAnimation(
-            context,
-            R.anim.rotate_open_anim
-        )
-    }
-    private val rotateClose: Animation by lazy {
-        AnimationUtils.loadAnimation(
-            context,
-            R.anim.rotate_close_anim
-        )
-    }
-    private val fromBottom: Animation by lazy {
-        AnimationUtils.loadAnimation(
-            context,
-            R.anim.from_bottom_anim
-        )
-    }
-    private val toBottom: Animation by lazy {
-        AnimationUtils.loadAnimation(
-            context,
-            R.anim.to_bottom_anim
-        )
-    }
-    private var clicked = false
     private val retrofitService = RetrofitService.getInstance()
     lateinit var projetoViewModel: ProjetoViewModel
     lateinit var usuarioViewModel: UsuarioViewModel
