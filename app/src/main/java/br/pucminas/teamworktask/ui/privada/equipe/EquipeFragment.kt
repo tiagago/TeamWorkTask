@@ -99,6 +99,7 @@ class EquipeFragment : GenericFragment(), EquipeParticipanteOnClickInterface {
             genericResponse.observe(viewLifecycleOwner) {
 
                 if (it != null && it.success) {
+                    showSuccessMessage(getString(R.string.equipe_remover_usuario_sucesso))
                     chamarServicos()
                 } else {
                     showErrorMessage(retornoErroServicoReturn(it))

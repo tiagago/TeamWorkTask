@@ -78,6 +78,7 @@
 
     <string name="equipe_remover_usuario_title">Remover Usuário</string>
     <string name="equipe_remover_usuario_descricao">Deseja realmente remover o usuário %1$s do projeto?</string>
+    <string name="equipe_remover_usuario_sucesso">Usuário removido com sucesso!</string>
 
     <string name="equipe_fab_compartilhar">Compartilhar Codigo Projeto</string>
     <string name="equipe_fab_enviar_email">Convidar por E-mail</string>

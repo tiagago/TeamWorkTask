@@ -43,7 +43,8 @@ open class GenericActivity : AppCompatActivity() {
     fun changeFragment(fragment: Fragment, topAlertMessageObject: TopAlertMessageObject? = null){
         supportFragmentManager.beginTransaction()
             .replace(obterFramelayoutID() , fragment)
-            .addToBackStack(null).commit()
+            .setReorderingAllowed(true)
+            .addToBackStack(fragment.javaClass.simpleName).commit()
         showAlert(topAlertMessageObject)
     }
 
