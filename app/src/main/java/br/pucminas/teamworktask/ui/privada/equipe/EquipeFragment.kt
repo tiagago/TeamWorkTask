@@ -217,10 +217,10 @@ class EquipeFragment : GenericFragment(), EquipeParticipanteOnClickInterface {
 
         builder.apply {
             // Set the message show for the Alert time
-            setMessage(getString(R.string.equipe_remover_usuario_title))
+            setTitle(getString(R.string.equipe_remover_usuario_title))
 
             // Set Alert Title
-            setTitle(getString(R.string.equipe_remover_usuario_descricao, usuario.nomeExibicao))
+            setMessage(getString(R.string.equipe_remover_usuario_descricao, usuario.nomeExibicao))
 
             // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
             setCancelable(false)
