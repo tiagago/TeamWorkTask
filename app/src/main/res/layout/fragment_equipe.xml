@@ -25,6 +25,60 @@
         app:layout_constraintBottom_toBottomOf="@id/equipe_logo_iv"
         />
 
+    <View
+        android:id="@+id/equipe_backgroud_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margem_padrao"
+        android:background="@drawable/card_bg"
+        app:layout_constraintTop_toBottomOf="@id/equipe_logo_iv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/equipe_lista_titulo_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margem_padrao"
+        style="@style/genericSubTittle"
+        android:text="@string/equipe_lista_participantes_title"
+        app:layout_constraintTop_toTopOf="@id/equipe_backgroud_view"
+        app:layout_constraintStart_toStartOf="@id/equipe_backgroud_view"
+        app:layout_constraintEnd_toEndOf="@id/equipe_backgroud_view"/>
+
+    <View
+        android:id="@+id/equipe_participante_separador_vw"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/secondary_color"
+        android:layout_marginTop="@dimen/margem_pequena"
+        android:layout_marginStart="@dimen/margem_pequena"
+        android:layout_marginEnd="@dimen/margem_pequena"
+        app:layout_constraintStart_toStartOf="@id/equipe_backgroud_view"
+        app:layout_constraintEnd_toEndOf="@id/equipe_backgroud_view"
+        app:layout_constraintTop_toBottomOf="@id/equipe_lista_titulo_tv"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/margem_pequena"
+        android:layout_marginStart="@dimen/margem_pequena"
+        android:layout_marginBottom="@dimen/margem_padrao"
+        app:layout_constraintTop_toBottomOf="@id/equipe_participante_separador_vw"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/equipe_participante_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/layout_equipe_adapter" />
+
+    </androidx.core.widget.NestedScrollView>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/equipe_main_fab"
         android:layout_width="wrap_content"

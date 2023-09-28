@@ -73,6 +73,12 @@
 
     <!-- Equipe -->
     <string name="equipe_title">@string/bottom_navegator_equipe</string>
+    <string name="equipe_lista_participantes_title">Participantes do Projeto</string>
+    <string name="equipe_lista_nome_criador">%1$s (Criador)</string>
+
+    <string name="equipe_remover_usuario_title">Remover Usuário</string>
+    <string name="equipe_remover_usuario_descricao">Deseja realmente remover o usuário %1$s do projeto?</string>
+
     <string name="equipe_fab_compartilhar">Compartilhar Codigo Projeto</string>
     <string name="equipe_fab_enviar_email">Convidar por E-mail</string>
 
@@ -80,7 +86,6 @@
     <string name="equipe_enviar_email_titulo_atalho">Send email...</string>
     <string name="equipe_enviar_email_titulo">TeamWork Tasks - Convite para o Projeto %1$s</string>
     <string name="equipe_enviar_email_doby">Olá,\n\nPara entrar no projeto %1$s via aplicação TeamWork Tasks utilize o código: %2$s \n\n Ou acesse o link a baixo para escanear o Qr Code \n\n https://api.qrserver.com/v1/create-qr-code/?data=%3$s</string>
-
 
     <!-- Notificacao -->
     <string name="notificacao_title">@string/bottom_navegator_notificacoes</string>

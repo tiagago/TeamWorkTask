@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/margem_pequena">
+
+    <ImageView
+        android:id="@+id/equipe_participante_iv"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_user"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/secondary_color_dark" />
+
+    <TextView
+        android:id="@+id/equipe_participante_tv"
+        style="@style/textViewLayoutDefault"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margem_pequena"
+        android:lineBreakStyle="normal"
+        app:layout_constraintStart_toEndOf="@id/equipe_participante_iv"
+        app:layout_constraintBottom_toBottomOf="@id/equipe_participante_iv"
+        app:layout_constraintTop_toTopOf="@id/equipe_participante_iv"
+        tools:text="Teste nome Projeto" />
+
+    <ImageView
+        android:id="@+id/equipe_participante_delete_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/equipe_participante_iv"
+        app:layout_constraintTop_toTopOf="@id/equipe_participante_iv"
+        app:tint="@color/secondary_color_dark"
+        />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/secondary_color"
+        android:layout_marginTop="@dimen/margem_pequena"
+        app:layout_constraintStart_toStartOf="@id/equipe_participante_iv"
+        app:layout_constraintTop_toBottomOf="@id/equipe_participante_iv"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

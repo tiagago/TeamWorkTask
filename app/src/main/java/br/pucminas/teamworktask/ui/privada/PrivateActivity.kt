@@ -3,26 +3,14 @@ package br.pucminas.teamworktask.ui.privada
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import br.pucminas.teamworktask.R
 import br.pucminas.teamworktask.databinding.ActivityPrivateBinding
-import br.pucminas.teamworktask.models.Usuario
 import br.pucminas.teamworktask.ui.GenericActivity
 import br.pucminas.teamworktask.ui.privada.equipe.EquipeFragment
-import br.pucminas.teamworktask.ui.privada.notificacao.NotificacaoFragment
 import br.pucminas.teamworktask.ui.privada.projeto.DashboardFragment
 import br.pucminas.teamworktask.ui.privada.tags.TagsFragment
 import br.pucminas.teamworktask.ui.privada.tarefa.TarefasFragment
 import br.pucminas.teamworktask.ui.publica.PublicActivity
-import br.pucminas.teamworktask.utils.SharedPreferenceUtils
-import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_EMAIL
-import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_ID
-import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_NOME
-import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_SENHA
-import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.obterPreferencia
-import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.obterPreferenciaInt
 
 class PrivateActivity : GenericActivity() {
     private lateinit var binding: ActivityPrivateBinding
@@ -36,24 +24,20 @@ class PrivateActivity : GenericActivity() {
     }
 
     fun configurarBnvListeners(){
-        binding.privadoBnv.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.bottom_nav_home -> changeFragment(DashboardFragment())
-                R.id.bottom_nav_tarefa -> changeFragment(TarefasFragment())
-                R.id.bottom_nav_tags -> changeFragment(TagsFragment())
-                R.id.bottom_nav_equipe -> changeFragment(EquipeFragment())
-                R.id.bottom_nav_notificacao -> changeFragment(NotificacaoFragment())
-                else -> {}
+        binding.apply {
+            privadoBnv.inflateMenu(R.menu.bottom_nav)
+            showBottomNavigator(true)
+            privadoBnv.setOnItemSelectedListener {
+                when (it.itemId) {
+                    R.id.bottom_nav_home -> changeFragment(DashboardFragment())
+                    R.id.bottom_nav_tarefa -> changeFragment(TarefasFragment())
+                    R.id.bottom_nav_tags -> changeFragment(TagsFragment())
+                    R.id.bottom_nav_equipe -> changeFragment(EquipeFragment())
+                    else -> {}
+                }
+                true
             }
-            true
         }
-    }
-
-
-    fun changeBottomNavigationLayout(isMeuProjeto: Boolean){
-        binding.privadoBnv.menu.clear()
-        binding.privadoBnv.inflateMenu(if(isMeuProjeto) R.menu.bottom_nav_meu_projeto else R.menu.bottom_nav)
-        showBottomNavigator(true)
     }
 
     fun showBottomNavigator(isVisible: Boolean){

@@ -12,6 +12,8 @@ class MainViewModelFactory constructor(private val repository: Repository): View
             UsuarioViewModel(this.repository) as T
         } else if (modelClass.isAssignableFrom(ProjetoViewModel::class.java)) {
                 ProjetoViewModel(this.repository) as T
+        } else if (modelClass.isAssignableFrom(ProjetoUsuarioViewModel::class.java)) {
+            ProjetoUsuarioViewModel(this.repository) as T
         } else {
             throw IllegalArgumentException("ViewModel Not Found")
         }

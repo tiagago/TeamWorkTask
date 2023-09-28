@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
         android:id="@+id/bottom_nav_home"
         android:title="@string/bottom_navegator_home"
@@ -12,4 +13,14 @@
         android:id="@+id/bottom_nav_tags"
         android:title="@string/bottom_navegator_tags"
         android:icon="@drawable/ic_tags"/>
+    <item
+        android:id="@+id/bottom_nav_equipe"
+        android:title="@string/bottom_navegator_equipe"
+        android:icon="@drawable/ic_equipe"/>
+    <!--
+    <item
+        android:id="@+id/bottom_nav_notificacao"
+        android:title="@string/bottom_navegator_notificacoes"
+        android:icon="@drawable/ic_notificacao"/>
+        -->
 </menu>

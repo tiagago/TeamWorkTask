@@ -2,6 +2,7 @@ package br.pucminas.teamworktask.request
 
 import br.pucminas.teamworktask.models.Projeto
 import br.pucminas.teamworktask.models.Usuario
+import br.pucminas.teamworktask.response.GenericResponse
 import br.pucminas.teamworktask.response.ProjetoResponse
 import br.pucminas.teamworktask.response.ProjetosResponse
 import br.pucminas.teamworktask.response.UsuarioResponse
@@ -32,6 +33,9 @@ interface RetrofitService {
 
     @GET("/api/projeto/obterProjetoComParticipantes/{idProjeto}")
     fun obterProjetoComParticipantes(@Path("idProjeto") idProjeto: Int): Call<ProjetoResponse>
+
+    @DELETE("/api/projetoUsuario/")
+    fun desassociarUsuarioProjeto(@Query("idProjeto") idProjeto: Int, @Query("idUsuario") idUsuario: Int): Call<GenericResponse>
 
     companion object {
 

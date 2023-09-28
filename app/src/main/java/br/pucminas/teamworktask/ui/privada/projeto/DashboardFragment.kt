@@ -232,7 +232,6 @@ class DashboardFragment : GenericFragment(), ProjetoSeletorOnClickInterface {
 
         val usuario = obterUsuarioPreference()
         isMyProjeto = projeto.criador == usuario.id
-        (activity as PrivateActivity).changeBottomNavigationLayout(projeto.criador == usuario.id)
         binding.dashboardCard.projetoCard.setOnClickListener {
             ProjetoSeletorDialog(projetos, projeto, this).show(parentFragmentManager, "")
         }
