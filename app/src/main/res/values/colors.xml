@@ -18,6 +18,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="backgroud_default">#81B94E</color>
 
+    <color name="black_20">#20000000</color>
 
     <!-- Information Colors -->
     <color name="colorSuccess">#1DF120</color>

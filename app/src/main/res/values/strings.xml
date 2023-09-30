@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">TeamWork Tasks</string>
 
-
+    <!-- Pré login -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="pre_login_usuario_label">Usuário</string>
     <string name="pre_login_senha_label">Senha</string>
@@ -19,6 +19,29 @@
     <string name="usuario_cadastro_senha_label">Senha</string>
     <string name="usuario_cadastro_repetir_senha_label">Repetir Senha</string>
     <string name="usuario_cadastro_sucesso">Usuário cadastrado com sucesso!</string>
+
+    <!-- Genericos -->
+    <string name="generico_vazio_erro">Informar %1$s!</string>
+    <string name="generico_salvar_label">Salvar</string>
+    <string name="generico_cancelar_label">Cancelar</string>
+    <string name="generico_confirmar">Sim</string>
+    <string name="generico_negar">Não</string>
+    <string name="generico_erro_servico">Ocorreu um erro ao realizar a requisição, por favor tente mais tarde!</string>
+
+    <!-- Bottom Navegator -->
+    <string name="bottom_navegator_home">Home</string>
+    <string name="bottom_navegator_tarefa">Tarefas</string>
+    <string name="bottom_navegator_tags">Tags</string>
+    <string name="bottom_navegator_equipe">Equipe</string>
+    <string name="bottom_navegator_notificacoes">Notificações</string>
+
+    <!-- Dashboard (Seletor Projeto)-->
+    <string name="dashboard_title">Bem vindo, %1$s!</string>
+    <string name="dashboard_fab_novo_projeto">Novo Projeto</string>
+    <string name="dashboard_fab_editar_projeto">Editar Projeto</string>
+    <string name="dashboard_fab_participar_projeto">Juntar-se a um Projeto</string>
+    <string name="dashboard_logout_title">Logout</string>
+    <string name="dashboard_logout_descricao">Deseja fazer Logout?</string>
 
     <!-- Cadastro Projeto -->
     <string name="projeto_cadastro_titulo">Cadastrar Projeto</string>
@@ -42,34 +65,14 @@
     <string name="projeto_associar_codigo_projeto_label">Código do projeto</string>
     <string name="projeto_associar_botao_label">Juntar-se</string>
 
-    <!-- Genericos -->
-    <string name="generico_vazio_erro">Informar %1$s!</string>
-    <string name="generico_salvar_label">Salvar</string>
-    <string name="generico_cancelar_label">Cancelar</string>
-    <string name="generico_confirmar">Sim</string>
-    <string name="generico_negar">Não</string>
-    <string name="generico_erro_servico">Ocorreu um erro ao realizar a requisição, por favor tente mais tarde!</string>
-
-    <!-- Bottom Navegator -->
-    <string name="bottom_navegator_home">Home</string>
-    <string name="bottom_navegator_tarefa">Tarefas</string>
-    <string name="bottom_navegator_tags">Tags</string>
-    <string name="bottom_navegator_equipe">Equipe</string>
-    <string name="bottom_navegator_notificacoes">Notificações</string>
-
-
-    <!-- Dashboard -->
-    <string name="dashboard_title">Bem vindo, %1$s!</string>
-    <string name="dashboard_fab_novo_projeto">Novo Projeto</string>
-    <string name="dashboard_fab_editar_projeto">Editar Projeto</string>
-    <string name="dashboard_fab_participar_projeto">Juntar-se a um Projeto</string>
-    <string name="dashboard_logout_title">Logout</string>
-    <string name="dashboard_logout_descricao">Deseja fazer Logout?</string>
-
     <!-- Tarefas -->
     <string name="tarefas_title">@string/bottom_navegator_tarefa</string>
     <!-- Tags -->
     <string name="tags_title">@string/bottom_navegator_tags</string>
+    <string name="tags_lista_title">Tags do Projeto</string>
+    <string name="tags_novo_titulo">Nova Tag</string>
+    <string name="tags_lista_vazia">O Projeto não possui ainda Tags. Para adicionar clicar no botão "+" e selecionar Nova Tag</string>
+
 
     <!-- Equipe -->
     <string name="equipe_title">@string/bottom_navegator_equipe</string>

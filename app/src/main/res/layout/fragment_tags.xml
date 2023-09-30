@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
 
     <ImageView
@@ -23,6 +23,125 @@
         app:layout_constraintStart_toEndOf="@id/tags_logo_iv"
         app:layout_constraintTop_toTopOf="@id/tags_logo_iv"
         app:layout_constraintBottom_toBottomOf="@id/tags_logo_iv"
+        />
+
+    <View
+        android:id="@+id/tag_backgroud_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margem_padrao"
+        android:background="@drawable/card_bg"
+        app:layout_constraintTop_toBottomOf="@id/tags_logo_iv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tag_lista_titulo_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margem_padrao"
+        style="@style/genericSubTittle"
+        android:text="@string/tags_lista_title"
+        app:layout_constraintTop_toTopOf="@id/tag_backgroud_view"
+        app:layout_constraintStart_toStartOf="@id/tag_backgroud_view"
+        app:layout_constraintEnd_toEndOf="@id/tag_backgroud_view"/>
+
+    <View
+        android:id="@+id/tag_lista_separador_vw"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/secondary_color"
+        android:layout_marginTop="@dimen/margem_pequena"
+        android:layout_marginStart="@dimen/margem_pequena"
+        android:layout_marginEnd="@dimen/margem_pequena"
+        app:layout_constraintStart_toStartOf="@id/tag_backgroud_view"
+        app:layout_constraintEnd_toEndOf="@id/tag_backgroud_view"
+        app:layout_constraintTop_toBottomOf="@id/tag_lista_titulo_tv"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/tag_lista_nsv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/margem_pequena"
+        android:layout_marginStart="@dimen/margem_pequena"
+        android:layout_marginBottom="@dimen/margem_padrao"
+        app:layout_constraintTop_toBottomOf="@id/tag_lista_separador_vw"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:visibility="gone">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tag_lista_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/layout_tag_adapter"
+            />
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/tab_metade_gl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.5"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="@id/tag_lista_separador_vw"
+        app:layout_constraintBottom_toBottomOf="@id/tag_backgroud_view"
+        />
+    <ImageView
+        android:id="@+id/tab_lista_vazia_iv"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/ic_result_empty"
+        app:layout_constraintBottom_toTopOf="@id/tab_metade_gl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <TextView
+        android:id="@+id/tab_lista_vazia_mensagem_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/tags_lista_vazia"
+        android:textAlignment="center"
+        android:layout_margin="@dimen/margem_padrao"
+        style="@style/textViewEmptyListLayout"
+        app:layout_constraintTop_toBottomOf="@id/tab_metade_gl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/tab_lista_vazia_grupo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tab_lista_vazia_iv,tab_lista_vazia_mensagem_tv" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/tag_main_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        style="@style/floatButtonMain"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/tag_novo_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:visibility="gone"
+        android:text="@string/tags_novo_titulo"
+        style="@style/floatButtonSubMenu"
+        app:icon="@drawable/ic_tag_novo"
+        app:layout_constraintBottom_toTopOf="@id/tag_main_fab"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import br.pucminas.teamworktask.R
+import br.pucminas.teamworktask.componentes.loadingDialog.LoadingDialog
 import br.pucminas.teamworktask.componentes.topAlert.TopAlertView
 import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertMessageObject
 import br.pucminas.teamworktask.models.Usuario
@@ -12,8 +13,8 @@ import br.pucminas.teamworktask.utils.SharedPreferenceUtils
 
 open class GenericActivity : AppCompatActivity() {
 
-    private val loadingDialog: ProgressDialog  by lazy(mode = LazyThreadSafetyMode.NONE) {
-        ProgressDialog(this)
+    private val loadingDialog: LoadingDialog  by lazy(mode = LazyThreadSafetyMode.NONE) {
+        LoadingDialog()
     }
 
     private val alert: TopAlertView by lazy(mode = LazyThreadSafetyMode.NONE) {
@@ -95,8 +96,8 @@ open class GenericActivity : AppCompatActivity() {
 
     fun showLoading(isLoading: Boolean) {
         loadingDialog.let {
-            if (isLoading && !loadingDialog?.isShowing!!) {
-                loadingDialog?.show()
+            if (isLoading && !loadingDialog?.isVisible!!) {
+                loadingDialog?.show(supportFragmentManager, "")
             } else {
                 loadingDialog?.dismiss()
             }

@@ -11,7 +11,9 @@ class MainViewModelFactory constructor(private val repository: Repository): View
         return if (modelClass.isAssignableFrom(UsuarioViewModel::class.java)) {
             UsuarioViewModel(this.repository) as T
         } else if (modelClass.isAssignableFrom(ProjetoViewModel::class.java)) {
-                ProjetoViewModel(this.repository) as T
+            ProjetoViewModel(this.repository) as T
+        } else if (modelClass.isAssignableFrom(TagViewModel::class.java)) {
+            TagViewModel(this.repository) as T
         } else if (modelClass.isAssignableFrom(ProjetoUsuarioViewModel::class.java)) {
             ProjetoUsuarioViewModel(this.repository) as T
         } else {

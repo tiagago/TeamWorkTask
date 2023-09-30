@@ -154,7 +154,6 @@ class EquipeFragment : GenericFragment(), EquipeParticipanteOnClickInterface {
         projetoUsuarioViewModel.desassociarUsuarioProjeto(projetoSelecionadoId, usuario.id.toInt())
     }
 
-    @SuppressLint("StringFormatMatches")
     fun configurarFloatingButton() {
         binding.apply {
             equipeMainFab.setOnClickListener {
@@ -178,18 +177,14 @@ class EquipeFragment : GenericFragment(), EquipeParticipanteOnClickInterface {
     private fun setVisibility() {
         binding.apply {
             equipeCompartilharFab.visibility = if (clicked) View.GONE else View.VISIBLE
-            equipeCompartilharTv.visibility = if (clicked) View.GONE else View.VISIBLE
             equipeEmailFab.visibility = if (clicked) View.GONE else View.VISIBLE
-            equipeEmailTv.visibility = if (clicked) View.GONE else View.VISIBLE
         }
     }
 
     private fun setAnimation() {
         binding.apply {
             equipeCompartilharFab.startAnimation(if (clicked) toBottom else fromBottom)
-            equipeCompartilharTv.startAnimation(if (clicked) toBottom else fromBottom)
             equipeEmailFab.startAnimation(if (clicked) toBottom else fromBottom)
-            equipeEmailTv.startAnimation(if (clicked) toBottom else fromBottom)
             equipeMainFab.startAnimation(if (clicked) rotateClose else rotateOpen)
         }
     }

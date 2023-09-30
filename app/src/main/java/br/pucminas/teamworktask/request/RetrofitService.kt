@@ -1,11 +1,9 @@
 package br.pucminas.teamworktask.request
 
 import br.pucminas.teamworktask.models.Projeto
+import br.pucminas.teamworktask.models.Tag
 import br.pucminas.teamworktask.models.Usuario
-import br.pucminas.teamworktask.response.GenericResponse
-import br.pucminas.teamworktask.response.ProjetoResponse
-import br.pucminas.teamworktask.response.ProjetosResponse
-import br.pucminas.teamworktask.response.UsuarioResponse
+import br.pucminas.teamworktask.response.*
 import br.pucminas.teamworktask.utils.Credentials
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -34,6 +32,17 @@ interface RetrofitService {
     @GET("/api/projeto/obterProjetoComParticipantes/{idProjeto}")
     fun obterProjetoComParticipantes(@Path("idProjeto") idProjeto: Int): Call<ProjetoResponse>
 
+    // Chamadas para as Tags
+    @POST("/api/tag/")
+    fun criarTag(@Body tag: Tag): Call<TagResponse>
+
+    @PUT("/api/tag/")
+    fun editarTag(@Body tag: Tag): Call<GenericResponse>
+
+    @GET("/api/tag/obterTagsPorProjeto/")
+    fun obterTagsPorProjeto(@Query("projetoId") id: Int): Call<TagsResponse>
+
+    // Chamadas associacao usuario no projeto.
     @DELETE("/api/projetoUsuario/")
     fun desassociarUsuarioProjeto(@Query("idProjeto") idProjeto: Int, @Query("idUsuario") idUsuario: Int): Call<GenericResponse>
 

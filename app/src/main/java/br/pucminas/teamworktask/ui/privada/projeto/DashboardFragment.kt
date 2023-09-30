@@ -106,24 +106,18 @@ class DashboardFragment : GenericFragment(), ProjetoSeletorOnClickInterface {
 
     private fun setVisibility() {
         binding.dashboardNovoFab.visibility = if (clicked) View.GONE else View.VISIBLE
-        binding.dashboardNovoTv.visibility = if (clicked) View.GONE else View.VISIBLE
         if(isMyProjeto){
             binding.dashboardEditarFab.visibility = if (clicked) View.GONE else View.VISIBLE
-            binding.dashboardEditarTv.visibility = if (clicked) View.GONE else View.VISIBLE
         }
         binding.dashboardParticiparFab.visibility = if (clicked) View.GONE else View.VISIBLE
-        binding.dashboardParticiparTv.visibility = if (clicked) View.GONE else View.VISIBLE
     }
 
     private fun setAnimation() {
         binding.dashboardNovoFab.startAnimation(if (clicked) toBottom else fromBottom)
-        binding.dashboardNovoTv.startAnimation(if (clicked) toBottom else fromBottom)
         if(isMyProjeto){
             binding.dashboardEditarFab.startAnimation(if (clicked) toBottom else fromBottom)
-            binding.dashboardEditarTv.startAnimation(if (clicked) toBottom else fromBottom)
         }
         binding.dashboardParticiparFab.startAnimation(if (clicked) toBottom else fromBottom)
-        binding.dashboardParticiparTv.startAnimation(if (clicked) toBottom else fromBottom)
         binding.dashboardMainFab.startAnimation(if (clicked) rotateClose else rotateOpen)
     }
 

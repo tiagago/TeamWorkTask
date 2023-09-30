@@ -20,6 +20,11 @@
         <item name="android:textColor">@color/secondary_color</item>
         <item name="android:fontFamily">sans-serif</item>
     </style>
+    <style name="textViewEmptyListLayout">
+        <item name="android:textSize">@dimen/titulo_tamanho</item>
+        <item name="android:textColor">@color/secondary_color_light</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
     <style name="textViewLayoutLabelDefault">
         <item name="android:textSize">@dimen/titulo_tamanho</item>
         <item name="android:textColor">@color/secondary_color_dark</item>
@@ -46,11 +51,14 @@
     </style>
     <style name="floatButtonSubMenu">
         <item name="rippleColor">@color/primary_color_dark</item>
-        <item name="tint">@color/white</item>
+        <item name="iconTint">@color/white</item>
         <item name="backgroundTint">@color/purple_500</item>
-        <item name="android:layout_marginBottom">@dimen/margem_pequena</item>
+        <item name="android:layout_marginBottom">@dimen/margem_padrao</item>
+        <item name="android:layout_marginEnd">@dimen/margem_pequena</item>
         <item name="fabSize">mini</item>
         <item name="android:elevation">@dimen/margem_pequena</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/white</item>
     </style>
     <style name="floatButtonSubMenuText">
         <item name="android:textSize">@dimen/titulo_tamanho</item>
