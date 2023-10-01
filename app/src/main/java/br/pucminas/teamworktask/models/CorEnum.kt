@@ -17,16 +17,4 @@ enum class CorEnum(var hexaCor: String, var nomeCor: String) {
     override fun toString(): String {
         return nomeCor
     }
-
-    companion object{
-        fun getCorEnumByHexaCor(hexaCor: String) : CorEnum?{
-            values().forEach {
-                if (it.hexaCor.equals(hexaCor)){
-                    return it
-                }
-            }
-
-            return null
-        }
-    }
 }

@@ -11,15 +11,20 @@ import retrofit2.http.Query
 
 class Repository constructor(private val retrofitService: RetrofitService) {
 
-    // Chamadas do usuário.
+
+    /*****************************
+     **** Chamadas do Usuário ****
+     *****************************/
     fun doLogin(login: String, senha: String) = retrofitService.doLogin(login, senha)
 
     fun criarUsuario(genericRequest: GenericRequest) = retrofitService.criarUsuario(genericRequest)
 
     fun obterUsuarioComProjetos(idUsuario: Int) = retrofitService.obterUsuarioComProjetos(idUsuario)
 
+    /*****************************
+     **** Chamadas do Projeto ****
+     *****************************/
 
-    // Chamadas do projeto.
     fun criarProjeto(projetoRequest: ProjetoRequest) = retrofitService.criarProjeto(projetoRequest)
 
     fun editarProjeto(projetoRequest: ProjetoRequest) = retrofitService.editarProjeto(projetoRequest)
@@ -28,7 +33,11 @@ class Repository constructor(private val retrofitService: RetrofitService) {
 
     fun obterProjetoComParticipantes(idProjeto: Int) = retrofitService.obterProjetoComParticipantes(idProjeto)
 
-    // Chamadas para as Tags
+    fun obterProjetoPorCodigo(codigo: String) = retrofitService.obterProjetoPorCodigo(codigo)
+
+    /*******************************
+     **** Chamadas para as Tags ****
+     *******************************/
     fun criarTag(tagRequest: TagRequest) = retrofitService.criarTag(tagRequest)
 
     fun editarTag(tagRequest: TagRequest) = retrofitService.editarTag(tagRequest)

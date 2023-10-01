@@ -5,41 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/dashboard_logo_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_user"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/dashboard_titulo_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/genericTittle"
-        android:text="@string/dashboard_title"
-        android:layout_marginStart="@dimen/margem_padrao"
-        app:layout_constraintStart_toEndOf="@id/dashboard_logo_iv"
-        app:layout_constraintTop_toTopOf="@id/dashboard_logo_iv"
-        app:layout_constraintBottom_toBottomOf="@id/dashboard_logo_iv"
-        />
-
-    <ImageView
-        android:id="@+id/dashboard_logout_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_logout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <include
         android:id="@+id/dashboard_card"
         layout="@layout/layout_projeto_adapter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margem_dobro"
-        app:layout_constraintTop_toBottomOf="@id/dashboard_logout_iv"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
          />
 

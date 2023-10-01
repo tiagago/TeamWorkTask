@@ -1,29 +1,25 @@
 package br.pucminas.teamworktask.viewmodels
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import br.pucminas.teamworktask.models.Projeto
 import br.pucminas.teamworktask.repositories.Repository
 import br.pucminas.teamworktask.request.ProjetoRequest
 import br.pucminas.teamworktask.response.ProjetoResponse
 import br.pucminas.teamworktask.response.ProjetosResponse
-import br.pucminas.teamworktask.utils.ViewModelUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class ProjetoViewModel constructor(private val repository: Repository)  : ViewModel() {
+class ProjetoViewModel constructor(private val repository: Repository) : GenericViewModel() {
     val projetoResponse = MutableLiveData<ProjetoResponse>()
     val projetosResponse = MutableLiveData<ProjetosResponse>()
-    val errorMessage = MutableLiveData<String>()
 
     fun criarProjeto(projetoRequest: ProjetoRequest) {
         executeService(repository.criarProjeto(projetoRequest))
     }
 
     fun editarProjeto(projetoRequest: ProjetoRequest) {
-        executeService(repository.editarProjeto(projetoRequest))
+        executeGenericService(repository.editarProjeto(projetoRequest))
     }
 
     fun oberMeusProjetos(idUsuario: Int) {
@@ -40,7 +36,7 @@ class ProjetoViewModel constructor(private val repository: Repository)  : ViewMo
                 if(response.body() != null){
                     projetoResponse.postValue(response.body())
                 } else {
-                    errorMessage.postValue(ViewModelUtils.tratarJsonRespostaErro(response.errorBody()))
+                    errorMessage.postValue(tratarJsonRespostaErro(response.errorBody()))
                 }
             }
             override fun onFailure(call: Call<ProjetoResponse>, t: Throwable) {
@@ -55,7 +51,7 @@ class ProjetoViewModel constructor(private val repository: Repository)  : ViewMo
                 if(response.body() != null){
                     projetosResponse.postValue(response.body())
                 } else {
-                    errorMessage.postValue(ViewModelUtils.tratarJsonRespostaErro(response.errorBody()))
+                    errorMessage.postValue(tratarJsonRespostaErro(response.errorBody()))
                 }
             }
             override fun onFailure(call: Call<ProjetosResponse>, t: Throwable) {

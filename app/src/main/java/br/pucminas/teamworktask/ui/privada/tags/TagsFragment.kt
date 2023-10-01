@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import br.pucminas.teamworktask.R
 import br.pucminas.teamworktask.databinding.FragmentTagsBinding
 import br.pucminas.teamworktask.models.Tag
 import br.pucminas.teamworktask.repositories.Repository
 import br.pucminas.teamworktask.request.RetrofitService
 import br.pucminas.teamworktask.ui.GenericFragment
+import br.pucminas.teamworktask.ui.privada.PrivateFragment
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils
 import br.pucminas.teamworktask.viewmodels.MainViewModelFactory
 import br.pucminas.teamworktask.viewmodels.TagViewModel
@@ -20,7 +22,7 @@ import br.pucminas.teamworktask.viewmodels.TagViewModel
  * Use the [TagsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class TagsFragment : GenericFragment(), TagItemListOnClickInterface, TagDialogInterface{
+class TagsFragment : PrivateFragment(), TagItemListOnClickInterface, TagDialogInterface{
     private var _binding: FragmentTagsBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -36,6 +38,13 @@ class TagsFragment : GenericFragment(), TagItemListOnClickInterface, TagDialogIn
         chamarServicos()
         configurarFloatingButton()
         return binding.root
+    }
+
+    override fun obterIcone(): Int {
+        return R.drawable.ic_tags
+    }
+    override fun obterTitulo(): String {
+        return getString(R.string.tags_title)
     }
 
     private fun configurarViewModels() {

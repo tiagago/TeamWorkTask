@@ -11,8 +11,51 @@
         android:layout_height="0dp"
         android:src="@drawable/fundo"
         android:scaleType="fitXY"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/privado_fl"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/privado_logo_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_user"
+        android:layout_marginTop="@dimen/margem_pequena"
+        android:layout_marginStart="@dimen/margem_pequena"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/privado_titulo_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/genericTittle"
+        android:text="@string/dashboard_title"
+        android:layout_marginStart="@dimen/margem_padrao"
+        app:layout_constraintStart_toEndOf="@id/privado_logo_iv"
+        app:layout_constraintTop_toTopOf="@id/privado_logo_iv"
+        app:layout_constraintBottom_toBottomOf="@id/privado_logo_iv"
+        />
+
+    <ImageView
+        android:id="@+id/privado_logout_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_logout"
+        android:layout_marginEnd="@dimen/margem_pequena"
+        android:layout_marginTop="@dimen/margem_pequena"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/privado_top_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/margem_pequena"
+        app:dividerColor="@color/purple_900"
+        app:layout_constraintTop_toBottomOf="@id/privado_logo_iv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
@@ -23,12 +66,21 @@
         android:layout_height="0dp"
         android:background="@color/white_oppacite_70"
         android:padding="@dimen/margem_padrao"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/privado_top_divider"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/privado_bnv"
+        app:layout_constraintBottom_toTopOf="@id/privado_bottom_divider"
         app:layout_constraintEnd_toEndOf="parent"
         />
 
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/privado_bottom_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        app:dividerColor="@color/purple_900"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/privado_bnv"
+        />
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/privado_bnv"
         android:layout_width="0dp"

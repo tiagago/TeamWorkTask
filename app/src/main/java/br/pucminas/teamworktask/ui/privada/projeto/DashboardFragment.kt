@@ -1,28 +1,20 @@
 package br.pucminas.teamworktask.ui.privada.projeto
 
-import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import androidx.lifecycle.ViewModelProvider
 import br.pucminas.teamworktask.R
-import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertMessageObject
-import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertType
 import br.pucminas.teamworktask.databinding.FragmentDashboardBinding
-import br.pucminas.teamworktask.databinding.LayoutSeletorProjetoDialogBinding
 import br.pucminas.teamworktask.models.Projeto
 import br.pucminas.teamworktask.repositories.Repository
 import br.pucminas.teamworktask.request.RetrofitService
 import br.pucminas.teamworktask.ui.GenericFragment
 import br.pucminas.teamworktask.ui.privada.PrivateActivity
-import br.pucminas.teamworktask.ui.publica.PublicActivity
+import br.pucminas.teamworktask.ui.privada.PrivateFragment
 import br.pucminas.teamworktask.utils.FormatterUtils
-import br.pucminas.teamworktask.utils.SharedPreferenceUtils
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.PROJETO_ID
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.guardarPreferenciaInt
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.obterPreferenciaInt
@@ -36,7 +28,7 @@ import br.pucminas.teamworktask.viewmodels.UsuarioViewModel
  * Use the [DashboardFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class DashboardFragment : GenericFragment(), ProjetoSeletorOnClickInterface {
+class DashboardFragment : PrivateFragment(), ProjetoSeletorOnClickInterface {
     private var _binding: FragmentDashboardBinding? = null
 
     // This property is only valid between onCreateView and
@@ -49,6 +41,7 @@ class DashboardFragment : GenericFragment(), ProjetoSeletorOnClickInterface {
     private var meusProjetos = ArrayList<Projeto>()
     private var outrosProjetos = ArrayList<Projeto>()
     private var projetos = ArrayList<Projeto>()
+    private var projetoSelecionado = Projeto()
     var contServicos = 0
     var erroServico = ""
     var isMyProjeto = false
@@ -62,25 +55,22 @@ class DashboardFragment : GenericFragment(), ProjetoSeletorOnClickInterface {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
 
         configurarViewModels()
-        configurarTitulo()
-        configurarLogoutButton()
         configurarFloatingButton()
-        chamarServicos()
 
         return binding.root
     }
 
-    private fun configurarTitulo() {
-        var usuario = obterUsuarioPreference()
-        binding.dashboardTituloTv.text = getString(R.string.dashboard_title, usuario.nomeExibicao)
+    override fun onResume() {
+        super.onResume()
+        chamarServicos()
     }
 
-    private fun configurarLogoutButton() {
-        binding.dashboardLogoutIv.setOnClickListener {
-            if (activity is PrivateActivity) {
-                (activity as PrivateActivity).chamarPopupLogout()
-            }
-        }
+    override fun obterIcone(): Int {
+        return R.drawable.ic_user
+    }
+    override fun obterTitulo(): String {
+        var usuario = obterUsuarioPreference()
+        return getString(R.string.dashboard_title, usuario.nomeExibicao)
     }
 
     fun configurarFloatingButton() {
@@ -88,7 +78,7 @@ class DashboardFragment : GenericFragment(), ProjetoSeletorOnClickInterface {
             onAddButtonClicked()
         }
         binding.dashboardEditarFab.setOnClickListener {
-
+            changeFragment(ProjetoCadastroFragment(projetoSelecionado))
         }
         binding.dashboardNovoFab.setOnClickListener {
             changeFragment(ProjetoCadastroFragment())
@@ -132,23 +122,27 @@ class DashboardFragment : GenericFragment(), ProjetoSeletorOnClickInterface {
                 ProjetoViewModel::class.java
             )
 
-        projetoViewModel.projetosResponse.observe(viewLifecycleOwner) {
-            contServicos--
-            if (it?.projetos != null && it.projetos!!.isNotEmpty() && it.success) {
-                meusProjetos.addAll(it.projetos!!)
-            } else {
-                erroServico = retornoErroServicoReturn(it)
+        projetoViewModel.apply {
+            projetosResponse.observe(viewLifecycleOwner) {
+                contServicos--
+                if (it?.projetos != null && it.projetos!!.isNotEmpty() && it.success) {
+                    meusProjetos = ArrayList()
+                    meusProjetos.clear()
+                    meusProjetos.addAll(it.projetos!!)
+                } else {
+                    erroServico = retornoErroServicoReturn(it)
+                }
+                processarProjetos()
             }
-            processarProjetos()
-        }
 
-        projetoViewModel.errorMessage.observe(viewLifecycleOwner) {
-            contServicos--
-            if (it != null) {
-                erroServico = it
-                usuarioViewModel.errorMessage.postValue(null)
+            errorMessage.observe(viewLifecycleOwner) {
+                contServicos--
+                if (it != null) {
+                    erroServico = it
+                    usuarioViewModel.errorMessage.postValue(null)
+                }
+                processarProjetos()
             }
-            processarProjetos()
         }
     }
 
@@ -158,23 +152,27 @@ class DashboardFragment : GenericFragment(), ProjetoSeletorOnClickInterface {
                 UsuarioViewModel::class.java
             )
 
-        usuarioViewModel.usuarioResponse.observe(viewLifecycleOwner) {
-            contServicos--
-            if (it?.usuario != null && it.usuario!!.participa.isNotEmpty() && it.success) {
-                outrosProjetos.addAll(it.usuario!!.participa)
-            } else {
-                erroServico = retornoErroServicoReturn(it)
+        usuarioViewModel.apply {
+            usuarioResponse.observe(viewLifecycleOwner) {
+                contServicos--
+                if (it?.usuario != null && it.usuario!!.participa.isNotEmpty() && it.success) {
+                    outrosProjetos = ArrayList()
+                    outrosProjetos.clear()
+                    outrosProjetos.addAll(it.usuario!!.participa)
+                } else {
+                    erroServico = retornoErroServicoReturn(it)
+                }
+                processarProjetos()
             }
-            processarProjetos()
-        }
 
-        usuarioViewModel.errorMessage.observe(viewLifecycleOwner) {
-            contServicos--
-            if (it != null) {
-                erroServico = it
-                usuarioViewModel.errorMessage.postValue(null)
+            errorMessage.observe(viewLifecycleOwner) {
+                contServicos--
+                if (it != null) {
+                    erroServico = it
+                    usuarioViewModel.errorMessage.postValue(null)
+                }
+                processarProjetos()
             }
-            processarProjetos()
         }
     }
 
@@ -192,13 +190,14 @@ class DashboardFragment : GenericFragment(), ProjetoSeletorOnClickInterface {
             return
         }
 
+        projetos = ArrayList()
         projetos.clear()
         projetos.addAll(meusProjetos)
         projetos.addAll(outrosProjetos)
 
         if(projetos.isNotEmpty()){
             val projetoSelecionadoId = obterPreferenciaInt(requireContext(), PROJETO_ID)
-            var projetoSelecionado = projetos[0]
+            projetoSelecionado = projetos[0]
             if(projetoSelecionadoId > 0){
                 projetos.forEach{
                     if(it.id.toInt() == projetoSelecionadoId){
@@ -207,7 +206,7 @@ class DashboardFragment : GenericFragment(), ProjetoSeletorOnClickInterface {
                 }
             }
 
-            selecaoProjeto(projetoSelecionado)
+            selecaoProjeto()
         } else {
             binding.dashboardCard.projetoCard.visibility = View.GONE
             showBottomNavigator(false)
@@ -216,19 +215,24 @@ class DashboardFragment : GenericFragment(), ProjetoSeletorOnClickInterface {
         showLoading(false)
     }
 
-    fun selecaoProjeto(projeto: Projeto){
-        guardarPreferenciaInt(requireContext(), PROJETO_ID, projeto.id.toInt())
+    fun selecaoProjeto(){
+        guardarPreferenciaInt(requireContext(), PROJETO_ID, projetoSelecionado.id.toInt())
+        binding.apply {
+            dashboardCard.projetoCard.visibility = View.VISIBLE
+            dashboardCard.projetoCardNomeTv.text = projetoSelecionado.nome
+            dashboardCard.projetoCardDescricaoTv.text = projetoSelecionado.descricao
+            dashboardCard.projetoCardDataCriacaoTv.text = FormatterUtils.formatDateToString(projetoSelecionado.dataCriacao)
 
-        binding.dashboardCard.projetoCard.visibility = View.VISIBLE
-        binding.dashboardCard.projetoCardNomeTv.text = projeto.nome
-        binding.dashboardCard.projetoCardDescricaoTv.text = projeto.descricao
-        binding.dashboardCard.projetoCardDataCriacaoTv.text = FormatterUtils.formatDateToString(projeto.dataCriacao)
-
-        val usuario = obterUsuarioPreference()
-        isMyProjeto = projeto.criador == usuario.id
-        binding.dashboardCard.projetoCard.setOnClickListener {
-            ProjetoSeletorDialog(projetos, projeto, this).show(parentFragmentManager, "")
+            val usuario = obterUsuarioPreference()
+            isMyProjeto = projetoSelecionado.criador == usuario.id
+            dashboardCard.projetoCard.setOnClickListener {
+                chamarSeletorProjeto()
+            }
         }
+    }
+
+    fun chamarSeletorProjeto() {
+        ProjetoSeletorDialog(projetos, projetoSelecionado, this).show(parentFragmentManager, "")
     }
 
     fun showBottomNavigator(isVisible: Boolean){
@@ -236,7 +240,8 @@ class DashboardFragment : GenericFragment(), ProjetoSeletorOnClickInterface {
     }
 
     override fun onClickProjeto(projeto: Projeto) {
-        selecaoProjeto(projeto)
+        projetoSelecionado = projeto
+        selecaoProjeto()
     }
 
 }

@@ -20,6 +20,7 @@ import br.pucminas.teamworktask.repositories.Repository
 import br.pucminas.teamworktask.request.ProjetoRequest
 import br.pucminas.teamworktask.request.RetrofitService
 import br.pucminas.teamworktask.ui.GenericFragment
+import br.pucminas.teamworktask.ui.privada.PrivateFragment
 import br.pucminas.teamworktask.ui.privada.projeto.ProjetoAssociarDialog
 import br.pucminas.teamworktask.ui.privada.projeto.ProjetoCadastroFragment
 import br.pucminas.teamworktask.ui.privada.projeto.ProjetoSeletorAdapter
@@ -34,7 +35,7 @@ import br.pucminas.teamworktask.viewmodels.ProjetoViewModel
  * Use the [EquipeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class EquipeFragment : GenericFragment(), EquipeParticipanteOnClickInterface {
+class EquipeFragment : PrivateFragment(), EquipeParticipanteOnClickInterface {
     private var _binding: FragmentEquipeBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -53,6 +54,13 @@ class EquipeFragment : GenericFragment(), EquipeParticipanteOnClickInterface {
         chamarServicos()
         configurarFloatingButton()
         return binding.root
+    }
+
+    override fun obterIcone(): Int {
+        return R.drawable.ic_equipe
+    }
+    override fun obterTitulo(): String {
+        return getString(R.string.equipe_title)
     }
 
     private fun configurarViewModels() {

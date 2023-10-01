@@ -1,20 +1,16 @@
 package br.pucminas.teamworktask.viewmodels
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import br.pucminas.teamworktask.models.Usuario
 import br.pucminas.teamworktask.repositories.Repository
 import br.pucminas.teamworktask.request.GenericRequest
 import br.pucminas.teamworktask.response.UsuarioResponse
-import br.pucminas.teamworktask.utils.ViewModelUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class UsuarioViewModel constructor(private val repository: Repository)  : ViewModel() {
+class UsuarioViewModel constructor(private val repository: Repository)  : GenericViewModel() {
     val usuarioResponse = MutableLiveData<UsuarioResponse>()
-    val errorMessage = MutableLiveData<String>()
 
     fun doLogin(login: String, senha: String) {
         executeService(repository.doLogin(login, senha))
@@ -34,7 +30,7 @@ class UsuarioViewModel constructor(private val repository: Repository)  : ViewMo
                 if(response.body() != null){
                     usuarioResponse.postValue(response.body())
                 } else {
-                    errorMessage.postValue(ViewModelUtils.tratarJsonRespostaErro(response.errorBody()))
+                    errorMessage.postValue(tratarJsonRespostaErro(response.errorBody()))
                 }
             }
             override fun onFailure(call: Call<UsuarioResponse>, t: Throwable) {

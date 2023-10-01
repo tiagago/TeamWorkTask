@@ -37,6 +37,16 @@ class PrivateActivity : GenericActivity() {
                 }
                 true
             }
+            privadoLogoutIv.setOnClickListener {
+                chamarPopupLogout()
+            }
+        }
+    }
+
+    fun atualizarTopLaout(icon: Int, titulo: String ){
+        binding.apply {
+            privadoLogoIv.setImageDrawable(getDrawable(icon))
+            privadoTituloTv.text = titulo
         }
     }
 

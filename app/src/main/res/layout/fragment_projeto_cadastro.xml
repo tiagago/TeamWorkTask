@@ -132,7 +132,7 @@
         app:layout_constraintTop_toTopOf="@id/projeto_cadastro_criado_por_label_tv"
         />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/projeto_cadastro_salvar_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -145,7 +145,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/projeto_cadastro_cancelar_bt" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/projeto_cadastro_cancelar_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

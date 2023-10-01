@@ -51,6 +51,7 @@
     <string name="projeto_cadastro_criado_por_label">Criado por : </string>
     <string name="projeto_cadastro_codigo_label">Código acesso : </string>
     <string name="projeto_cadastro_sucesso">Projeto cadastrado com sucesso!</string>
+    <string name="projeto_editar_sucesso">Projeto editado com sucesso!</string>
 
     <!-- Projeto Cards -->
     <string name="projeto_card_nome_label">Nome Projeto : </string>

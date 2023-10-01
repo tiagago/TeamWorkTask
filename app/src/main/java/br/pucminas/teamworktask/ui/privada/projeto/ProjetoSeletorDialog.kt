@@ -32,7 +32,6 @@ class ProjetoSeletorDialog(private val listaProjetos: List<Projeto>, private val
                 adapter = ProjetoSeletorAdapter(context, listaProjetos, projetoSelecionado, this@ProjetoSeletorDialog)
             }
         }
-
     }
 
     override fun onStart() {

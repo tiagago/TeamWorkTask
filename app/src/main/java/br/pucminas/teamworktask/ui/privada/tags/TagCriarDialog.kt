@@ -45,8 +45,11 @@ class TagCriarDialog(private val tagDialogInterface: TagDialogInterface, private
         if(tagEditar != null){
             binding.tagCriarTv.text = getString(R.string.tag_editar_titulo)
             binding.tagNomeTie.setText(tagEditar.nome)
-            corSelecionada = CorEnum.getCorEnumByHexaCor(tagEditar.cor)
-            if(corSelecionada != null){
+
+            var listaCoresSelecionadas = CorEnum.entries.filter { it.hexaCor == tagEditar.cor }
+
+            if(listaCoresSelecionadas.isNotEmpty()){
+                corSelecionada = listaCoresSelecionadas[0]
                 binding.tagCorActv.setText(corSelecionada.toString())
             }
         }
@@ -71,7 +74,7 @@ class TagCriarDialog(private val tagDialogInterface: TagDialogInterface, private
 
     private fun carregarCorArrayAdapter() {
         binding.apply {
-            tagCorActv.setAdapter(TagCorAdapter(requireContext(),tagCorActv.id, CorEnum.values().toList()))
+            tagCorActv.setAdapter(TagCorAdapter(requireContext(),tagCorActv.id, CorEnum.entries))
         }
     }
 

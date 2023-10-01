@@ -44,6 +44,7 @@ class ProjetoCadastroFragment(var editarProjeto: Projeto? = null) : GenericFragm
         _binding = FragmentProjetoCadastroBinding.inflate(inflater, container, false)
 
         if(editarProjeto != null) {
+            projeto.id = editarProjeto!!.id
             projeto.dataCriacao = editarProjeto!!.dataCriacao
             projeto.codigo = editarProjeto!!.codigo
         } else {
@@ -74,12 +75,14 @@ class ProjetoCadastroFragment(var editarProjeto: Projeto? = null) : GenericFragm
     }
 
     fun prepararListeners(){
-        binding.projetoCadastroCancelarBt.setOnClickListener {
-            onBackPressed()
-        }
+        binding.apply {
+            projetoCadastroCancelarBt.setOnClickListener {
+                onBackPressed()
+            }
 
-        binding.projetoCadastroSalvarBt.setOnClickListener {
-            salvarProjeto()
+            projetoCadastroSalvarBt.setOnClickListener {
+                salvarProjeto()
+            }
         }
     }
 
@@ -112,7 +115,11 @@ class ProjetoCadastroFragment(var editarProjeto: Projeto? = null) : GenericFragm
                 projetoRequest.usuario = obterUsuarioPreference()
                 projetoRequest.projeto = projeto
                 showLoading(true)
-                viewModel.criarProjeto(projetoRequest)
+                if(editarProjeto != null) {
+                    viewModel.editarProjeto(projetoRequest)
+                } else {
+                    viewModel.criarProjeto(projetoRequest)
+                }
             }
         }
     }
@@ -123,18 +130,30 @@ class ProjetoCadastroFragment(var editarProjeto: Projeto? = null) : GenericFragm
                 ProjetoViewModel::class.java
             )
 
-        viewModel.projetoResponse.observe(viewLifecycleOwner) {
-            showLoading(false)
-            if(it?.projeto != null && it.success){
-                onBackPressed(TopAlertMessageObject(TopAlertType.SUCCESS, getString(R.string.projeto_cadastro_sucesso)))
-            } else {
-                retornoErroServico(it)
+        viewModel.apply {
+            projetoResponse.observe(viewLifecycleOwner) {
+                showLoading(false)
+                if(it?.projeto != null && it.success){
+                    onBackPressed(TopAlertMessageObject(TopAlertType.SUCCESS, getString(R.string.projeto_cadastro_sucesso)))
+                } else {
+                    retornoErroServico(it)
+                }
+            }
+
+            genericResponse.observe(viewLifecycleOwner) {
+                showLoading(false)
+                if(it != null && it.success){
+                    onBackPressed(TopAlertMessageObject(TopAlertType.SUCCESS, getString(R.string.projeto_editar_sucesso)))
+                } else {
+                    retornoErroServico(it)
+                }
+            }
+
+            errorMessage.observe(viewLifecycleOwner) {
+                showLoading(false)
+                showErrorGenericServer()
             }
         }
 
-        viewModel.errorMessage.observe(viewLifecycleOwner) {
-            showLoading(false)
-            showErrorGenericServer()
-        }
     }
 }

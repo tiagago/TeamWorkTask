@@ -26,13 +26,15 @@ interface RetrofitService {
     fun criarProjeto(@Body projetoRequest: ProjetoRequest): Call<ProjetoResponse>
 
     @PUT("/api/projeto/")
-    fun editarProjeto(@Body projetoRequest: ProjetoRequest): Call<ProjetoResponse>
+    fun editarProjeto(@Body projetoRequest: ProjetoRequest): Call<GenericResponse>
 
     @GET("/api/projeto/obterMeusProjetos/")
     fun oberMeusProjetos(@Query("idUsuario") id: Int): Call<ProjetosResponse>
 
     @GET("/api/projeto/obterProjetoComParticipantes/")
     fun obterProjetoComParticipantes(@Query("idProjeto") idProjeto: Int): Call<ProjetoResponse>
+
+    fun obterProjetoPorCodigo(@Query("codigo") codigo: String): Call<ProjetoResponse>
 
     // Chamadas para as Tags
     @POST("/api/tag/")

@@ -10,6 +10,7 @@ import br.pucminas.teamworktask.componentes.topAlert.TopAlertView
 import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertMessageObject
 import br.pucminas.teamworktask.models.Usuario
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 open class GenericActivity : AppCompatActivity() {
 
@@ -53,7 +54,7 @@ open class GenericActivity : AppCompatActivity() {
 
     fun chamarPopupLogout() {
         // Create the object of AlertDialog Builder class
-        val builder = AlertDialog.Builder(this)
+        val builder = MaterialAlertDialogBuilder(this, R.style.ThemeOverlay_App_MaterialAlertDialog)
 
         // Set the message show for the Alert time
         builder.setMessage(obterMensagemLogout())
@@ -96,17 +97,17 @@ open class GenericActivity : AppCompatActivity() {
 
     fun showLoading(isLoading: Boolean) {
         loadingDialog.let {
-            if (isLoading && !loadingDialog?.isVisible!!) {
-                loadingDialog?.show(supportFragmentManager, "")
+            if (isLoading && !loadingDialog.isVisible && (loadingDialog.dialog == null  || !loadingDialog.dialog!!.isShowing)) {
+                loadingDialog.show(supportFragmentManager, "")
             } else {
-                loadingDialog?.dismiss()
+                loadingDialog.dismiss()
             }
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        loadingDialog!!.dismiss()
+        loadingDialog.dismiss()
     }
 
     fun obterUsuarioPreference(): Usuario {
