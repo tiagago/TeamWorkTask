@@ -3,33 +3,38 @@ package br.pucminas.teamworktask.repositories
 import br.pucminas.teamworktask.models.Projeto
 import br.pucminas.teamworktask.models.Tag
 import br.pucminas.teamworktask.models.Usuario
+import br.pucminas.teamworktask.request.GenericRequest
+import br.pucminas.teamworktask.request.ProjetoRequest
 import br.pucminas.teamworktask.request.RetrofitService
+import br.pucminas.teamworktask.request.TagRequest
 import retrofit2.http.Query
 
 class Repository constructor(private val retrofitService: RetrofitService) {
 
     // Chamadas do usuário.
-    fun doLogin(email: String, senha: String) = retrofitService.doLogin(email, senha)
+    fun doLogin(login: String, senha: String) = retrofitService.doLogin(login, senha)
 
-    fun criarUsuario(usuario: Usuario) = retrofitService.criarUsuario(usuario)
+    fun criarUsuario(genericRequest: GenericRequest) = retrofitService.criarUsuario(genericRequest)
 
     fun obterUsuarioComProjetos(idUsuario: Int) = retrofitService.obterUsuarioComProjetos(idUsuario)
 
 
     // Chamadas do projeto.
-    fun criarProjeto(projeto: Projeto) = retrofitService.criarProjeto(projeto)
+    fun criarProjeto(projetoRequest: ProjetoRequest) = retrofitService.criarProjeto(projetoRequest)
+
+    fun editarProjeto(projetoRequest: ProjetoRequest) = retrofitService.editarProjeto(projetoRequest)
 
     fun oberMeusProjetos(idUsuario: Int) = retrofitService.oberMeusProjetos(idUsuario)
 
     fun obterProjetoComParticipantes(idProjeto: Int) = retrofitService.obterProjetoComParticipantes(idProjeto)
 
     // Chamadas para as Tags
-    fun criarTag(tag: Tag) = retrofitService.criarTag(tag)
+    fun criarTag(tagRequest: TagRequest) = retrofitService.criarTag(tagRequest)
 
-    fun editarTag(tag: Tag) = retrofitService.editarTag(tag)
+    fun editarTag(tagRequest: TagRequest) = retrofitService.editarTag(tagRequest)
 
     fun obterTagsPorProjeto(projetoId: Int) = retrofitService.obterTagsPorProjeto(projetoId)
 
     // Chamadas associacao usuario no projeto.
-    fun desassociarUsuarioProjeto(idProjeto: Int, idUsuario: Int) = retrofitService.desassociarUsuarioProjeto(idProjeto, idUsuario)
+    fun desassociarUsuarioProjeto(projetoRequest: ProjetoRequest) = retrofitService.desassociarUsuarioProjeto(projetoRequest)
 }

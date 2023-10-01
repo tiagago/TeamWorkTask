@@ -17,6 +17,7 @@ import br.pucminas.teamworktask.databinding.FragmentEquipeBinding
 import br.pucminas.teamworktask.models.Projeto
 import br.pucminas.teamworktask.models.Usuario
 import br.pucminas.teamworktask.repositories.Repository
+import br.pucminas.teamworktask.request.ProjetoRequest
 import br.pucminas.teamworktask.request.RetrofitService
 import br.pucminas.teamworktask.ui.GenericFragment
 import br.pucminas.teamworktask.ui.privada.projeto.ProjetoAssociarDialog
@@ -151,7 +152,14 @@ class EquipeFragment : GenericFragment(), EquipeParticipanteOnClickInterface {
             requireContext(),
             PROJETO_ID
         )
-        projetoUsuarioViewModel.desassociarUsuarioProjeto(projetoSelecionadoId, usuario.id.toInt())
+
+        var projetoRequest = ProjetoRequest()
+        var projeto = Projeto()
+        projeto.id = Integer(projetoSelecionadoId)
+        projetoRequest.usuario = usuario
+        projetoRequest.projeto = projeto
+
+        projetoUsuarioViewModel.desassociarUsuarioProjeto(projetoRequest)
     }
 
     fun configurarFloatingButton() {

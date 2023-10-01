@@ -41,7 +41,8 @@
             style="@style/textInputEditTextDefault"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:maxLength="30"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -64,7 +65,8 @@
             android:lineBreakStyle="normal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:maxLength="255"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView

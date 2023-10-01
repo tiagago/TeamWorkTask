@@ -2,16 +2,13 @@ package br.pucminas.teamworktask.ui.publica
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import br.pucminas.teamworktask.R
-import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertMessageObject
 import br.pucminas.teamworktask.databinding.ActivityPublicBinding
 import br.pucminas.teamworktask.models.Usuario
 import br.pucminas.teamworktask.ui.privada.PrivateActivity
 import br.pucminas.teamworktask.ui.GenericActivity
-import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_EMAIL
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_ID
+import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_LOGIN
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_NOME
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_SENHA
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.guardarPreferencia
@@ -35,7 +32,7 @@ class PublicActivity : GenericActivity() {
 
     fun doLogin(usuario: Usuario){
         guardarPreferenciaInt(this, USUARIO_ID, usuario.id.toInt())
-        guardarPreferencia(this, USUARIO_EMAIL, usuario.email)
+        guardarPreferencia(this, USUARIO_LOGIN, usuario.login)
         guardarPreferencia(this, USUARIO_SENHA, usuario.senha)
         guardarPreferencia(this, USUARIO_NOME, usuario.nomeExibicao)
 

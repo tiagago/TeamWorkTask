@@ -12,6 +12,7 @@ import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertType
 import br.pucminas.teamworktask.databinding.FragmentUsuarioCadastroBinding
 import br.pucminas.teamworktask.models.Usuario
 import br.pucminas.teamworktask.repositories.Repository
+import br.pucminas.teamworktask.request.GenericRequest
 import br.pucminas.teamworktask.request.RetrofitService
 import br.pucminas.teamworktask.ui.GenericFragment
 import br.pucminas.teamworktask.viewmodels.MainViewModelFactory
@@ -63,6 +64,7 @@ class UsuarioCadastroFragment : GenericFragment() {
             )
 
         viewModel.usuarioResponse.observe(viewLifecycleOwner) {
+            showLoading(false)
             if(it?.usuario != null && it.success){
                 onBackPressed(TopAlertMessageObject(TopAlertType.SUCCESS, getString(R.string.usuario_cadastro_sucesso)))
             } else {
@@ -71,6 +73,7 @@ class UsuarioCadastroFragment : GenericFragment() {
         }
 
         viewModel.errorMessage.observe(viewLifecycleOwner) {
+            showLoading(false)
             showErrorGenericServer()
         }
     }
@@ -80,7 +83,7 @@ class UsuarioCadastroFragment : GenericFragment() {
 
             var achouProblema = false
             val nome: String = usuarioCadastroNomeTie.text.toString()
-            val email: String = usuarioCadastroEmailTie.text.toString()
+            val login: String = usuarioCadastroLoginTie.text.toString()
             val senha: String = usuarioCadastroSenhaTie.text.toString()
             val senhaRepetida: String = usuarioCadastroRepetirSenhaTie.text.toString()
 
@@ -91,11 +94,11 @@ class UsuarioCadastroFragment : GenericFragment() {
                 usuarioCadastroNomeTil.error = null
             }
 
-            if(email.isBlank() || email == getString(R.string.usuario_cadastro_email_label)){
-                usuarioCadastroEmailTil.error = getString(R.string.generico_vazio_erro, getString(R.string.usuario_cadastro_email_label))
+            if(login.isBlank() || login == getString(R.string.usuario_cadastro_login_label)){
+                usuarioCadastroLoginTil.error = getString(R.string.generico_vazio_erro, getString(R.string.usuario_cadastro_login_label))
                 achouProblema = true
             } else {
-                usuarioCadastroEmailTil.error = null
+                usuarioCadastroLoginTil.error = null
             }
 
             if(senha.isBlank() || senha == getString(R.string.usuario_cadastro_senha_label)){
@@ -113,12 +116,17 @@ class UsuarioCadastroFragment : GenericFragment() {
             }
 
             if(!achouProblema){
+                showLoading(true)
                 var usuario = Usuario()
 
-                usuario.email = email
+                usuario.login = login
                 usuario.nomeExibicao = nome
                 usuario.senha = senha
-                viewModel.criarUsuario(usuario)
+
+                var genericRequest = GenericRequest()
+                genericRequest.usuario = usuario
+
+                viewModel.criarUsuario(genericRequest)
             }
         }
     }

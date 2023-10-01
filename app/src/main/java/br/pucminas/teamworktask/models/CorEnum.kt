@@ -13,4 +13,20 @@ enum class CorEnum(var hexaCor: String, var nomeCor: String) {
     AZUL_ESCURO("#579DFF", "Azul escuro"),
     VERDE_LIMAO_ESCURO("#94C748", "Verde limao escuro"),
     CINZA_ESCURO("#8590A2", "Cinza escuro");
+
+    override fun toString(): String {
+        return nomeCor
+    }
+
+    companion object{
+        fun getCorEnumByHexaCor(hexaCor: String) : CorEnum?{
+            values().forEach {
+                if (it.hexaCor.equals(hexaCor)){
+                    return it
+                }
+            }
+
+            return null
+        }
+    }
 }

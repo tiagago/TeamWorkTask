@@ -31,14 +31,23 @@
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
-    <style name="textInputLayoutDefault" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="textInputLayoutDefault" parent="Widget.Material3.TextInputLayout.OutlinedBox">
         <item name="android:textColorHint">@color/secondary_color_dark</item>
         <item name="boxStrokeColor">@color/text_input_layout_stroke_color</item>
 
     </style>
+
+    <style name="textInputLayoutSelectorDefault" parent="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="android:textColorHint">@color/secondary_color_dark</item>
+        <item name="boxStrokeColor">@color/text_input_layout_stroke_color</item>
+    </style>
     <style name="textInputEditTextDefault" parent="TextAppearance.AppCompat">
         <item name="android:textColorHint">@color/secondary_color_dark</item>
         <item name="android:textColor">@color/secondary_color</item>
+    </style>
+    <style name="autoCompleteTextViewDefault">
+
+
     </style>
 
     <style name="floatButtonMain">

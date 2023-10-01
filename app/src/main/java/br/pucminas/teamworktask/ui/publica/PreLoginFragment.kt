@@ -19,8 +19,8 @@ import br.pucminas.teamworktask.repositories.Repository
 import br.pucminas.teamworktask.request.RetrofitService
 import br.pucminas.teamworktask.ui.GenericFragment
 import br.pucminas.teamworktask.utils.PermissionUtils
-import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_EMAIL
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_ID
+import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_LOGIN
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_NOME
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.USUARIO_SENHA
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.obterPreferencia
@@ -60,9 +60,9 @@ class PreLoginFragment : GenericFragment() {
 
     @RequiresApi(Build.VERSION_CODES.P)
     private fun configurarEmail() {
-        val email : String = obterPreferencia(requireContext(), USUARIO_EMAIL)
-        if(email.isNotBlank()){
-            binding.loginUsuarioTie.setText(email)
+        val login : String = obterPreferencia(requireContext(), USUARIO_LOGIN)
+        if(login.isNotBlank()){
+            binding.loginUsuarioTie.setText(login)
             binding.loginFingerprintIv.visibility = View.VISIBLE
             configurarBotaoBiometria()
         } else {
@@ -117,10 +117,10 @@ class PreLoginFragment : GenericFragment() {
     fun configurarBotaoEntrar(){
         binding.loginEntrarBt.setOnClickListener {
             var achouProblema = false
-            val email: String = binding.loginUsuarioTie.text.toString()
+            val login: String = binding.loginUsuarioTie.text.toString()
             val senha: String = binding.loginSenhaTie.text.toString()
 
-            if(email.isBlank() || email == getString(R.string.pre_login_usuario_label)){
+            if(login.isBlank() || login == getString(R.string.pre_login_usuario_label)){
                 binding.loginUsuarioTil.error = getString(R.string.generico_vazio_erro, getString(R.string.pre_login_usuario_label))
                 achouProblema = true
             } else {
@@ -136,7 +136,7 @@ class PreLoginFragment : GenericFragment() {
 
             if(!achouProblema){
                 showLoading(true)
-                viewModel.doLogin(email, senha)
+                viewModel.doLogin(login, senha)
             }
         }
     }
@@ -185,7 +185,7 @@ class PreLoginFragment : GenericFragment() {
         if(activity is PublicActivity){
             var usuario = Usuario()
             usuario.id = Integer(obterPreferenciaInt(requireContext(), USUARIO_ID))
-            usuario.email = obterPreferencia(requireContext(), USUARIO_EMAIL)
+            usuario.login = obterPreferencia(requireContext(), USUARIO_LOGIN)
             usuario.nomeExibicao = obterPreferencia(requireContext(), USUARIO_NOME)
             usuario.senha = obterPreferencia(requireContext(), USUARIO_SENHA)
 

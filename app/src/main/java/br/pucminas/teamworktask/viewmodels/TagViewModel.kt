@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.pucminas.teamworktask.models.Tag
 import br.pucminas.teamworktask.repositories.Repository
+import br.pucminas.teamworktask.request.TagRequest
 import br.pucminas.teamworktask.response.*
 import br.pucminas.teamworktask.utils.ViewModelUtils
 import retrofit2.Call
@@ -17,17 +18,19 @@ class TagViewModel constructor(private val repository: Repository)  : ViewModel(
     val genericResponse = MutableLiveData<GenericResponse>()
     val errorMessage = MutableLiveData<String>()
 
-    fun criarProjeto(tag: Tag) {
-        executeService(repository.criarTag(tag))
+    fun criarTag(tagRequest: TagRequest) {
+        executeService(repository.criarTag(tagRequest))
+    }
+
+    fun editarTag(tagRequest: TagRequest) {
+        executeGenericervice(repository.editarTag(tagRequest))
     }
 
     fun obterTagsPorProjeto(projetoId: Int) {
         executeListService(repository.obterTagsPorProjeto(projetoId))
     }
 
-    fun editarTag(tag: Tag) {
-        executeGenericervice(repository.editarTag(tag))
-    }
+
 
     private fun executeService(response: Call<TagResponse>){
         response.enqueue(object : Callback<TagResponse> {

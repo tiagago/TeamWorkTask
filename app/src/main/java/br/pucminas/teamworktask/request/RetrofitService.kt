@@ -13,38 +13,40 @@ import retrofit2.http.*
 interface RetrofitService {
     // Chamadas do usuário.
     @GET("/api/usuario/doLogin/")
-    fun doLogin(@Query(value="email", encoded=true) email: String, @Query(value="senha", encoded=true) senha: String): Call<UsuarioResponse>
+    fun doLogin(@Query(value="login", encoded=true) login: String, @Query(value="senha", encoded=true) senha: String): Call<UsuarioResponse>
 
-    @GET("/api/usuario/obterPorID/{id}")
-    fun obterUsuarioComProjetos(@Path("id") id: Int): Call<UsuarioResponse>
+    @GET("/api/usuario/obterPorID/")
+    fun obterUsuarioComProjetos(@Query("idUsuario") id: Int): Call<UsuarioResponse>
 
     @POST("/api/usuario/")
-    fun criarUsuario(@Body usuario: Usuario): Call<UsuarioResponse>
-
+    fun criarUsuario(@Body genericRequest: GenericRequest): Call<UsuarioResponse>
 
     // Chamadas do projeto.
     @POST("/api/projeto/")
-    fun criarProjeto(@Body projeto: Projeto): Call<ProjetoResponse>
+    fun criarProjeto(@Body projetoRequest: ProjetoRequest): Call<ProjetoResponse>
 
-    @GET("/api/projeto/obterMeusProjetos/{id}")
-    fun oberMeusProjetos(@Path("id") id: Int): Call<ProjetosResponse>
+    @PUT("/api/projeto/")
+    fun editarProjeto(@Body projetoRequest: ProjetoRequest): Call<ProjetoResponse>
 
-    @GET("/api/projeto/obterProjetoComParticipantes/{idProjeto}")
-    fun obterProjetoComParticipantes(@Path("idProjeto") idProjeto: Int): Call<ProjetoResponse>
+    @GET("/api/projeto/obterMeusProjetos/")
+    fun oberMeusProjetos(@Query("idUsuario") id: Int): Call<ProjetosResponse>
+
+    @GET("/api/projeto/obterProjetoComParticipantes/")
+    fun obterProjetoComParticipantes(@Query("idProjeto") idProjeto: Int): Call<ProjetoResponse>
 
     // Chamadas para as Tags
     @POST("/api/tag/")
-    fun criarTag(@Body tag: Tag): Call<TagResponse>
+    fun criarTag(@Body tagRequest: TagRequest): Call<TagResponse>
 
     @PUT("/api/tag/")
-    fun editarTag(@Body tag: Tag): Call<GenericResponse>
+    fun editarTag(@Body tagRequest: TagRequest): Call<GenericResponse>
 
     @GET("/api/tag/obterTagsPorProjeto/")
-    fun obterTagsPorProjeto(@Query("projetoId") id: Int): Call<TagsResponse>
+    fun obterTagsPorProjeto(@Query("idProjeto") id: Int): Call<TagsResponse>
 
     // Chamadas associacao usuario no projeto.
     @DELETE("/api/projetoUsuario/")
-    fun desassociarUsuarioProjeto(@Query("idProjeto") idProjeto: Int, @Query("idUsuario") idUsuario: Int): Call<GenericResponse>
+    fun desassociarUsuarioProjeto(@Body projetoRequest: ProjetoRequest): Call<GenericResponse>
 
     companion object {
 

@@ -3,6 +3,7 @@ package br.pucminas.teamworktask.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.pucminas.teamworktask.repositories.Repository
+import br.pucminas.teamworktask.request.ProjetoRequest
 import br.pucminas.teamworktask.response.GenericResponse
 import br.pucminas.teamworktask.utils.ViewModelUtils
 import retrofit2.Call
@@ -14,8 +15,8 @@ class ProjetoUsuarioViewModel constructor(private val repository: Repository)  :
     val genericResponse = MutableLiveData<GenericResponse>()
     val errorMessage = MutableLiveData<String>()
 
-    fun desassociarUsuarioProjeto(idProjeto: Int, idUsuario: Int) {
-        executeService(repository.desassociarUsuarioProjeto(idProjeto, idUsuario))
+    fun desassociarUsuarioProjeto(projetoRequest: ProjetoRequest) {
+        executeService(repository.desassociarUsuarioProjeto(projetoRequest))
     }
 
     private fun executeService(response: Call<GenericResponse>){

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.pucminas.teamworktask.models.Usuario
 import br.pucminas.teamworktask.repositories.Repository
+import br.pucminas.teamworktask.request.GenericRequest
 import br.pucminas.teamworktask.response.UsuarioResponse
 import br.pucminas.teamworktask.utils.ViewModelUtils
 import retrofit2.Call
@@ -15,12 +16,12 @@ class UsuarioViewModel constructor(private val repository: Repository)  : ViewMo
     val usuarioResponse = MutableLiveData<UsuarioResponse>()
     val errorMessage = MutableLiveData<String>()
 
-    fun doLogin(email: String, senha: String) {
-        executeService(repository.doLogin(email, senha))
+    fun doLogin(login: String, senha: String) {
+        executeService(repository.doLogin(login, senha))
     }
 
-    fun criarUsuario(usuario: Usuario) {
-        executeService(repository.criarUsuario(usuario))
+    fun criarUsuario(genericRequest: GenericRequest) {
+        executeService(repository.criarUsuario(genericRequest))
     }
 
     fun obterUsuarioComProjetos(idUsuario: Int) {

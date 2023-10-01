@@ -14,6 +14,7 @@ import br.pucminas.teamworktask.databinding.FragmentProjetoCadastroBinding
 import br.pucminas.teamworktask.models.Projeto
 import br.pucminas.teamworktask.models.Usuario
 import br.pucminas.teamworktask.repositories.Repository
+import br.pucminas.teamworktask.request.ProjetoRequest
 import br.pucminas.teamworktask.request.RetrofitService
 import br.pucminas.teamworktask.ui.GenericFragment
 import br.pucminas.teamworktask.utils.FormatterUtils
@@ -29,7 +30,7 @@ import java.util.*
  * Use the [ProjetoCadastroFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ProjetoCadastroFragment : GenericFragment() {
+class ProjetoCadastroFragment(var editarProjeto: Projeto? = null) : GenericFragment() {
     private var _binding: FragmentProjetoCadastroBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -42,8 +43,14 @@ class ProjetoCadastroFragment : GenericFragment() {
         // Inflate the layout for this fragment
         _binding = FragmentProjetoCadastroBinding.inflate(inflater, container, false)
 
-        projeto.dataCriacao = Date()
-        projeto.codigo = GeradorCodigo.geraCodigoProjeto()
+        if(editarProjeto != null) {
+            projeto.dataCriacao = editarProjeto!!.dataCriacao
+            projeto.codigo = editarProjeto!!.codigo
+        } else {
+            projeto.dataCriacao = Date()
+            projeto.codigo = GeradorCodigo.geraCodigoProjeto()
+        }
+
         projeto.usuario = obterUsuarioPreference()
 
         configurarViewModels()
@@ -54,9 +61,16 @@ class ProjetoCadastroFragment : GenericFragment() {
     }
 
     fun configurarTextViews(){
-        binding.projetoCadastroCriadoEmTv.text = FormatterUtils.formatDateToString(projeto.dataCriacao)
-        binding.projetoCadastroCriadoPorTv.text = projeto.usuario.nomeExibicao
-        binding.projetoCadastroCodigoTv.text = projeto.codigo
+        binding.apply {
+            if(editarProjeto != null){
+                projetoCadastroNomeTie.setText(editarProjeto!!.nome)
+                projetoCadastroDescricaoTie.setText(editarProjeto!!.descricao)
+            }
+
+            projetoCadastroCriadoEmTv.text = FormatterUtils.formatDateToString(projeto.dataCriacao)
+            projetoCadastroCriadoPorTv.text = projeto.usuario.nomeExibicao
+            projetoCadastroCodigoTv.text = projeto.codigo
+        }
     }
 
     fun prepararListeners(){
@@ -94,7 +108,11 @@ class ProjetoCadastroFragment : GenericFragment() {
                 projeto.nome = nome
                 projeto.descricao = descricao
 
-                viewModel.criarProjeto(projeto)
+                var projetoRequest = ProjetoRequest()
+                projetoRequest.usuario = obterUsuarioPreference()
+                projetoRequest.projeto = projeto
+                showLoading(true)
+                viewModel.criarProjeto(projetoRequest)
             }
         }
     }
@@ -106,6 +124,7 @@ class ProjetoCadastroFragment : GenericFragment() {
             )
 
         viewModel.projetoResponse.observe(viewLifecycleOwner) {
+            showLoading(false)
             if(it?.projeto != null && it.success){
                 onBackPressed(TopAlertMessageObject(TopAlertType.SUCCESS, getString(R.string.projeto_cadastro_sucesso)))
             } else {
@@ -114,6 +133,7 @@ class ProjetoCadastroFragment : GenericFragment() {
         }
 
         viewModel.errorMessage.observe(viewLifecycleOwner) {
+            showLoading(false)
             showErrorGenericServer()
         }
     }

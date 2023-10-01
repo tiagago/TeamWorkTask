@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import br.pucminas.teamworktask.models.Projeto
 import br.pucminas.teamworktask.repositories.Repository
+import br.pucminas.teamworktask.request.ProjetoRequest
 import br.pucminas.teamworktask.response.ProjetoResponse
 import br.pucminas.teamworktask.response.ProjetosResponse
 import br.pucminas.teamworktask.utils.ViewModelUtils
@@ -17,8 +18,12 @@ class ProjetoViewModel constructor(private val repository: Repository)  : ViewMo
     val projetosResponse = MutableLiveData<ProjetosResponse>()
     val errorMessage = MutableLiveData<String>()
 
-    fun criarProjeto(projeto: Projeto) {
-        executeService(repository.criarProjeto(projeto))
+    fun criarProjeto(projetoRequest: ProjetoRequest) {
+        executeService(repository.criarProjeto(projetoRequest))
+    }
+
+    fun editarProjeto(projetoRequest: ProjetoRequest) {
+        executeService(repository.editarProjeto(projetoRequest))
     }
 
     fun oberMeusProjetos(idUsuario: Int) {

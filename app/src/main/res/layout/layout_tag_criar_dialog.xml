@@ -3,10 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="@dimen/margem_padrao"
-    android:background="@drawable/card_seletor_bg"
+    android:layout_margin="@dimen/margem_padrao"
+    android:background="@drawable/card_dialog_bg"
+    android:elevation="@dimen/margem_pequena"
     >
 
     <TextView
@@ -14,8 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/genericTittle"
-        android:text="@string/projeto_associar_titulo_label"
-        android:layout_marginStart="@dimen/margem_padrao"
+        android:text="@string/tag_criar_titulo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -27,7 +28,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margem_padrao"
-        android:hint="@string/projeto_associar_codigo_projeto_label"
+        android:hint="@string/tags_nome_label"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,19 +47,24 @@
         android:id="@+id/tag_cor_til"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_marginTop="@dimen/margem_padrao"
+        style="@style/textInputLayoutSelectorDefault"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tag_criar_tv">
+        app:layout_constraintTop_toBottomOf="@id/tag_nome_til">
 
         <AutoCompleteTextView
+            android:id="@+id/tag_cor_actv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
+            android:hint="@string/tags_cor_label"
+            style="@style/textInputEditTextDefault"
+
             />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/tag_salvar_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,8 +72,23 @@
         android:paddingStart="@dimen/margem_dobro"
         android:paddingEnd="@dimen/margem_dobro"
         android:backgroundTint="@color/primary_color"
-        android:text="@string/projeto_associar_botao_label"
+        android:text="@string/generico_salvar_label"
+        android:elevation="@dimen/margem_pequena"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tag_cor_til" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/tag_cancelar_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margem_padrao"
+        android:paddingStart="@dimen/margem_dobro"
+        android:paddingEnd="@dimen/margem_dobro"
+        android:backgroundTint="@color/primary_color"
+        android:text="@string/generico_cancelar_label"
+        android:elevation="@dimen/margem_pequena"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tag_salvar_bt" />
 </androidx.constraintlayout.widget.ConstraintLayout>

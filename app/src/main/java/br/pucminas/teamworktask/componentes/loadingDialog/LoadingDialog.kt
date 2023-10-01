@@ -35,6 +35,4 @@ class LoadingDialog: DialogFragment() {
             isCancelable = false
         }
     }
-
-
 }

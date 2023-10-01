@@ -117,8 +117,8 @@ open class GenericActivity : AppCompatActivity() {
                 SharedPreferenceUtils.USUARIO_ID
             )
         )
-        usuario.email =
-            SharedPreferenceUtils.obterPreferencia(this, SharedPreferenceUtils.USUARIO_EMAIL)
+        usuario.login =
+            SharedPreferenceUtils.obterPreferencia(this, SharedPreferenceUtils.USUARIO_LOGIN)
         usuario.senha =
             SharedPreferenceUtils.obterPreferencia(this, SharedPreferenceUtils.USUARIO_SENHA)
         usuario.nomeExibicao =

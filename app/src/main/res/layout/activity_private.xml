@@ -36,7 +36,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="@color/white_oppacite_70"
+        android:background="@color/white_oppacite_70"
         android:visibility="gone"
         tools:visibility="visible"
         />

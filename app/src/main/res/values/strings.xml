@@ -15,7 +15,7 @@
     <!-- Cadastro usuario -->
     <string name="usuario_cadastro_titulo">Cadastrar Usuário</string>
     <string name="usuario_cadastro_nome_label">Nome Exibição</string>
-    <string name="usuario_cadastro_email_label">E-mail</string>
+    <string name="usuario_cadastro_login_label">Login</string>
     <string name="usuario_cadastro_senha_label">Senha</string>
     <string name="usuario_cadastro_repetir_senha_label">Repetir Senha</string>
     <string name="usuario_cadastro_sucesso">Usuário cadastrado com sucesso!</string>
@@ -71,8 +71,13 @@
     <string name="tags_title">@string/bottom_navegator_tags</string>
     <string name="tags_lista_title">Tags do Projeto</string>
     <string name="tags_novo_titulo">Nova Tag</string>
+    <string name="tags_nome_label">Nome</string>
+    <string name="tags_cor_label">Cor</string>
     <string name="tags_lista_vazia">O Projeto não possui ainda Tags. Para adicionar clicar no botão "+" e selecionar Nova Tag</string>
-
+    <string name="tag_criar_titulo">Criar Nova Tag</string>
+    <string name="tag_editar_titulo">Editar uma Tag</string>
+    <string name="tag_salvar_sucesso">Tag cadastrado com sucesso!</string>
+    <string name="tag_editar_sucesso">Tag editada com sucesso!</string>
 
     <!-- Equipe -->
     <string name="equipe_title">@string/bottom_navegator_equipe</string>

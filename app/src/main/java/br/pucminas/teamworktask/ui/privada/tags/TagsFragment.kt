@@ -20,14 +20,13 @@ import br.pucminas.teamworktask.viewmodels.TagViewModel
  * Use the [TagsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class TagsFragment : GenericFragment(), TagItemListOnClickInterface{
+class TagsFragment : GenericFragment(), TagItemListOnClickInterface, TagDialogInterface{
     private var _binding: FragmentTagsBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
     private val retrofitService = RetrofitService.getInstance()
     lateinit var tagViewModel: TagViewModel
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -67,11 +66,11 @@ class TagsFragment : GenericFragment(), TagItemListOnClickInterface{
     }
 
     private fun chamarServicos() {
-        showLoading(true)
         val projetoSelecionadoId = SharedPreferenceUtils.obterPreferenciaInt(
             requireContext(),
             SharedPreferenceUtils.PROJETO_ID
         )
+        showLoading(true)
         tagViewModel.obterTagsPorProjeto(projetoSelecionadoId)
     }
 
@@ -92,17 +91,17 @@ class TagsFragment : GenericFragment(), TagItemListOnClickInterface{
         binding.tabListaVaziaGrupo.visibility = if(isShow) View.VISIBLE else View.GONE
     }
 
-    override fun onClickEditarTag(tag: Tag) {
-        TODO("Not yet implemented")
-    }
-
     fun configurarFloatingButton() {
+        val projetoSelecionadoId = SharedPreferenceUtils.obterPreferenciaInt(
+            requireContext(),
+            SharedPreferenceUtils.PROJETO_ID
+        )
         binding.apply {
             tagMainFab.setOnClickListener {
                 onAddButtonClicked()
             }
             tagNovoFab.setOnClickListener {
-                //enviarEmail()
+                TagCriarDialog(this@TagsFragment, obterUsuarioPreference(),projetoSelecionadoId).show(parentFragmentManager, "")
             }
         }
     }
@@ -124,6 +123,24 @@ class TagsFragment : GenericFragment(), TagItemListOnClickInterface{
             tagNovoFab.startAnimation(if (clicked) toBottom else fromBottom)
             tagMainFab.startAnimation(if (clicked) rotateClose else rotateOpen)
         }
+    }
+
+    // IMPLEMENT INTERFACE METHODS CALLBACK
+    override fun onClickEditarTag(tag: Tag) {
+        val projetoSelecionadoId = SharedPreferenceUtils.obterPreferenciaInt(
+            requireContext(),
+            SharedPreferenceUtils.PROJETO_ID
+        )
+        TagCriarDialog(this@TagsFragment, obterUsuarioPreference(), projetoSelecionadoId, tag).show(parentFragmentManager, "")
+    }
+
+    override fun showMensagemSucesso(mensagem: String) {
+        showSuccessMessage(mensagem)
+        chamarServicos()
+    }
+
+    override fun showMensagemErro(mensagem: String) {
+        showErrorMessage(mensagem)
     }
 
 }
