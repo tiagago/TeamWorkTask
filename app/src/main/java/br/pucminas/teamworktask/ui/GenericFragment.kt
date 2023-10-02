@@ -9,8 +9,8 @@ import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertType
 import br.pucminas.teamworktask.models.Usuario
 import br.pucminas.teamworktask.response.GenericResponse
 
-open class GenericFragment : Fragment() {
-    fun retornoErroServico(response: GenericResponse?){
+open class GenericFragment : Fragment(), BaseFragmentCallback {
+    override fun retornoErroServico(response: GenericResponse?){
         if(response != null && response.message.isNotBlank()){
             showErrorMessage(response.message)
         } else {
@@ -18,7 +18,7 @@ open class GenericFragment : Fragment() {
         }
     }
 
-    fun retornoErroServicoReturn(response: GenericResponse?) : String{
+    override fun retornoErroServicoReturn(response: GenericResponse?) : String{
         return if(response != null && response.message.isNotBlank()){
             response.message
         } else {
@@ -26,20 +26,20 @@ open class GenericFragment : Fragment() {
         }
     }
 
-    fun showErrorGenericServer(){
+    override fun showErrorGenericServer(){
         showErrorMessage(getString(R.string.generico_erro_servico))
     }
 
-    fun showErrorMessage(message: String, titulo: String? = null){
-        showAlertMessage(TopAlertMessageObject(TopAlertType.ERROR, message, titulo))
+    override fun showErrorMessage(message: String){
+        showAlertMessage(TopAlertMessageObject(TopAlertType.ERROR, message))
     }
 
-    fun showWarningMessage(message: String, titulo: String? = null){
-        showAlertMessage(TopAlertMessageObject(TopAlertType.WARNING, message, titulo))
+    override fun showWarningMessage(message: String){
+        showAlertMessage(TopAlertMessageObject(TopAlertType.WARNING, message))
     }
 
-    fun showSuccessMessage(message: String, titulo: String? = null){
-        showAlertMessage(TopAlertMessageObject(TopAlertType.SUCCESS, message, titulo))
+    override fun showSuccessMessage(message: String){
+        showAlertMessage(TopAlertMessageObject(TopAlertType.SUCCESS, message))
     }
 
     fun showAlertMessage(topAlertMessageObject: TopAlertMessageObject){
@@ -70,7 +70,7 @@ open class GenericFragment : Fragment() {
         }
     }
 
-    fun showLoading(isLoading: Boolean) {
+    override fun showLoading(isLoading: Boolean) {
         if (activity is GenericActivity) {
             (activity as GenericActivity).showLoading(isLoading)
         }

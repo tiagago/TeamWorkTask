@@ -46,4 +46,5 @@ class Repository constructor(private val retrofitService: RetrofitService) {
 
     // Chamadas associacao usuario no projeto.
     fun desassociarUsuarioProjeto(projetoRequest: ProjetoRequest) = retrofitService.desassociarUsuarioProjeto(projetoRequest)
+    fun associarUsuarioProjeto(projetoRequest: ProjetoRequest) = retrofitService.associarUsuarioProjeto(projetoRequest)
 }

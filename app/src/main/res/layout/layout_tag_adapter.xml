@@ -38,11 +38,14 @@
         app:layout_constraintTop_toTopOf="@id/tag_lista_iv"
         tools:text="Teste nome Projeto" />
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/secondary_color"
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/equipe_participante_separador"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margem_pequena"
+        app:dividerThickness="0.5dp"
+        app:dividerColor="@color/secondary_color"
         app:layout_constraintStart_toStartOf="@id/tag_lista_iv"
         app:layout_constraintTop_toBottomOf="@id/tag_lista_iv"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

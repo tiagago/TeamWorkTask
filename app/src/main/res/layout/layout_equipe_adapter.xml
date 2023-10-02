@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/equipe_participante_iv"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:src="@drawable/ic_user"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,20 +29,21 @@
 
     <ImageView
         android:id="@+id/equipe_participante_delete_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:src="@drawable/ic_delete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/equipe_participante_iv"
         app:layout_constraintTop_toTopOf="@id/equipe_participante_iv"
-        app:tint="@color/secondary_color_dark"
-        />
+        app:tint="@color/secondary_color_dark"/>
 
-    <View
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/equipe_participante_separador"
         android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/secondary_color"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margem_pequena"
+        app:dividerThickness="0.5dp"
+        app:dividerColor="@color/secondary_color"
         app:layout_constraintStart_toStartOf="@id/equipe_participante_iv"
         app:layout_constraintTop_toBottomOf="@id/equipe_participante_iv"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

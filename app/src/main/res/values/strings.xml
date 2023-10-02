@@ -64,7 +64,11 @@
     <!-- Projeto associar -->
     <string name="projeto_associar_titulo_label">Junte-se a um projeto</string>
     <string name="projeto_associar_codigo_projeto_label">Código do projeto</string>
-    <string name="projeto_associar_botao_label">Juntar-se</string>
+    <string name="projeto_associar_botao_pesquisar_label">Pesquisar</string>
+    <string name="projeto_associar_botao_juntar_label">Juntar-se</string>
+    <string name="projeto_associar_ja_associado_warning">Você já participa desse projeto!</string>
+    <string name="projeto_associar_projeto_invalido_warning">Projeto não encontrado!</string>
+    <string name="projeto_associar_sucesso">Você foi associado ao projeto com sucesso!</string>
 
     <!-- Tarefas -->
     <string name="tarefas_title">@string/bottom_navegator_tarefa</string>

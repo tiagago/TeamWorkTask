@@ -34,7 +34,8 @@ interface RetrofitService {
     @GET("/api/projeto/obterProjetoComParticipantes/")
     fun obterProjetoComParticipantes(@Query("idProjeto") idProjeto: Int): Call<ProjetoResponse>
 
-    fun obterProjetoPorCodigo(@Query("codigo") codigo: String): Call<ProjetoResponse>
+    @GET("/api/projeto/obterProjetoPorCodigo/")
+    fun obterProjetoPorCodigo(@Query("codigo") codigo: String): Call<ProjetosResponse>
 
     // Chamadas para as Tags
     @POST("/api/tag/")
@@ -49,6 +50,9 @@ interface RetrofitService {
     // Chamadas associacao usuario no projeto.
     @DELETE("/api/projetoUsuario/")
     fun desassociarUsuarioProjeto(@Body projetoRequest: ProjetoRequest): Call<GenericResponse>
+
+    @POST("/api/projetoUsuario/")
+    fun associarUsuarioProjeto(@Body projetoRequest: ProjetoRequest): Call<GenericResponse>
 
     companion object {
 

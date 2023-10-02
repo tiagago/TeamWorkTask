@@ -8,4 +8,8 @@ class ProjetoUsuarioViewModel constructor(private val repository: Repository)  :
     fun desassociarUsuarioProjeto(projetoRequest: ProjetoRequest) {
         executeGenericService(repository.desassociarUsuarioProjeto(projetoRequest))
     }
+
+    fun associarUsuarioProjeto(projetoRequest: ProjetoRequest) {
+        executeGenericService(repository.associarUsuarioProjeto(projetoRequest))
+    }
 }

@@ -84,7 +84,7 @@ class DashboardFragment : PrivateFragment(), ProjetoSeletorOnClickInterface {
             changeFragment(ProjetoCadastroFragment())
         }
         binding.dashboardParticiparFab.setOnClickListener {
-            ProjetoAssociarDialog().show(parentFragmentManager, "")
+            ProjetoAssociarDialog(projetos, obterUsuarioPreference(), this).show(parentFragmentManager, "")
         }
     }
 

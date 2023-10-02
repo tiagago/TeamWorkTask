@@ -30,6 +30,10 @@ class ProjetoViewModel constructor(private val repository: Repository) : Generic
         executeService(repository.obterProjetoComParticipantes(idProjeto))
     }
 
+    fun obterProjetoPorCodigo(codigo: String) {
+        executeListService(repository.obterProjetoPorCodigo(codigo))
+    }
+
     private fun executeService(response: Call<ProjetoResponse>){
         response.enqueue(object : Callback<ProjetoResponse> {
             override fun onResponse(call: Call<ProjetoResponse>, response: Response<ProjetoResponse>) {
