@@ -22,6 +22,7 @@ import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.PROJETO_ID
 import br.pucminas.teamworktask.viewmodels.MainViewModelFactory
 import br.pucminas.teamworktask.viewmodels.ProjetoUsuarioViewModel
 import br.pucminas.teamworktask.viewmodels.ProjetoViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
  * A simple [Fragment] subclass.
@@ -154,13 +155,7 @@ class EquipeFragment : PrivateFragment(), EquipeParticipanteOnClickInterface {
             PROJETO_ID
         )
 
-        var projetoRequest = ProjetoRequest()
-        var projeto = Projeto()
-        projeto.id = Integer(projetoSelecionadoId)
-        projetoRequest.usuario = usuario
-        projetoRequest.projeto = projeto
-
-        projetoUsuarioViewModel.desassociarUsuarioProjeto(projetoRequest)
+        projetoUsuarioViewModel.desassociarUsuarioProjeto(projetoSelecionadoId, usuario.id.toInt())
     }
 
     fun configurarFloatingButton() {
@@ -218,7 +213,7 @@ class EquipeFragment : PrivateFragment(), EquipeParticipanteOnClickInterface {
 
     override fun onClickExcluirParticipante(usuario: Usuario) {
         // Create the object of AlertDialog Builder class
-        val builder = AlertDialog.Builder(requireContext())
+        val builder = MaterialAlertDialogBuilder(requireContext(), R.style.ThemeOverlay_App_MaterialAlertDialog)
 
         builder.apply {
             // Set the message show for the Alert time

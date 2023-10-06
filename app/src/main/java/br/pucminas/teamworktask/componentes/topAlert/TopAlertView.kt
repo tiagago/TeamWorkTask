@@ -1,25 +1,21 @@
 package br.pucminas.teamworktask.componentes.topAlert
 
 
-import android.annotation.SuppressLint
 import android.app.Dialog
-import android.content.Context
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
-import android.os.Build.VERSION
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import br.pucminas.teamworktask.R
 import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertMessageObject
 import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertType
 import br.pucminas.teamworktask.databinding.FragmentTopAlertViewBinding
-import java.util.*
+import java.util.Timer
+import java.util.TimerTask
 
 
 class TopAlertView : DialogFragment() {

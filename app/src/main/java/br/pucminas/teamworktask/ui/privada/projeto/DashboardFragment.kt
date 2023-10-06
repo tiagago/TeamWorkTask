@@ -28,7 +28,7 @@ import br.pucminas.teamworktask.viewmodels.UsuarioViewModel
  * Use the [DashboardFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class DashboardFragment : PrivateFragment(), ProjetoSeletorOnClickInterface {
+class DashboardFragment : PrivateFragment(), ProjetoSeletorOnClickInterface, ProjetoAssociarCallback {
     private var _binding: FragmentDashboardBinding? = null
 
     // This property is only valid between onCreateView and
@@ -84,7 +84,7 @@ class DashboardFragment : PrivateFragment(), ProjetoSeletorOnClickInterface {
             changeFragment(ProjetoCadastroFragment())
         }
         binding.dashboardParticiparFab.setOnClickListener {
-            ProjetoAssociarDialog(projetos, obterUsuarioPreference(), this).show(parentFragmentManager, "")
+            ProjetoAssociarDialog(projetos, obterUsuarioPreference(), this, this).show(parentFragmentManager, "")
         }
     }
 
@@ -207,6 +207,7 @@ class DashboardFragment : PrivateFragment(), ProjetoSeletorOnClickInterface {
             }
 
             selecaoProjeto()
+            showBottomNavigator(true)
         } else {
             binding.dashboardCard.projetoCard.visibility = View.GONE
             showBottomNavigator(false)
@@ -242,6 +243,10 @@ class DashboardFragment : PrivateFragment(), ProjetoSeletorOnClickInterface {
     override fun onClickProjeto(projeto: Projeto) {
         projetoSelecionado = projeto
         selecaoProjeto()
+    }
+
+    override fun onCloseDialog() {
+        chamarServicos()
     }
 
 }

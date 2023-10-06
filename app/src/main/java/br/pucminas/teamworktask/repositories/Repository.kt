@@ -45,6 +45,6 @@ class Repository constructor(private val retrofitService: RetrofitService) {
     fun obterTagsPorProjeto(projetoId: Int) = retrofitService.obterTagsPorProjeto(projetoId)
 
     // Chamadas associacao usuario no projeto.
-    fun desassociarUsuarioProjeto(projetoRequest: ProjetoRequest) = retrofitService.desassociarUsuarioProjeto(projetoRequest)
+    fun desassociarUsuarioProjeto(idProjeto: Int, idUsuario: Int) = retrofitService.desassociarUsuarioProjeto(idProjeto, idUsuario)
     fun associarUsuarioProjeto(projetoRequest: ProjetoRequest) = retrofitService.associarUsuarioProjeto(projetoRequest)
 }

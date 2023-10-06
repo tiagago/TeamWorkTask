@@ -49,7 +49,7 @@ interface RetrofitService {
 
     // Chamadas associacao usuario no projeto.
     @DELETE("/api/projetoUsuario/")
-    fun desassociarUsuarioProjeto(@Body projetoRequest: ProjetoRequest): Call<GenericResponse>
+    fun desassociarUsuarioProjeto(@Query("idProjeto") idProjeto: Int, @Query("idUsuario") idUsuario: Int): Call<GenericResponse>
 
     @POST("/api/projetoUsuario/")
     fun associarUsuarioProjeto(@Body projetoRequest: ProjetoRequest): Call<GenericResponse>

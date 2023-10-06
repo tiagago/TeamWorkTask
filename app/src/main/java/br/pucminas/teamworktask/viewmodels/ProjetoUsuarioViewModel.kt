@@ -5,8 +5,8 @@ import br.pucminas.teamworktask.request.ProjetoRequest
 
 
 class ProjetoUsuarioViewModel constructor(private val repository: Repository)  : GenericViewModel() {
-    fun desassociarUsuarioProjeto(projetoRequest: ProjetoRequest) {
-        executeGenericService(repository.desassociarUsuarioProjeto(projetoRequest))
+    fun desassociarUsuarioProjeto(idProjeto: Int, idUsuario: Int) {
+        executeGenericService(repository.desassociarUsuarioProjeto(idProjeto, idUsuario))
     }
 
     fun associarUsuarioProjeto(projetoRequest: ProjetoRequest) {

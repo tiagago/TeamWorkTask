@@ -32,7 +32,8 @@ import com.budiyev.android.codescanner.DecodeCallback
 
 class ProjetoAssociarDialog(private val projetos: List<Projeto>,
                             private val usuario: Usuario,
-                            private val callback: BaseFragmentCallback) : DialogFragment() {
+                            private val callback: BaseFragmentCallback,
+                            private val dialogCallback: ProjetoAssociarCallback) : DialogFragment() {
     private var _binding: LayoutProjetoAssociarDialogBinding? = null
     // This property is only valid between onCreateDialog and
     // onDestroyView.
@@ -96,8 +97,6 @@ class ProjetoAssociarDialog(private val projetos: List<Projeto>,
     }
 
     fun showObterGrupo(isToShow: Boolean){
-        "projeto_associar_titulo_tv,projeto_associar_codigo_til,projeto_associar_qrcode_iv,projeto_associar_pesquisar_bt"
-
         binding.apply {
             projetoAssociarTituloTv.visibility = if(isToShow) View.VISIBLE else View.GONE
             projetoAssociarCodigoTil.visibility = if(isToShow) View.VISIBLE else View.GONE
@@ -171,6 +170,7 @@ class ProjetoAssociarDialog(private val projetos: List<Projeto>,
             genericResponse.observe(viewLifecycleOwner) {
                 if (it != null && it.success) {
                     callback.showSuccessMessage(getString(R.string.projeto_associar_sucesso))
+                    dialogCallback.onCloseDialog()
                     dismiss()
                 } else {
                     callback.showErrorMessage(callback.retornoErroServicoReturn(it))
