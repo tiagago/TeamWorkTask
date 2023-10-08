@@ -3,13 +3,11 @@ package br.pucminas.teamworktask.ui.privada.tags
 import android.app.Activity
 import android.content.Context
 import android.graphics.Color
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Filter
 import br.pucminas.teamworktask.databinding.LayoutTagColorAdapterBinding
-import br.pucminas.teamworktask.models.CorEnum
+import br.pucminas.teamworktask.models.enums.CorEnum
 
 class TagCorAdapter(private val mContext: Context,
                     private val mLayoutResourceId: Int, private val corEnumList: List<CorEnum>): ArrayAdapter<CorEnum>(mContext, mLayoutResourceId, corEnumList){

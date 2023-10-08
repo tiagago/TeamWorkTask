@@ -6,6 +6,7 @@
 
 
     <dimen name="margem_padrao">16dp</dimen>
+    <dimen name="margem_padrao_meio">24dp</dimen>
     <dimen name="elevacao_padrao">8dp</dimen>
     <dimen name="margem_pequena">8dp</dimen>
     <dimen name="margem_dobro">32dp</dimen>

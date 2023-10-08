@@ -1,4 +1,4 @@
-package br.pucminas.teamworktask.models
+package br.pucminas.teamworktask.models.enums
 
 enum class CorEnum(var hexaCor: String, var nomeCor: String) {
     VERDE_CLARO("#BAF3DB", "Verde claro"),

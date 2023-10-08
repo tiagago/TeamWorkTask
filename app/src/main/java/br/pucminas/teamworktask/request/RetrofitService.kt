@@ -11,7 +11,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 interface RetrofitService {
-    // Chamadas do usuário.
+    /*****************************
+     **** Chamadas do Usuário ****
+     *****************************/
     @GET("/api/usuario/doLogin/")
     fun doLogin(@Query(value="login", encoded=true) login: String, @Query(value="senha", encoded=true) senha: String): Call<UsuarioResponse>
 
@@ -21,7 +23,9 @@ interface RetrofitService {
     @POST("/api/usuario/")
     fun criarUsuario(@Body genericRequest: GenericRequest): Call<UsuarioResponse>
 
-    // Chamadas do projeto.
+    /*****************************
+     **** Chamadas do Projeto ****
+     *****************************/
     @POST("/api/projeto/")
     fun criarProjeto(@Body projetoRequest: ProjetoRequest): Call<ProjetoResponse>
 
@@ -37,7 +41,9 @@ interface RetrofitService {
     @GET("/api/projeto/obterProjetoPorCodigo/")
     fun obterProjetoPorCodigo(@Query("codigo") codigo: String): Call<ProjetosResponse>
 
-    // Chamadas para as Tags
+    /*******************************
+     **** Chamadas para as Tags ****
+     *******************************/
     @POST("/api/tag/")
     fun criarTag(@Body tagRequest: TagRequest): Call<TagResponse>
 
@@ -47,7 +53,25 @@ interface RetrofitService {
     @GET("/api/tag/obterTagsPorProjeto/")
     fun obterTagsPorProjeto(@Query("idProjeto") id: Int): Call<TagsResponse>
 
-    // Chamadas associacao usuario no projeto.
+    /**********************************
+     **** Chamadas para as Tarefas ****
+     **********************************/
+
+    @POST("/api/tarefa/")
+    fun criarTarefa(@Body tarefaRequest: TarefaRequest): Call<TarefaResponse>
+
+    @PUT("/api/tarefa/")
+    fun editarTarefa(@Body tarefaRequest: TarefaRequest): Call<GenericResponse>
+
+    @DELETE("/api/tarefa/")
+    fun deletarTarefa(@Query("id") tarefaId: Int): Call<GenericResponse>
+
+    @GET("/api/tarefa/obterTarefasPorProjetoStatus/")
+    fun obterTarefasPorProjetoStatus(@Query("idProjeto") id: Int): Call<TarefasResponse>
+
+    /************************************************
+     **** Chamadas associacao usuario no projeto ****
+     ************************************************/
     @DELETE("/api/projetoUsuario/")
     fun desassociarUsuarioProjeto(@Query("idProjeto") idProjeto: Int, @Query("idUsuario") idUsuario: Int): Call<GenericResponse>
 

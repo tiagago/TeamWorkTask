@@ -60,7 +60,6 @@
             android:inputType="none"
             android:hint="@string/tags_cor_label"
             style="@style/textInputEditTextDefault"
-
             />
     </com.google.android.material.textfield.TextInputLayout>
 

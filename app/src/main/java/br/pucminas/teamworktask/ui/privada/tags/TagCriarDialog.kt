@@ -10,10 +10,8 @@ import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import br.pucminas.teamworktask.R
-import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertMessageObject
-import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertType
 import br.pucminas.teamworktask.databinding.LayoutTagCriarDialogBinding
-import br.pucminas.teamworktask.models.CorEnum
+import br.pucminas.teamworktask.models.enums.CorEnum
 import br.pucminas.teamworktask.models.Projeto
 import br.pucminas.teamworktask.models.Tag
 import br.pucminas.teamworktask.models.Usuario

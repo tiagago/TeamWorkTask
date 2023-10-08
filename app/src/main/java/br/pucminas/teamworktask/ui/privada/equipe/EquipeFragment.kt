@@ -3,22 +3,18 @@ package br.pucminas.teamworktask.ui.privada.equipe
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import br.pucminas.teamworktask.R
 import br.pucminas.teamworktask.databinding.FragmentEquipeBinding
 import br.pucminas.teamworktask.models.Projeto
 import br.pucminas.teamworktask.models.Usuario
 import br.pucminas.teamworktask.repositories.Repository
-import br.pucminas.teamworktask.request.ProjetoRequest
 import br.pucminas.teamworktask.request.RetrofitService
 import br.pucminas.teamworktask.ui.privada.PrivateFragment
-import br.pucminas.teamworktask.utils.SharedPreferenceUtils
-import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.PROJETO_ID
 import br.pucminas.teamworktask.viewmodels.MainViewModelFactory
 import br.pucminas.teamworktask.viewmodels.ProjetoUsuarioViewModel
 import br.pucminas.teamworktask.viewmodels.ProjetoViewModel
@@ -141,21 +137,12 @@ class EquipeFragment : PrivateFragment(), EquipeParticipanteOnClickInterface {
 
     private fun chamarServicos() {
         showLoading(true)
-        val projetoSelecionadoId = SharedPreferenceUtils.obterPreferenciaInt(
-            requireContext(),
-            PROJETO_ID
-        )
-        projetoViewModel.obterProjetoComParticipantes(projetoSelecionadoId)
+        projetoViewModel.obterProjetoComParticipantes(obterProjetoSelecionado())
     }
 
     private fun chamarProjetoUsuarioServicos(usuario: Usuario) {
         showLoading(true)
-        val projetoSelecionadoId = SharedPreferenceUtils.obterPreferenciaInt(
-            requireContext(),
-            PROJETO_ID
-        )
-
-        projetoUsuarioViewModel.desassociarUsuarioProjeto(projetoSelecionadoId, usuario.id.toInt())
+        projetoUsuarioViewModel.desassociarUsuarioProjeto(obterProjetoSelecionado(), usuario.id.toInt())
     }
 
     fun configurarFloatingButton() {

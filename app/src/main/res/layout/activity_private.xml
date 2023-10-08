@@ -67,7 +67,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/white_oppacite_70"
-        android:padding="@dimen/margem_padrao"
         app:layout_constraintTop_toBottomOf="@id/privado_top_divider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/privado_bottom_divider"

@@ -5,4 +5,7 @@ class Tag {
     lateinit var nome : String
     lateinit var cor : String
     lateinit var projeto: Projeto
+    override fun toString(): String {
+        return nome
+    }
 }

@@ -1,23 +1,21 @@
 package br.pucminas.teamworktask.ui.privada.projeto
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import br.pucminas.teamworktask.R
 import br.pucminas.teamworktask.databinding.FragmentDashboardBinding
 import br.pucminas.teamworktask.models.Projeto
 import br.pucminas.teamworktask.repositories.Repository
 import br.pucminas.teamworktask.request.RetrofitService
-import br.pucminas.teamworktask.ui.GenericFragment
 import br.pucminas.teamworktask.ui.privada.PrivateActivity
 import br.pucminas.teamworktask.ui.privada.PrivateFragment
 import br.pucminas.teamworktask.utils.FormatterUtils
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.PROJETO_ID
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.guardarPreferenciaInt
-import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.obterPreferenciaInt
 import br.pucminas.teamworktask.viewmodels.MainViewModelFactory
 import br.pucminas.teamworktask.viewmodels.ProjetoViewModel
 import br.pucminas.teamworktask.viewmodels.UsuarioViewModel
@@ -196,7 +194,7 @@ class DashboardFragment : PrivateFragment(), ProjetoSeletorOnClickInterface, Pro
         projetos.addAll(outrosProjetos)
 
         if(projetos.isNotEmpty()){
-            val projetoSelecionadoId = obterPreferenciaInt(requireContext(), PROJETO_ID)
+            val projetoSelecionadoId = obterProjetoSelecionado()
             projetoSelecionado = projetos[0]
             if(projetoSelecionadoId > 0){
                 projetos.forEach{

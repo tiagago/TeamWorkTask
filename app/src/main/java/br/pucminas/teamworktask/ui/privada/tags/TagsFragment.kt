@@ -75,12 +75,8 @@ class TagsFragment : PrivateFragment(), TagItemListOnClickInterface, TagDialogIn
     }
 
     private fun chamarServicos() {
-        val projetoSelecionadoId = SharedPreferenceUtils.obterPreferenciaInt(
-            requireContext(),
-            SharedPreferenceUtils.PROJETO_ID
-        )
         showLoading(true)
-        tagViewModel.obterTagsPorProjeto(projetoSelecionadoId)
+        tagViewModel.obterTagsPorProjeto(obterProjetoSelecionado())
     }
 
     private fun exibirTags(tags: List<Tag>?) {
@@ -101,16 +97,12 @@ class TagsFragment : PrivateFragment(), TagItemListOnClickInterface, TagDialogIn
     }
 
     fun configurarFloatingButton() {
-        val projetoSelecionadoId = SharedPreferenceUtils.obterPreferenciaInt(
-            requireContext(),
-            SharedPreferenceUtils.PROJETO_ID
-        )
         binding.apply {
             tagMainFab.setOnClickListener {
                 onAddButtonClicked()
             }
             tagNovoFab.setOnClickListener {
-                TagCriarDialog(this@TagsFragment, obterUsuarioPreference(),projetoSelecionadoId).show(parentFragmentManager, "")
+                TagCriarDialog(this@TagsFragment, obterUsuarioPreference(), obterProjetoSelecionado()).show(parentFragmentManager, "")
             }
         }
     }
@@ -136,11 +128,7 @@ class TagsFragment : PrivateFragment(), TagItemListOnClickInterface, TagDialogIn
 
     // IMPLEMENT INTERFACE METHODS CALLBACK
     override fun onClickEditarTag(tag: Tag) {
-        val projetoSelecionadoId = SharedPreferenceUtils.obterPreferenciaInt(
-            requireContext(),
-            SharedPreferenceUtils.PROJETO_ID
-        )
-        TagCriarDialog(this@TagsFragment, obterUsuarioPreference(), projetoSelecionadoId, tag).show(parentFragmentManager, "")
+        TagCriarDialog(this@TagsFragment, obterUsuarioPreference(), obterProjetoSelecionado(), tag).show(parentFragmentManager, "")
     }
 
     override fun showMensagemSucesso(mensagem: String) {

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/margem_padrao"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tarefa_cadastro_nome_til"
+                style="@style/textInputLayoutDefault"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margem_padrao"
+                android:hint="@string/tarefa_cadastro_nome_label"
+                app:endIconMode="clear_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tarefa_cadastro_nome_tie"
+                    style="@style/textInputEditTextDefault"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textPersonName"
+                    android:maxLength="30"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tarefa_cadastro_descricao_til"
+                style="@style/textInputLayoutDefault"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margem_padrao"
+                android:hint="@string/tarefa_cadastro_descricao_label"
+                app:endIconMode="clear_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tarefa_cadastro_nome_til">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tarefa_cadastro_descricao_tie"
+                    style="@style/textInputEditTextDefault"
+                    android:singleLine="false"
+                    android:maxLines="5"
+                    android:lineBreakStyle="normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textMultiLine"
+                    android:maxLength="255"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tarefa_cadastro_data_entrega_til"
+                style="@style/textInputLayoutDefault"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margem_padrao"
+                android:hint="@string/tarefa_cadastro_data_entrega_label"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_calendar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tarefa_cadastro_descricao_til">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tarefa_cadastro_data_entrega_tie"
+                    style="@style/textInputEditTextDefault"
+                    android:singleLine="false"
+                    android:maxLines="5"
+                    android:lineBreakStyle="normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tarefa_cadastro_prioridade_til"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margem_padrao"
+                style="@style/textInputLayoutSelectorDefault"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tarefa_cadastro_data_entrega_til">
+
+                <AutoCompleteTextView
+                    android:id="@+id/tarefa_cadastro_prioridade_actv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:hint="@string/tarefa_cadastro_prioridade_label"
+                    style="@style/textInputEditTextDefault"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tarefa_cadastro_status_til"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margem_padrao"
+                style="@style/textInputLayoutSelectorDefault"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tarefa_cadastro_prioridade_til">
+
+                <AutoCompleteTextView
+                    android:id="@+id/tarefa_cadastro_status_actv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:hint="@string/tarefa_cadastro_status_label"
+                    style="@style/textInputEditTextDefault"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tarefa_cadastro_responsavel_til"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margem_padrao"
+                style="@style/textInputLayoutSelectorDefault"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tarefa_cadastro_status_til">
+
+                <AutoCompleteTextView
+                    android:id="@+id/tarefa_cadastro_responsavel_actv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:hint="@string/tarefa_cadastro_responsavel_label"
+                    style="@style/textInputEditTextDefault"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tarefa_cadastro_tag_til"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margem_padrao"
+                style="@style/textInputLayoutSelectorDefault"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tarefa_cadastro_responsavel_til">
+
+                <AutoCompleteTextView
+                    android:id="@+id/tarefa_cadastro_tag_actv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:hint="@string/tarefa_cadastro_tag_label"
+                    style="@style/textInputEditTextDefault"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tarefa_cadastro_salvar_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margem_padrao"
+                android:paddingStart="@dimen/margem_dobro"
+                android:paddingEnd="@dimen/margem_dobro"
+                android:backgroundTint="@color/primary_color"
+                android:text="@string/generico_salvar_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tarefa_cadastro_tag_til" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tarefa_cadastro_cancelar_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margem_padrao"
+                android:paddingStart="@dimen/margem_dobro"
+                android:paddingEnd="@dimen/margem_dobro"
+                android:backgroundTint="@color/primary_color"
+                android:text="@string/generico_cancelar_label"
+                app:layout_constraintTop_toBottomOf="@id/tarefa_cadastro_salvar_bt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

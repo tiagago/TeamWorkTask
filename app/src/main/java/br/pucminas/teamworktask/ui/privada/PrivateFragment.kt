@@ -10,6 +10,7 @@ import br.pucminas.teamworktask.models.Usuario
 import br.pucminas.teamworktask.response.GenericResponse
 import br.pucminas.teamworktask.ui.GenericActivity
 import br.pucminas.teamworktask.ui.GenericFragment
+import br.pucminas.teamworktask.utils.SharedPreferenceUtils
 
 open class PrivateFragment : GenericFragment() {
 
@@ -42,6 +43,7 @@ open class PrivateFragment : GenericFragment() {
 
     override fun onResume() {
         super.onResume()
+        clicked = false
         atualizarTopLayout()
     }
 
@@ -49,6 +51,13 @@ open class PrivateFragment : GenericFragment() {
         if (activity is PrivateActivity) {
             (activity as PrivateActivity).atualizarTopLaout(obterIcone(), obterTitulo())
         }
+    }
+
+    fun obterProjetoSelecionado(): Int {
+        return SharedPreferenceUtils.obterPreferenciaInt(
+            requireContext(),
+            SharedPreferenceUtils.PROJETO_ID
+        )
     }
 
     open fun obterIcone() : Int = 0

@@ -188,9 +188,9 @@ class ProjetoAssociarDialog(private val projetos: List<Projeto>,
         }
     }
 
-    /********************************
+    /**********************************
      **** Validações da requisição ****
-     ********************************/
+     **********************************/
 
     private fun validarCodigo() {
         binding.apply {

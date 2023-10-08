@@ -7,6 +7,7 @@ import br.pucminas.teamworktask.request.GenericRequest
 import br.pucminas.teamworktask.request.ProjetoRequest
 import br.pucminas.teamworktask.request.RetrofitService
 import br.pucminas.teamworktask.request.TagRequest
+import br.pucminas.teamworktask.request.TarefaRequest
 import retrofit2.http.Query
 
 class Repository constructor(private val retrofitService: RetrofitService) {
@@ -44,7 +45,21 @@ class Repository constructor(private val retrofitService: RetrofitService) {
 
     fun obterTagsPorProjeto(projetoId: Int) = retrofitService.obterTagsPorProjeto(projetoId)
 
-    // Chamadas associacao usuario no projeto.
+    /**********************************
+     **** Chamadas para as Tarefas ****
+     **********************************/
+    fun criarTarefa(tarefaRequest: TarefaRequest) = retrofitService.criarTarefa(tarefaRequest)
+
+    fun editarTarefa(tarefaRequest: TarefaRequest) = retrofitService.editarTarefa(tarefaRequest)
+
+    fun deletarTarefa(tarefaId: Int) = retrofitService.deletarTarefa(tarefaId)
+
+    fun obterTarefasPorProjetoStatus(projetoId: Int) = retrofitService.obterTarefasPorProjetoStatus(projetoId)
+
+    /************************************************
+     **** Chamadas associacao usuario no projeto ****
+     ************************************************/
+
     fun desassociarUsuarioProjeto(idProjeto: Int, idUsuario: Int) = retrofitService.desassociarUsuarioProjeto(idProjeto, idUsuario)
     fun associarUsuarioProjeto(projetoRequest: ProjetoRequest) = retrofitService.associarUsuarioProjeto(projetoRequest)
 }

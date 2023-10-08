@@ -72,6 +72,24 @@
 
     <!-- Tarefas -->
     <string name="tarefas_title">@string/bottom_navegator_tarefa</string>
+    <string name="tarefas_novo_titulo">Nova Tarefa</string>
+    <string name="tarefas_tab_aberta">Aberta</string>
+    <string name="tarefas_tab_desenvolvimento">Desenvolvimento</string>
+    <string name="tarefas_tab_validacao">Validação</string>
+    <string name="tarefas_tab_concluida">Concluída</string>
+
+    <!-- Tarefas Cadastro -->
+    <string name="tarefa_cadastro_titulo">Cadastrar Tarefa</string>
+    <string name="tarefa_cadastro_nome_label">Nome Tarefa</string>
+    <string name="tarefa_cadastro_descricao_label">Descrição</string>
+    <string name="tarefa_cadastro_data_entrega_label">Data Entrega</string>
+    <string name="tarefa_cadastro_prioridade_label">Prioridade</string>
+    <string name="tarefa_cadastro_status_label">Status</string>
+    <string name="tarefa_cadastro_tag_label">Tag</string>
+    <string name="tarefa_cadastro_responsavel_label">Responsavel</string>
+    <string name="tarefa_cadastro_sucesso">Tarefa cadastrada com sucesso!</string>
+    <string name="tarefa_editar_sucesso">Tarefa editada com sucesso!</string>
+
     <!-- Tags -->
     <string name="tags_title">@string/bottom_navegator_tags</string>
     <string name="tags_lista_title">Tags do Projeto</string>
