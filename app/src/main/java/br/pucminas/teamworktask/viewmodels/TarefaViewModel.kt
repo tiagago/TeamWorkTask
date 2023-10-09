@@ -26,8 +26,8 @@ class TarefaViewModel constructor(private val repository: Repository)  : Generic
         executeGenericService(repository.deletarTarefa(tarefaId))
     }
 
-    fun obterTagsPorProjeto(projetoId: Int) {
-        executeListService(repository.obterTarefasPorProjetoStatus(projetoId))
+    fun obterTarefasPorProjetoStatus(projetoId: Int, idStatus: Int) {
+        executeListService(repository.obterTarefasPorProjetoStatus(projetoId, idStatus))
     }
 
     private fun executeService(response: Call<TarefaResponse>){

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/projeto_card_cl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margem_padrao"
+    android:layout_marginStart="@dimen/margem_padrao"
+    android:layout_marginEnd="@dimen/margem_padrao">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/tarefa_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        android:backgroundTint="@color/white_oppacite_70"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margem_padrao">
+
+            <TextView
+                android:id="@+id/tarefa_nome_label_tv"
+                style="@style/textViewLayoutLabelDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tarefas_card_nome_label"
+                app:layout_constraintBottom_toBottomOf="@id/tarefa_nome_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tarefa_nome_tv" />
+
+            <TextView
+                android:id="@+id/tarefa_nome_tv"
+                style="@style/textViewLayoutDefault"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margem_pequena"
+                android:lineBreakStyle="normal"
+                app:layout_constraintStart_toEndOf="@id/tarefa_nome_label_tv"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Teste nome Projeto" />
+
+            <TextView
+                android:id="@+id/tarefa_descricao_label_tv"
+                style="@style/textViewLayoutLabelDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tarefas_card_descricao_label"
+                app:layout_constraintBottom_toBottomOf="@id/tarefa_descricao_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tarefa_descricao_tv" />
+
+            <TextView
+                android:id="@+id/tarefa_descricao_tv"
+                style="@style/textViewLayoutDefault"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margem_pequena"
+                android:layout_marginTop="@dimen/margem_pequena"
+                android:lineBreakStyle="normal"
+                app:layout_constraintStart_toEndOf="@id/tarefa_descricao_label_tv"
+                app:layout_constraintTop_toBottomOf="@id/tarefa_nome_tv"
+                tools:text="Teste Descricao Projeto" />
+
+            <TextView
+                android:id="@+id/tarefa_prioridade_label_tv"
+                style="@style/textViewLayoutLabelDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tarefas_card_prioridade_label"
+                app:layout_constraintBottom_toBottomOf="@id/tarefa_prioridade_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tarefa_prioridade_tv" />
+
+            <TextView
+                android:id="@+id/tarefa_prioridade_tv"
+                style="@style/textViewLayoutDefault"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margem_pequena"
+                android:layout_marginTop="@dimen/margem_pequena"
+                android:lineBreakStyle="normal"
+                app:layout_constraintStart_toEndOf="@id/tarefa_prioridade_label_tv"
+                app:layout_constraintTop_toBottomOf="@id/tarefa_descricao_tv"
+                tools:text="Alta" />
+
+            <TextView
+                android:id="@+id/tarefa_data_label_tv"
+                style="@style/textViewLayoutLabelDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tarefas_card_data_label"
+                app:layout_constraintBottom_toBottomOf="@id/tarefa_data_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tarefa_data_tv" />
+
+            <TextView
+                android:id="@+id/tarefa_data_tv"
+                style="@style/textViewLayoutDefault"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margem_pequena"
+                android:layout_marginTop="@dimen/margem_pequena"
+                android:lineBreakStyle="normal"
+                app:layout_constraintStart_toEndOf="@id/tarefa_data_label_tv"
+                app:layout_constraintTop_toBottomOf="@id/tarefa_prioridade_tv"
+                tools:text="01/01/2000" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

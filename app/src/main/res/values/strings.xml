@@ -77,6 +77,11 @@
     <string name="tarefas_tab_desenvolvimento">Desenvolvimento</string>
     <string name="tarefas_tab_validacao">Validação</string>
     <string name="tarefas_tab_concluida">Concluída</string>
+    <string name="tarefas_card_nome_label">Nome Projeto : </string>
+    <string name="tarefas_card_descricao_label">Descrição : </string>
+    <string name="tarefas_card_prioridade_label">Prioridade : </string>
+    <string name="tarefas_card_data_label">Data Entrega : </string>
+
 
     <!-- Tarefas Cadastro -->
     <string name="tarefa_cadastro_titulo">Cadastrar Tarefa</string>

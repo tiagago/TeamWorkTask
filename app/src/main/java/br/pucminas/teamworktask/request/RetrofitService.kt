@@ -67,7 +67,7 @@ interface RetrofitService {
     fun deletarTarefa(@Query("id") tarefaId: Int): Call<GenericResponse>
 
     @GET("/api/tarefa/obterTarefasPorProjetoStatus/")
-    fun obterTarefasPorProjetoStatus(@Query("idProjeto") id: Int): Call<TarefasResponse>
+    fun obterTarefasPorProjetoStatus(@Query("idProjeto") id: Int, @Query("idStatus") idStatus: Int): Call<TarefasResponse>
 
     /************************************************
      **** Chamadas associacao usuario no projeto ****
