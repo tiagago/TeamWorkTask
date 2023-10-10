@@ -14,6 +14,9 @@
 
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
         <!-- Customize your theme here. -->
+        <item name="textAppearanceLargePopupMenu">@style/TextAppearance.App.BodyLarge</item>
+        <item name="textAppearanceSmallPopupMenu">@style/TextAppearance.App.BodyLarge</item>
+        <item name="popupMenuBackground">@drawable/custom_popup_background</item>
     </style>
 
     <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
@@ -26,4 +29,11 @@
         <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button</item>
         <item name="buttonBarNegativeButtonStyle">@style/Widget.App.Button</item>
     </style>
+
+    <style name="TextAppearance.App.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/secondary_color_dark</item>
+    </style>
+
 </resources>

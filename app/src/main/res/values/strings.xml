@@ -81,6 +81,10 @@
     <string name="tarefas_card_descricao_label">Descrição : </string>
     <string name="tarefas_card_prioridade_label">Prioridade : </string>
     <string name="tarefas_card_data_label">Data Entrega : </string>
+    <string name="tarefas_card_pop_editar_label">Editar</string>
+    <string name="tarefas_card_pop_agendar_label">Agendar</string>
+    <string name="tarefas_card_pop_deletar_label">Deletar</string>
+    <string name="tarefas_agenda_titulo">Entrega tarefa : %1$s</string>
 
 
     <!-- Tarefas Cadastro -->

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/pop_opcao_editar"
+        android:title="@string/tarefas_card_pop_editar_label"
+        android:icon="@drawable/ic_edit"/>
+    <item
+        android:id="@+id/pop_opcao_agendar"
+        android:title="@string/tarefas_card_pop_agendar_label"
+        android:icon="@drawable/ic_calendar"/>
+    <item
+        android:id="@+id/pop_opcao_deletar"
+        android:title="@string/tarefas_card_pop_deletar_label"
+        android:icon="@drawable/ic_delete"/>
+</menu>

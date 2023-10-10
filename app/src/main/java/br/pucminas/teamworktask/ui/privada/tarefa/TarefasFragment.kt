@@ -25,7 +25,7 @@ import com.google.android.material.tabs.TabLayout
  * Use the [TarefasFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class TarefasFragment : PrivateFragment() {
+class TarefasFragment : PrivateFragment(), TarefaItemListOnClickInterface {
     private var _binding: FragmentTarefasBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -54,7 +54,7 @@ class TarefasFragment : PrivateFragment() {
     private fun atualizarListaTarefas(tarefas: List<Tarefa>) {
         binding.apply {
             tarefaListaRv.apply {
-                adapter = TarefaListAdapter(requireContext(), tarefas)
+                adapter = TarefaListAdapter(requireContext(), tarefas, this@TarefasFragment)
             }
         }
     }
@@ -151,6 +151,16 @@ class TarefasFragment : PrivateFragment() {
 
             }
 
+            genericResponse.observe(viewLifecycleOwner){
+                showLoading(false)
+                if(it.success){
+                    showSuccessMessage("Tarefa Excluida com sucesso!")
+                    chamarServico()
+                } else {
+                    showErrorMessage(retornoErroServicoReturn(it))
+                }
+            }
+
             errorMessage.observe(viewLifecycleOwner) {
                 showLoading(false)
                 if (it != null) {
@@ -162,10 +172,17 @@ class TarefasFragment : PrivateFragment() {
         }
     }
 
+    /******************************************
+     **** Callbacks do adapter das Tarefas ****
+     ******************************************/
 
+    override fun onClickEditarTarefa(tarefa: Tarefa) {
 
-    /**********************************
-     **** Validações da requisição ****
-     **********************************/
+    }
+
+    override fun onClickExcluirTarefa(tarefa: Tarefa) {
+        showLoading(true)
+        tarefaViewModel.deletarTarefa(tarefa.id.toInt())
+    }
 
 }

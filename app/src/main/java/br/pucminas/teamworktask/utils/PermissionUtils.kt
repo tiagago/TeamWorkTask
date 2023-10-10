@@ -35,5 +35,9 @@ class PermissionUtils {
         fun checkCameraPermission(context: Context): Boolean {
             return ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
         }
+
+        fun checkAgendaPermission(context: Context): Boolean {
+            return ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALENDAR) == PackageManager.PERMISSION_GRANTED
+        }
     }
 }

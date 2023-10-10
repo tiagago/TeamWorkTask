@@ -44,6 +44,7 @@
                 android:layout_marginStart="@dimen/margem_pequena"
                 android:lineBreakStyle="normal"
                 app:layout_constraintStart_toEndOf="@id/tarefa_nome_label_tv"
+                app:layout_constraintEnd_toStartOf="@id/tarefa_more"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Teste nome Projeto" />
 
@@ -66,6 +67,7 @@
                 android:layout_marginTop="@dimen/margem_pequena"
                 android:lineBreakStyle="normal"
                 app:layout_constraintStart_toEndOf="@id/tarefa_descricao_label_tv"
+                app:layout_constraintEnd_toStartOf="@id/tarefa_more"
                 app:layout_constraintTop_toBottomOf="@id/tarefa_nome_tv"
                 tools:text="Teste Descricao Projeto" />
 
@@ -112,6 +114,16 @@
                 app:layout_constraintStart_toEndOf="@id/tarefa_data_label_tv"
                 app:layout_constraintTop_toBottomOf="@id/tarefa_prioridade_tv"
                 tools:text="01/01/2000" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/tarefa_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_more"
+                android:tint="@color/secondary_color_dark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
