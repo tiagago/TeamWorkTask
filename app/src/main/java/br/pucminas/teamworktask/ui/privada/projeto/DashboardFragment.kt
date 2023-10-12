@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import br.pucminas.teamworktask.R
 import br.pucminas.teamworktask.databinding.FragmentDashboardBinding
+import br.pucminas.teamworktask.models.Historico
 import br.pucminas.teamworktask.models.Projeto
 import br.pucminas.teamworktask.repositories.Repository
 import br.pucminas.teamworktask.request.RetrofitService
@@ -16,6 +17,7 @@ import br.pucminas.teamworktask.ui.privada.PrivateFragment
 import br.pucminas.teamworktask.utils.FormatterUtils
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.PROJETO_ID
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils.Companion.guardarPreferenciaInt
+import br.pucminas.teamworktask.viewmodels.HistoricoViewModel
 import br.pucminas.teamworktask.viewmodels.MainViewModelFactory
 import br.pucminas.teamworktask.viewmodels.ProjetoViewModel
 import br.pucminas.teamworktask.viewmodels.UsuarioViewModel
@@ -36,6 +38,7 @@ class DashboardFragment : PrivateFragment(), ProjetoSeletorOnClickInterface, Pro
     private val retrofitService = RetrofitService.getInstance()
     lateinit var projetoViewModel: ProjetoViewModel
     lateinit var usuarioViewModel: UsuarioViewModel
+    lateinit var historicoViewModel: HistoricoViewModel
     private var meusProjetos = ArrayList<Projeto>()
     private var outrosProjetos = ArrayList<Projeto>()
     private var projetos = ArrayList<Projeto>()
@@ -70,6 +73,10 @@ class DashboardFragment : PrivateFragment(), ProjetoSeletorOnClickInterface, Pro
         var usuario = obterUsuarioPreference()
         return getString(R.string.dashboard_title, usuario.nomeExibicao)
     }
+
+    /*****************************************
+     **** Configuração do floating Button ****
+     *****************************************/
 
     fun configurarFloatingButton() {
         binding.dashboardMainFab.setOnClickListener {
@@ -109,9 +116,30 @@ class DashboardFragment : PrivateFragment(), ProjetoSeletorOnClickInterface, Pro
         binding.dashboardMainFab.startAnimation(if (clicked) rotateClose else rotateOpen)
     }
 
+    /******************************
+     **** Chamadas de Serviços ****
+     ******************************/
+
+    private fun chamarServicos() {
+        showLoading(true)
+        contServicos = 2
+        val usuario = obterUsuarioPreference()
+        usuarioViewModel.obterUsuarioComProjetos(usuario.id.toInt())
+        projetoViewModel.oberMeusProjetos(usuario.id.toInt())
+    }
+
+    private fun chamarServicoHistorico() {
+        showLoading(true)
+        historicoViewModel.obterTarefasPorProjetoStatus(projetoSelecionado.id.toInt())
+    }
+
+    /**************************************
+     **** Configurações dos ViewModels ****
+     **************************************/
     private fun configurarViewModels() {
         configurarProjetoViewModels()
         configurarUsuarioViewModels()
+        configurarHistoricoViewModels()
     }
 
     private fun configurarProjetoViewModels() {
@@ -137,7 +165,7 @@ class DashboardFragment : PrivateFragment(), ProjetoSeletorOnClickInterface, Pro
                 contServicos--
                 if (it != null) {
                     erroServico = it
-                    usuarioViewModel.errorMessage.postValue(null)
+                    errorMessage.postValue(null)
                 }
                 processarProjetos()
             }
@@ -167,20 +195,43 @@ class DashboardFragment : PrivateFragment(), ProjetoSeletorOnClickInterface, Pro
                 contServicos--
                 if (it != null) {
                     erroServico = it
-                    usuarioViewModel.errorMessage.postValue(null)
+                    errorMessage.postValue(null)
                 }
                 processarProjetos()
             }
         }
     }
 
-    private fun chamarServicos() {
-        showLoading(true)
-        contServicos = 2
-        val usuario = obterUsuarioPreference()
-        usuarioViewModel.obterUsuarioComProjetos(usuario.id.toInt())
-        projetoViewModel.oberMeusProjetos(usuario.id.toInt())
+    private fun configurarHistoricoViewModels() {
+        historicoViewModel =
+            ViewModelProvider(this, MainViewModelFactory(Repository(retrofitService))).get(
+                HistoricoViewModel::class.java
+            )
+
+        historicoViewModel.apply {
+            historicosResponse.observe(viewLifecycleOwner) {
+                processarHistorico(if (it?.historicos != null && it.historicos!!.isNotEmpty() && it.success)
+                    it.historicos
+                else
+                    null
+                )
+
+                showLoading(false)
+            }
+
+            errorMessage.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    erroServico = it
+                    errorMessage.postValue(null)
+                }
+                showLoading(false)
+            }
+        }
     }
+
+    /************************************
+     **** Processar retorno Serviços ****
+     ************************************/
 
     fun processarProjetos(){
 
@@ -214,6 +265,23 @@ class DashboardFragment : PrivateFragment(), ProjetoSeletorOnClickInterface, Pro
         showLoading(false)
     }
 
+    fun processarHistorico(historicos: List<Historico>?){
+        if (!historicos.isNullOrEmpty()){
+
+            showListaVaziaMensagem(false)
+        } else {
+            showListaVaziaMensagem(true)
+        }
+    }
+
+    private fun showListaVaziaMensagem(isShow: Boolean){
+        binding.dashboardListaVaziaGrupo.visibility = if(isShow) View.VISIBLE else View.GONE
+    }
+
+    /*******************************
+     **** Card Projeto Selector ****
+     *******************************/
+
     fun selecaoProjeto(){
         guardarPreferenciaInt(requireContext(), PROJETO_ID, projetoSelecionado.id.toInt())
         binding.apply {
@@ -227,6 +295,7 @@ class DashboardFragment : PrivateFragment(), ProjetoSeletorOnClickInterface, Pro
             dashboardCard.projetoCard.setOnClickListener {
                 chamarSeletorProjeto()
             }
+            chamarServicoHistorico()
         }
     }
 
@@ -237,6 +306,10 @@ class DashboardFragment : PrivateFragment(), ProjetoSeletorOnClickInterface, Pro
     fun showBottomNavigator(isVisible: Boolean){
         (activity as PrivateActivity).showBottomNavigator(isVisible)
     }
+
+    /**************************************
+     **** Override Interfaces callback ****
+     **************************************/
 
     override fun onClickProjeto(projeto: Projeto) {
         projetoSelecionado = projeto

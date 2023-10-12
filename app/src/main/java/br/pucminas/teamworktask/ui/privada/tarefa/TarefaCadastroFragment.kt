@@ -22,7 +22,6 @@ import br.pucminas.teamworktask.request.RetrofitService
 import br.pucminas.teamworktask.request.TarefaRequest
 import br.pucminas.teamworktask.ui.privada.PrivateFragment
 import br.pucminas.teamworktask.utils.FormatterUtils
-import br.pucminas.teamworktask.utils.GeradorCodigo
 import br.pucminas.teamworktask.viewmodels.MainViewModelFactory
 import br.pucminas.teamworktask.viewmodels.ProjetoViewModel
 import br.pucminas.teamworktask.viewmodels.TagViewModel
@@ -60,31 +59,43 @@ class TarefaCadastroFragment(var editarTarefa: Tarefa? = null) : PrivateFragment
         // Inflate the layout for this fragment
         _binding = FragmentTarefaCadastroBinding.inflate(inflater, container, false)
 
-        if(editarTarefa != null) {
-            projeto.id = editarTarefa!!.id
-            projeto.dataCriacao = editarTarefa!!.dataCriacao
-
-        } else {
-            projeto.dataCriacao = Date()
-            projeto.codigo = GeradorCodigo.geraCodigoProjeto()
-        }
-
-        projeto.usuario = obterUsuarioPreference()
-
         configurarViewModels()
         chamarServicosIniciais()
-        configurarTextViews()
+        preencherInputs()
         prepararListeners()
         return binding.root
     }
 
-    fun configurarTextViews(){
+    fun preencherInputs(){
         binding.apply {
             if(editarTarefa != null){
-                //projetoCadastroNomeTie.setText(editarTarefa!!.nome)
-                //projetoCadastroDescricaoTie.setText(editarTarefa!!.descricao)
-            }
+                dataEntregaSelecionada = editarTarefa!!.dataEntrega
+                statusSelecionada = StatusEnum.values()[editarTarefa!!.status.toInt()]
+                prioridadeSelecionada = PrioridadeEnum.values()[editarTarefa!!.prioridade.toInt()]
+                responsavelSelecionado = editarTarefa!!.usuario
+                tagSelecionada = editarTarefa!!.tag
 
+                tarefaCadastroNomeTie.setText(editarTarefa!!.nome)
+                tarefaCadastroDescricaoTie.setText(editarTarefa!!.descricao)
+                if(dataEntregaSelecionada != null){
+                    tarefaCadastroDataEntregaTie.setText(FormatterUtils.formatDateToString(
+                        dataEntregaSelecionada!!
+                    ))
+                }
+                if(statusSelecionada != null){
+                    tarefaCadastroStatusActv.setText(statusSelecionada!!.status)
+                }
+                if(prioridadeSelecionada != null){
+                    tarefaCadastroPrioridadeActv.setText(prioridadeSelecionada!!.nomePrioridade)
+                }
+                if(tagSelecionada != null){
+                    tarefaCadastroTagActv.setText(tagSelecionada!!.nome)
+                }
+
+                if(responsavelSelecionado != null){
+                    tarefaCadastroResponsavelActv.setText(responsavelSelecionado!!.nomeExibicao)
+                }
+            }
         }
     }
 
@@ -222,8 +233,9 @@ class TarefaCadastroFragment(var editarTarefa: Tarefa? = null) : PrivateFragment
 
             if(!achouProblema){
                 var tarefaRequest = TarefaRequest()
-                var tarefa = Tarefa()
-                tarefa.nome = nome
+                var tarefa = if(editarTarefa != null) editarTarefa else Tarefa()
+
+                tarefa!!.nome = nome
                 tarefa.descricao = descricao
                 tarefa.prioridade = Integer(prioridadeSelecionada!!.id)
                 tarefa.status = Integer(statusSelecionada!!.id)
@@ -235,7 +247,11 @@ class TarefaCadastroFragment(var editarTarefa: Tarefa? = null) : PrivateFragment
                 tarefaRequest.usuario = obterUsuarioPreference()
 
                 showLoading(true)
-                tarefaViewModel.criarTarefa(tarefaRequest)
+                if(tarefa.id > 0){
+                    tarefaViewModel.editarTarefa(tarefaRequest)
+                } else {
+                    tarefaViewModel.criarTarefa(tarefaRequest)
+                }
             }
         }
     }

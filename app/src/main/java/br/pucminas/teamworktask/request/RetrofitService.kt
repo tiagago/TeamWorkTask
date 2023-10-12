@@ -78,6 +78,14 @@ interface RetrofitService {
     @POST("/api/projetoUsuario/")
     fun associarUsuarioProjeto(@Body projetoRequest: ProjetoRequest): Call<GenericResponse>
 
+    /***************************************
+     **** Chamadas associacao historico ****
+     ***************************************/
+
+    @GET("/api/historico/obterHistoricoPorProjeto/")
+    fun obterHistoricoPorProjeto(@Query("idProjeto") projetoId: Int): Call<HistoricosResponse>
+
+
     companion object {
 
         private val retrofitService: RetrofitService by lazy {

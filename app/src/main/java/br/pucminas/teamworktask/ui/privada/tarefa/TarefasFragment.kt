@@ -177,7 +177,7 @@ class TarefasFragment : PrivateFragment(), TarefaItemListOnClickInterface {
      ******************************************/
 
     override fun onClickEditarTarefa(tarefa: Tarefa) {
-
+        changeFragment(TarefaCadastroFragment(tarefa))
     }
 
     override fun onClickExcluirTarefa(tarefa: Tarefa) {

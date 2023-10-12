@@ -62,4 +62,10 @@ class Repository constructor(private val retrofitService: RetrofitService) {
 
     fun desassociarUsuarioProjeto(idProjeto: Int, idUsuario: Int) = retrofitService.desassociarUsuarioProjeto(idProjeto, idUsuario)
     fun associarUsuarioProjeto(projetoRequest: ProjetoRequest) = retrofitService.associarUsuarioProjeto(projetoRequest)
+
+    /***************************************
+     **** Chamadas associacao historico ****
+     ***************************************/
+
+    fun obterHistoricoPorProjeto(projetoId: Int) = retrofitService.obterHistoricoPorProjeto(projetoId)
 }

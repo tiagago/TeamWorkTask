@@ -42,6 +42,8 @@
     <string name="dashboard_fab_participar_projeto">Juntar-se a um Projeto</string>
     <string name="dashboard_logout_title">Logout</string>
     <string name="dashboard_logout_descricao">Deseja fazer Logout?</string>
+    <string name="dashboard_lista_title">Histórico</string>
+    <string name="dashboard_lista_vazia">O Projeto não possui historico</string>
 
     <!-- Cadastro Projeto -->
     <string name="projeto_cadastro_titulo">Cadastrar Projeto</string>
