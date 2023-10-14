@@ -195,7 +195,7 @@ class PreLoginFragment : GenericFragment() {
             errorMessage.observe(viewLifecycleOwner) {
                 showLoading(false)
                 if(it != null){
-                    showErrorGenericServer()
+                    showErrorMessage(it)
                     errorMessage.postValue(null)
                 }
             }
