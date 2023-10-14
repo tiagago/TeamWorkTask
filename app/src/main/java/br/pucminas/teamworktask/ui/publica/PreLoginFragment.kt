@@ -145,9 +145,8 @@ class PreLoginFragment : GenericFragment() {
             override fun onAuthenticationSucceeded(result:
                                                    BiometricPrompt.AuthenticationResult) {
                 super.onAuthenticationSucceeded(result)
-                if(activity is PublicActivity){
-                    viewModel.doLogin(obterPreferencia(requireContext(), USUARIO_LOGIN), obterPreferencia(requireContext(), USUARIO_SENHA))
-                }
+                showLoading(true)
+                viewModel.doLogin(obterPreferencia(requireContext(), USUARIO_LOGIN), obterPreferencia(requireContext(), USUARIO_SENHA))
             }
         }
     @RequiresApi(Build.VERSION_CODES.P)
