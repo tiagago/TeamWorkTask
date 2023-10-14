@@ -6,36 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/projeto_cadastro_logo_iv"
-        android:layout_width="@dimen/imagem_titulo_tamanho"
-        android:layout_height="@dimen/imagem_titulo_tamanho"
-        android:src="@drawable/ic_project"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/genericTittle"
-        android:text="@string/projeto_cadastro_titulo"
-        android:layout_marginStart="@dimen/margem_padrao"
-        app:layout_constraintStart_toEndOf="@id/projeto_cadastro_logo_iv"
-        app:layout_constraintTop_toTopOf="@id/projeto_cadastro_logo_iv"
-        app:layout_constraintBottom_toBottomOf="@id/projeto_cadastro_logo_iv"
-        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/projeto_cadastro_nome_til"
         style="@style/textInputLayoutDefault"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margem_dobro"
+        android:layout_marginTop="@dimen/margem_padrao"
         android:hint="@string/projeto_cadastro_nome_label"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/projeto_cadastro_logo_iv">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/projeto_cadastro_nome_tie"

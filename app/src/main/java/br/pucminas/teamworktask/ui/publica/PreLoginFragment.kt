@@ -50,54 +50,41 @@ class PreLoginFragment : GenericFragment() {
         return binding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     @RequiresApi(Build.VERSION_CODES.P)
     fun prepararListeners(){
-        configurarEmail()
+        carregarDadosPreference()
         configurarViewModels()
         configurarBotaoUsuarioCadastro()
         configurarBotaoEntrar()
     }
 
+    /*********************************
+     **** Controle Listeners View ****
+     *********************************/
     @RequiresApi(Build.VERSION_CODES.P)
-    private fun configurarEmail() {
-        val login : String = obterPreferencia(requireContext(), USUARIO_LOGIN)
-        if(login.isNotBlank()){
-            binding.loginUsuarioTie.setText(login)
-            binding.loginFingerprintIv.visibility = View.VISIBLE
-            configurarBotaoBiometria()
-        } else {
-            binding.loginFingerprintIv.visibility = View.GONE
-        }
-    }
-
-    private fun configurarViewModels() {
-        viewModel =
-            ViewModelProvider(this, MainViewModelFactory(Repository(retrofitService))).get(
-                UsuarioViewModel::class.java
-            )
-
-        viewModel.usuarioResponse.observe(viewLifecycleOwner) {
-            showLoading(false)
-            if(it?.usuario != null && it.success){
-                if (activity is PublicActivity) {
-                    (activity as PublicActivity).doLogin(it.usuario!!)
-                }
+    private fun carregarDadosPreference() {
+        binding.apply {
+            val login : String = obterPreferencia(requireContext(), USUARIO_LOGIN)
+            if(login.isNotBlank()){
+                loginUsuarioTie.setText(login)
+                loginFingerprintIv.visibility = View.VISIBLE
+                configurarBotaoBiometria()
             } else {
-                retornoErroServico(it)
-            }
-        }
-
-        viewModel.errorMessage.observe(viewLifecycleOwner) {
-            showLoading(false)
-            if(it != null){
-                showErrorGenericServer()
-                viewModel.errorMessage.postValue(null)
+                loginFingerprintIv.visibility = View.GONE
             }
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
     fun configurarBotaoBiometria(){
+        binding.apply {
+
+        }
         if(PermissionUtils.checkBiometricSupport(requireContext())){
             binding.loginFingerprintIv.visibility = View.VISIBLE
             binding.loginFingerprintIv.setOnClickListener {
@@ -114,6 +101,9 @@ class PreLoginFragment : GenericFragment() {
         }
     }
 
+    /***************************************
+     **** Validações para efetuar login ****
+     ***************************************/
     fun configurarBotaoEntrar(){
         binding.loginEntrarBt.setOnClickListener {
             var achouProblema = false
@@ -141,11 +131,9 @@ class PreLoginFragment : GenericFragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
+    /************************************
+     **** Configurações da Biometria ****
+     ************************************/
     private val authenticationCallback: BiometricPrompt.AuthenticationCallback
         get() = @RequiresApi(Build.VERSION_CODES.P)
         object : BiometricPrompt.AuthenticationCallback() {
@@ -157,7 +145,9 @@ class PreLoginFragment : GenericFragment() {
             override fun onAuthenticationSucceeded(result:
                                                    BiometricPrompt.AuthenticationResult) {
                 super.onAuthenticationSucceeded(result)
-                efetuarLoginFingerPrint()
+                if(activity is PublicActivity){
+                    viewModel.doLogin(obterPreferencia(requireContext(), USUARIO_LOGIN), obterPreferencia(requireContext(), USUARIO_SENHA))
+                }
             }
         }
     @RequiresApi(Build.VERSION_CODES.P)
@@ -181,17 +171,35 @@ class PreLoginFragment : GenericFragment() {
         return cancellationSignal as CancellationSignal
     }
 
-    private fun efetuarLoginFingerPrint(){
-        if(activity is PublicActivity){
-            var usuario = Usuario()
-            usuario.id = Integer(obterPreferenciaInt(requireContext(), USUARIO_ID))
-            usuario.login = obterPreferencia(requireContext(), USUARIO_LOGIN)
-            usuario.nomeExibicao = obterPreferencia(requireContext(), USUARIO_NOME)
-            usuario.senha = obterPreferencia(requireContext(), USUARIO_SENHA)
+    /**************************************
+     **** Configurações dos ViewModels ****
+     **************************************/
+    private fun configurarViewModels() {
+        viewModel =
+            ViewModelProvider(this, MainViewModelFactory(Repository(retrofitService))).get(
+                UsuarioViewModel::class.java
+            )
 
-            (activity as PublicActivity).doLogin(usuario)
+        viewModel.apply {
+            usuarioResponse.observe(viewLifecycleOwner) {
+                showLoading(false)
+                if(it?.usuario != null && it.success){
+                    if (activity is PublicActivity) {
+                        (activity as PublicActivity).doLogin(it.usuario!!)
+                    }
+                } else {
+                    retornoErroServico(it)
+                }
+            }
+
+            errorMessage.observe(viewLifecycleOwner) {
+                showLoading(false)
+                if(it != null){
+                    showErrorGenericServer()
+                    errorMessage.postValue(null)
+                }
+            }
         }
     }
-
 
 }

@@ -9,5 +9,10 @@ class FormatterUtils {
             val formatter = SimpleDateFormat("dd/MM/yyyy")
             return formatter.format(date)
         }
+
+        fun formatDateToStringWithHour(date: Date): String{
+            val formatter = SimpleDateFormat("dd/MM/yyyy - hh:mm:ss")
+            return formatter.format(date)
+        }
     }
 }

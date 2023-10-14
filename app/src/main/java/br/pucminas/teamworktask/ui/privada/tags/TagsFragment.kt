@@ -11,6 +11,7 @@ import br.pucminas.teamworktask.databinding.FragmentTagsBinding
 import br.pucminas.teamworktask.models.Tag
 import br.pucminas.teamworktask.repositories.Repository
 import br.pucminas.teamworktask.request.RetrofitService
+import br.pucminas.teamworktask.ui.BaseFragmentCallback
 import br.pucminas.teamworktask.ui.GenericFragment
 import br.pucminas.teamworktask.ui.privada.PrivateFragment
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils
@@ -22,7 +23,7 @@ import br.pucminas.teamworktask.viewmodels.TagViewModel
  * Use the [TagsFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class TagsFragment : PrivateFragment(), TagItemListOnClickInterface, TagDialogInterface{
+class TagsFragment : PrivateFragment(), TagItemListOnClickInterface{
     private var _binding: FragmentTagsBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -47,37 +48,22 @@ class TagsFragment : PrivateFragment(), TagItemListOnClickInterface, TagDialogIn
         return getString(R.string.tags_title)
     }
 
-    private fun configurarViewModels() {
-        tagViewModel =
-            ViewModelProvider(this, MainViewModelFactory(Repository(retrofitService))).get(
-                TagViewModel::class.java
-            )
-
-        tagViewModel.apply {
-            tagsResponse.observe(viewLifecycleOwner) {
-                if (it?.tags != null && it.success) {
-                    exibirTags(it.tags)
-                } else {
-                    showErrorMessage(retornoErroServicoReturn(it))
-                }
-                showLoading(false)
-            }
-
-            errorMessage.observe(viewLifecycleOwner) {
-                if (it != null) {
-                    showListaVaziaMensagem(false)
-                    showErrorMessage(it)
-                    errorMessage.postValue(null)
-                }
-                showLoading(false)
-            }
-        }
+    override fun showSuccessMessage(message: String) {
+        super.showSuccessMessage(message)
+        chamarServicos()
     }
 
+    /******************************
+     **** Chamadas de Serviços ****
+     ******************************/
     private fun chamarServicos() {
         showLoading(true)
         tagViewModel.obterTagsPorProjeto(obterProjetoSelecionado())
     }
+
+    /********************************************
+     **** Controle de Visibilidade das Views ****
+     ********************************************/
 
     private fun exibirTags(tags: List<Tag>?) {
         binding.apply {
@@ -96,6 +82,9 @@ class TagsFragment : PrivateFragment(), TagItemListOnClickInterface, TagDialogIn
         binding.tabListaVaziaGrupo.visibility = if(isShow) View.VISIBLE else View.GONE
     }
 
+    /*****************************************
+     **** Configuração do floating Button ****
+     *****************************************/
     fun configurarFloatingButton() {
         binding.apply {
             tagMainFab.setOnClickListener {
@@ -131,13 +120,34 @@ class TagsFragment : PrivateFragment(), TagItemListOnClickInterface, TagDialogIn
         TagCriarDialog(this@TagsFragment, obterUsuarioPreference(), obterProjetoSelecionado(), tag).show(parentFragmentManager, "")
     }
 
-    override fun showMensagemSucesso(mensagem: String) {
-        showSuccessMessage(mensagem)
-        chamarServicos()
-    }
+    /**************************************
+     **** Configurações dos ViewModels ****
+     **************************************/
+    private fun configurarViewModels() {
+        tagViewModel =
+            ViewModelProvider(this, MainViewModelFactory(Repository(retrofitService))).get(
+                TagViewModel::class.java
+            )
 
-    override fun showMensagemErro(mensagem: String) {
-        showErrorMessage(mensagem)
+        tagViewModel.apply {
+            tagsResponse.observe(viewLifecycleOwner) {
+                if (it?.tags != null && it.success) {
+                    exibirTags(it.tags)
+                } else {
+                    showErrorMessage(retornoErroServicoReturn(it))
+                }
+                showLoading(false)
+            }
+
+            errorMessage.observe(viewLifecycleOwner) {
+                if (it != null) {
+                    showListaVaziaMensagem(false)
+                    showErrorMessage(it)
+                    errorMessage.postValue(null)
+                }
+                showLoading(false)
+            }
+        }
     }
 
 }

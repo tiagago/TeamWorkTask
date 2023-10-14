@@ -9,6 +9,9 @@ import br.pucminas.teamworktask.componentes.loadingDialog.LoadingDialog
 import br.pucminas.teamworktask.componentes.topAlert.TopAlertView
 import br.pucminas.teamworktask.componentes.topAlert.`object`.TopAlertMessageObject
 import br.pucminas.teamworktask.models.Usuario
+import br.pucminas.teamworktask.ui.privada.projeto.ProjetoCadastroFragment
+import br.pucminas.teamworktask.ui.privada.tarefa.TarefaCadastroFragment
+import br.pucminas.teamworktask.ui.publica.UsuarioCadastroFragment
 import br.pucminas.teamworktask.utils.SharedPreferenceUtils
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -33,12 +36,16 @@ open class GenericActivity : AppCompatActivity() {
 
     // Declare the onBackPressed method when the back button is pressed this method will call
     override fun onBackPressed() {
-        val count = supportFragmentManager.backStackEntryCount
 
-        if (count == 1) {
+        if (supportFragmentManager.backStackEntryCount == 1) {
             chamarPopupLogout()
         } else {
-            supportFragmentManager.popBackStack();
+            val lasFragment = supportFragmentManager.fragments.last()
+            if(lasFragment is TarefaCadastroFragment || lasFragment is ProjetoCadastroFragment || lasFragment is UsuarioCadastroFragment){
+                supportFragmentManager.popBackStack();
+            } else {
+                chamarPopupLogout()
+            }
         }
     }
 

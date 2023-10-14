@@ -182,7 +182,7 @@ class TarefasFragment : PrivateFragment(), TarefaItemListOnClickInterface {
 
     override fun onClickExcluirTarefa(tarefa: Tarefa) {
         showLoading(true)
-        tarefaViewModel.deletarTarefa(tarefa.id.toInt())
+        tarefaViewModel.deletarTarefa(tarefa.id.toInt(), tarefa.nome, obterUsuarioPreference().id.toInt(), obterProjetoSelecionado())
     }
 
 }

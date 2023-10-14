@@ -17,6 +17,7 @@ import br.pucminas.teamworktask.repositories.Repository
 import br.pucminas.teamworktask.request.ProjetoRequest
 import br.pucminas.teamworktask.request.RetrofitService
 import br.pucminas.teamworktask.ui.GenericFragment
+import br.pucminas.teamworktask.ui.privada.PrivateFragment
 import br.pucminas.teamworktask.utils.FormatterUtils
 import br.pucminas.teamworktask.utils.GeradorCodigo
 import br.pucminas.teamworktask.viewmodels.MainViewModelFactory
@@ -30,7 +31,7 @@ import java.util.*
  * Use the [ProjetoCadastroFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ProjetoCadastroFragment(var editarProjeto: Projeto? = null) : GenericFragment() {
+class ProjetoCadastroFragment(var editarProjeto: Projeto? = null) : PrivateFragment() {
     private var _binding: FragmentProjetoCadastroBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -43,17 +44,6 @@ class ProjetoCadastroFragment(var editarProjeto: Projeto? = null) : GenericFragm
         // Inflate the layout for this fragment
         _binding = FragmentProjetoCadastroBinding.inflate(inflater, container, false)
 
-        if(editarProjeto != null) {
-            projeto.id = editarProjeto!!.id
-            projeto.dataCriacao = editarProjeto!!.dataCriacao
-            projeto.codigo = editarProjeto!!.codigo
-        } else {
-            projeto.dataCriacao = Date()
-            projeto.codigo = GeradorCodigo.geraCodigoProjeto()
-        }
-
-        projeto.usuario = obterUsuarioPreference()
-
         configurarViewModels()
         configurarTextViews()
         prepararListeners()
@@ -61,12 +51,32 @@ class ProjetoCadastroFragment(var editarProjeto: Projeto? = null) : GenericFragm
         return binding.root
     }
 
+    override fun obterIcone(): Int {
+        return R.drawable.ic_project
+    }
+    override fun obterTitulo(): String {
+        var usuario = obterUsuarioPreference()
+        return getString(R.string.projeto_cadastro_titulo)
+    }
+
+    /*********************************
+     **** Controle Listeners View ****
+     *********************************/
+
     fun configurarTextViews(){
         binding.apply {
             if(editarProjeto != null){
+                projeto.id = editarProjeto!!.id
+                projeto.dataCriacao = editarProjeto!!.dataCriacao
+                projeto.codigo = editarProjeto!!.codigo
                 projetoCadastroNomeTie.setText(editarProjeto!!.nome)
                 projetoCadastroDescricaoTie.setText(editarProjeto!!.descricao)
+            } else {
+                projeto.dataCriacao = Date()
+                projeto.codigo = GeradorCodigo.geraCodigoProjeto()
             }
+
+            projeto.usuario = obterUsuarioPreference()
 
             projetoCadastroCriadoEmTv.text = FormatterUtils.formatDateToString(projeto.dataCriacao)
             projetoCadastroCriadoPorTv.text = projeto.usuario.nomeExibicao
@@ -86,6 +96,9 @@ class ProjetoCadastroFragment(var editarProjeto: Projeto? = null) : GenericFragm
         }
     }
 
+    /***************************************
+     **** Validações para salvar/editar ****
+     ***************************************/
     private fun salvarProjeto() {
         binding.apply {
 
@@ -124,6 +137,9 @@ class ProjetoCadastroFragment(var editarProjeto: Projeto? = null) : GenericFragm
         }
     }
 
+    /**************************************
+     **** Configurações dos ViewModels ****
+     **************************************/
     private fun configurarViewModels() {
         viewModel =
             ViewModelProvider(this, MainViewModelFactory(Repository(retrofitService))).get(

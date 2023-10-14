@@ -257,9 +257,11 @@ class DashboardFragment : PrivateFragment(), ProjetoSeletorOnClickInterface, Pro
 
             selecaoProjeto()
             showBottomNavigator(true)
+            showInformacoesProjeto(true)
         } else {
             binding.dashboardCard.projetoCard.visibility = View.GONE
             showBottomNavigator(false)
+            showInformacoesProjeto(false)
         }
 
         showLoading(false)
@@ -267,7 +269,7 @@ class DashboardFragment : PrivateFragment(), ProjetoSeletorOnClickInterface, Pro
 
     fun processarHistorico(historicos: List<Historico>?){
         if (!historicos.isNullOrEmpty()){
-
+            binding.dashboardListaRv.adapter = HistoricoAdapter(requireContext(), historicos)
             showListaVaziaMensagem(false)
         } else {
             showListaVaziaMensagem(true)
@@ -305,6 +307,13 @@ class DashboardFragment : PrivateFragment(), ProjetoSeletorOnClickInterface, Pro
 
     fun showBottomNavigator(isVisible: Boolean){
         (activity as PrivateActivity).showBottomNavigator(isVisible)
+    }
+
+    fun showInformacoesProjeto(isShowProjeto: Boolean){
+        binding.apply {
+            dashboardProjetoVaziaGrupo.visibility = if(isShowProjeto) View.GONE else View.VISIBLE
+            dashboardProjetoGrupo.visibility = if(isShowProjeto) View.VISIBLE else View.GONE
+        }
     }
 
     /**************************************

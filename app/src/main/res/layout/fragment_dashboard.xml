@@ -71,7 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/layout_tag_adapter"/>
+                    tools:listitem="@layout/layout_historico_adapter"/>
             </androidx.core.widget.NestedScrollView>
 
             <androidx.constraintlayout.widget.Guideline
@@ -111,6 +111,56 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/dashboard_projeto_grupo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="dashboard_card,dashboard_historico_card"
+        tools:visibility="gone"/>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/dashboard_geral_metade_gl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.5"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/dashboard_projeto_vazia_iv"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/ic_result_empty"
+        app:layout_constraintBottom_toTopOf="@id/dashboard_geral_metade_gl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/secondary_color_dark" />
+
+    <TextView
+        android:id="@+id/dashboard_projeto_vazia_mensagem_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/dashboard_sem_projeto_vazia"
+        android:textAlignment="center"
+        android:layout_margin="@dimen/margem_padrao"
+        android:textColor="@color/secondary_color_dark"
+        style="@style/textViewEmptyListLayout"
+        app:layout_constraintTop_toBottomOf="@id/dashboard_geral_metade_gl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/dashboard_projeto_vazia_grupo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="dashboard_projeto_vazia_iv,dashboard_projeto_vazia_mensagem_tv"
+        tools:visibility="visible"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/dashboard_main_fab"

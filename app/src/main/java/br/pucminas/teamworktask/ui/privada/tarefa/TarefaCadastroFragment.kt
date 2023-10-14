@@ -66,6 +66,9 @@ class TarefaCadastroFragment(var editarTarefa: Tarefa? = null) : PrivateFragment
         return binding.root
     }
 
+    /*********************************
+     ******* Processar Tarefa *******
+     *********************************/
     fun preencherInputs(){
         binding.apply {
             if(editarTarefa != null){
@@ -247,7 +250,7 @@ class TarefaCadastroFragment(var editarTarefa: Tarefa? = null) : PrivateFragment
                 tarefaRequest.usuario = obterUsuarioPreference()
 
                 showLoading(true)
-                if(tarefa.id > 0){
+                if(editarTarefa != null){
                     tarefaViewModel.editarTarefa(tarefaRequest)
                 } else {
                     tarefaViewModel.criarTarefa(tarefaRequest)

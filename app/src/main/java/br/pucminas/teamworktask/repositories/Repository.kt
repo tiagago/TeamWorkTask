@@ -52,7 +52,7 @@ class Repository constructor(private val retrofitService: RetrofitService) {
 
     fun editarTarefa(tarefaRequest: TarefaRequest) = retrofitService.editarTarefa(tarefaRequest)
 
-    fun deletarTarefa(tarefaId: Int) = retrofitService.deletarTarefa(tarefaId)
+    fun deletarTarefa(tarefaId: Int, nomeTarefa: String, idUsuario: Int, idProjeto: Int) = retrofitService.deletarTarefa(tarefaId, nomeTarefa, idUsuario, idProjeto)
 
     fun obterTarefasPorProjetoStatus(projetoId: Int, idStatus: Int) = retrofitService.obterTarefasPorProjetoStatus(projetoId, idStatus)
 

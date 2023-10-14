@@ -30,6 +30,9 @@ class PublicActivity : GenericActivity() {
         changeFragment(PreLoginFragment())
     }
 
+    /**********************************************************************************
+     **** Efetuar o Login do usuario após sucesso de chamada de login com sucesso  ****
+     **********************************************************************************/
     fun doLogin(usuario: Usuario){
         guardarPreferenciaInt(this, USUARIO_ID, usuario.id.toInt())
         guardarPreferencia(this, USUARIO_LOGIN, usuario.login)

@@ -1,93 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/margem_padrao"
-    android:layout_margin="@dimen/margem_padrao"
-    android:background="@drawable/card_dialog_bg"
-    android:elevation="@dimen/margem_pequena"
-    >
+    android:background="@color/transparent">
 
-    <TextView
-        android:id="@+id/tag_criar_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/genericTittle"
-        android:text="@string/tag_criar_titulo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tag_nome_til"
-        style="@style/textInputLayoutDefault"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margem_padrao"
-        android:hint="@string/tags_nome_label"
-        app:endIconMode="clear_text"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margem_padrao"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tag_criar_tv">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tag_nome_tie"
-            style="@style/textInputEditTextDefault"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textPersonName" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tag_cor_til"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margem_padrao"
-        style="@style/textInputLayoutSelectorDefault"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tag_nome_til">
-
-        <AutoCompleteTextView
-            android:id="@+id/tag_cor_actv"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none"
-            android:hint="@string/tags_cor_label"
-            style="@style/textInputEditTextDefault"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:padding="@dimen/margem_padrao">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/tag_salvar_bt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margem_padrao"
-        android:paddingStart="@dimen/margem_dobro"
-        android:paddingEnd="@dimen/margem_dobro"
-        android:backgroundTint="@color/primary_color"
-        android:text="@string/generico_salvar_label"
-        android:elevation="@dimen/margem_pequena"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tag_cor_til" />
+            <TextView
+                android:id="@+id/tag_criar_tv"
+                style="@style/genericTittle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tag_criar_titulo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/tag_cancelar_bt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margem_padrao"
-        android:paddingStart="@dimen/margem_dobro"
-        android:paddingEnd="@dimen/margem_dobro"
-        android:backgroundTint="@color/primary_color"
-        android:text="@string/generico_cancelar_label"
-        android:elevation="@dimen/margem_pequena"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tag_salvar_bt" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tag_nome_til"
+                style="@style/textInputLayoutDefault"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margem_padrao"
+                android:hint="@string/tags_nome_label"
+                app:endIconMode="clear_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tag_criar_tv">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tag_nome_tie"
+                    style="@style/textInputEditTextDefault"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textPersonName" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tag_cor_til"
+                style="@style/textInputLayoutSelectorDefault"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margem_padrao"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tag_nome_til">
+
+                <AutoCompleteTextView
+                    android:id="@+id/tag_cor_actv"
+                    style="@style/textInputEditTextDefault"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/tags_cor_label"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tag_salvar_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margem_padrao"
+                android:backgroundTint="@color/primary_color"
+                android:elevation="@dimen/margem_pequena"
+                android:paddingStart="@dimen/margem_dobro"
+                android:paddingEnd="@dimen/margem_dobro"
+                android:text="@string/generico_salvar_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tag_cor_til" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tag_cancelar_bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margem_padrao"
+                android:backgroundTint="@color/primary_color"
+                android:elevation="@dimen/margem_pequena"
+                android:paddingStart="@dimen/margem_dobro"
+                android:paddingEnd="@dimen/margem_dobro"
+                android:text="@string/generico_cancelar_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tag_salvar_bt" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

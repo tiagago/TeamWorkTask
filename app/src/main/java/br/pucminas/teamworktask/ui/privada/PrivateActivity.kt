@@ -57,7 +57,9 @@ class PrivateActivity : GenericActivity() {
 
     override fun onResume() {
         super.onResume()
-        changeFragment(DashboardFragment())
+        if (supportFragmentManager.backStackEntryCount <= 1) {
+            changeFragment(DashboardFragment())
+        }
     }
 
     override fun obterFramelayoutID(): Int = binding.privadoFl.id

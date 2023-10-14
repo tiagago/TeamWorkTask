@@ -25,13 +25,18 @@ import br.pucminas.teamworktask.viewmodels.UsuarioViewModel
  */
 class UsuarioCadastroFragment : GenericFragment() {
     private var _binding: FragmentUsuarioCadastroBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
     private val retrofitService = RetrofitService.getInstance()
     lateinit var viewModel: UsuarioViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentUsuarioCadastroBinding.inflate(inflater, container, false)
 
@@ -40,44 +45,24 @@ class UsuarioCadastroFragment : GenericFragment() {
         return binding.root
     }
 
-    fun prepararListeners(){
-        configurarBotaoCancelar()
-        configurarBotaoSalvar()
-    }
 
-    private fun configurarBotaoCancelar() {
-        binding.usuarioCadastroCancelarBt.setOnClickListener {
-            onBackPressed()
-        }
-    }
-
-    private fun configurarBotaoSalvar() {
-        binding.usuarioCadastroSalvarBt.setOnClickListener {
-            salvarUsuario()
-        }
-    }
-
-    private fun configurarViewModels() {
-        viewModel =
-            ViewModelProvider(this, MainViewModelFactory(Repository(retrofitService))).get(
-                UsuarioViewModel::class.java
-            )
-
-        viewModel.usuarioResponse.observe(viewLifecycleOwner) {
-            showLoading(false)
-            if(it?.usuario != null && it.success){
-                onBackPressed(TopAlertMessageObject(TopAlertType.SUCCESS, getString(R.string.usuario_cadastro_sucesso)))
-            } else {
-                retornoErroServico(it)
+    /*********************************
+     **** Controle Listeners View ****
+     *********************************/
+    fun prepararListeners() {
+        binding.apply {
+            usuarioCadastroCancelarBt.setOnClickListener {
+                onBackPressed()
+            }
+            usuarioCadastroSalvarBt.setOnClickListener {
+                salvarUsuario()
             }
         }
-
-        viewModel.errorMessage.observe(viewLifecycleOwner) {
-            showLoading(false)
-            showErrorGenericServer()
-        }
     }
 
+    /***************************************
+     **** Validações para salvar/editar ****
+     ***************************************/
     private fun salvarUsuario() {
         binding.apply {
 
@@ -87,35 +72,47 @@ class UsuarioCadastroFragment : GenericFragment() {
             val senha: String = usuarioCadastroSenhaTie.text.toString()
             val senhaRepetida: String = usuarioCadastroRepetirSenhaTie.text.toString()
 
-            if(nome.isBlank() || nome == getString(R.string.usuario_cadastro_nome_label)){
-                usuarioCadastroNomeTil.error = getString(R.string.generico_vazio_erro, getString(R.string.usuario_cadastro_nome_label))
+            if (nome.isBlank() || nome == getString(R.string.usuario_cadastro_nome_label)) {
+                usuarioCadastroNomeTil.error = getString(
+                    R.string.generico_vazio_erro,
+                    getString(R.string.usuario_cadastro_nome_label)
+                )
                 achouProblema = true
             } else {
                 usuarioCadastroNomeTil.error = null
             }
 
-            if(login.isBlank() || login == getString(R.string.usuario_cadastro_login_label)){
-                usuarioCadastroLoginTil.error = getString(R.string.generico_vazio_erro, getString(R.string.usuario_cadastro_login_label))
+            if (login.isBlank() || login == getString(R.string.usuario_cadastro_login_label)) {
+                usuarioCadastroLoginTil.error = getString(
+                    R.string.generico_vazio_erro,
+                    getString(R.string.usuario_cadastro_login_label)
+                )
                 achouProblema = true
             } else {
                 usuarioCadastroLoginTil.error = null
             }
 
-            if(senha.isBlank() || senha == getString(R.string.usuario_cadastro_senha_label)){
-                usuarioCadastroSenhaTil.error = getString(R.string.generico_vazio_erro, getString(R.string.usuario_cadastro_senha_label))
+            if (senha.isBlank() || senha == getString(R.string.usuario_cadastro_senha_label)) {
+                usuarioCadastroSenhaTil.error = getString(
+                    R.string.generico_vazio_erro,
+                    getString(R.string.usuario_cadastro_senha_label)
+                )
                 achouProblema = true
             } else {
                 usuarioCadastroSenhaTil.error = null
             }
 
-            if(senhaRepetida.isBlank() || senhaRepetida == getString(R.string.usuario_cadastro_repetir_senha_label)){
-                usuarioCadastroRepetirSenhaTil.error = getString(R.string.generico_vazio_erro, getString(R.string.usuario_cadastro_repetir_senha_label))
+            if (senhaRepetida.isBlank() || senhaRepetida == getString(R.string.usuario_cadastro_repetir_senha_label)) {
+                usuarioCadastroRepetirSenhaTil.error = getString(
+                    R.string.generico_vazio_erro,
+                    getString(R.string.usuario_cadastro_repetir_senha_label)
+                )
                 achouProblema = true
             } else {
                 usuarioCadastroRepetirSenhaTil.error = null
             }
 
-            if(!achouProblema){
+            if (!achouProblema) {
                 showLoading(true)
                 var usuario = Usuario()
 
@@ -127,6 +124,37 @@ class UsuarioCadastroFragment : GenericFragment() {
                 genericRequest.usuario = usuario
 
                 viewModel.criarUsuario(genericRequest)
+            }
+        }
+    }
+
+    /**************************************
+     **** Configurações dos ViewModels ****
+     **************************************/
+    private fun configurarViewModels() {
+        viewModel =
+            ViewModelProvider(this, MainViewModelFactory(Repository(retrofitService))).get(
+                UsuarioViewModel::class.java
+            )
+
+        viewModel.apply {
+            usuarioResponse.observe(viewLifecycleOwner) {
+                showLoading(false)
+                if (it?.usuario != null && it.success) {
+                    onBackPressed(
+                        TopAlertMessageObject(
+                            TopAlertType.SUCCESS,
+                            getString(R.string.usuario_cadastro_sucesso)
+                        )
+                    )
+                } else {
+                    retornoErroServico(it)
+                }
+            }
+
+            errorMessage.observe(viewLifecycleOwner) {
+                showLoading(false)
+                showErrorGenericServer()
             }
         }
     }
