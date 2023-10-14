@@ -31,15 +31,17 @@ Atualmente o projeto já está implementado na linguagem Java e acessível somen
 
 # Padrão Arquitetural
 
-Essa aplicação deve ser desenvolvida em Android seguindo a linguagem Kotlin que é a linguagem recomendada pela Google para se desenvolver uma nova aplicação e será usado o padrão de arquitetura MVVM.
+Essa aplicação foi  desenvolvida em Android seguindo a linguagem Kotlin que é a linguagem recomendada pela Google para se desenvolver uma nova aplicação e foi usado o padrão de arquitetura MVVM.
 
-Para o desenvolvimento serão usadas as seguintes tecnologias:
+Para o desenvolvimento foram usadas as seguintes tecnologias:
 
 • Android Studio (IDE)
 
 • Kotlin (Linguagem de programação)
 
 • Retrofit (Rest Client onde iremos acessar e persistir os dados)
+
+• livedata
 
 • Binding
 
